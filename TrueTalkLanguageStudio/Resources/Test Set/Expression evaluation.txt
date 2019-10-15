@@ -1,0 +1,10 @@
+Set temperature to 60.
+When temperature is 60 close all windows [extend: where|which]. // makes sense. recognize build-time optimization for first time exec.
+When temperature is 60 open all windows [extend: where|which].  // contracdition. recognize build-time optimization for first time exec.
+When temperature is 70 open all windows.                        // makes sense.
+When temperature is 70 open all closed windows.                 // closed is redundant
+When temperature is 70 open all opened windows.                 // action is redundant
+
+ontology:   temperature ==> variable, quantity
+            closed ==> opposite (open[ed])
+            window ==> open/close
