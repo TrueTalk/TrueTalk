@@ -1,10 +1,32 @@
-Set temperature to 60.
-When temperature is 60 close all windows [extend: where|which]. // makes sense. recognize build-time optimization for first time exec.
-When temperature is 60 open all windows [extend: where|which].  // contracdition. recognize build-time optimization for first time exec.
-When temperature is 70 open all windows.                        // makes sense.
-When temperature is 70 open all closed windows.                 // closed is redundant
-When temperature is 70 open all opened windows.                 // action is redundant
 
-ontology:   temperature ==> variable, quantity
-            closed ==> opposite (open[ed])
+COMPILATION PHASES
+- ingest, 
+- tokenize, 
+- parse, 
+- import in TrueTalk IR, 
+- normalize (substitute synonyms vs. ontology, normalize subordinate sentence structure)
+- infer logic structure
+- normalize logic strucure
+- simplify logic structure
+- prove feasibility (non-cotracdition)
+- emit: identify local resource access, substitute resource identifiers
+- emit: emit resource access operations (REST/CRUD syntax with query)
+- emit: encode state, emit state monitoring logic
+- emit: bytecode (instruction is: 'install_monitor', with params set {callback, target_in_state_index, type_in_state_index (*), hint[observe|poll]} )  
+(*) position at which to write the acquired state, relies on a 'update' instruction to save. 'update' is encoded as a memory store plus a callback to tt::OnStateChanged method in runtime.
+
+[Set temperature to 60.]
+When temperature is 60 close[shut] all windows [extend: where|which].   // makes sense. [recognize synonym]. [recognize build-time optimization for first time exec].
+When temperature is 60 open all windows [extend: where|which].          // contradiction. [recognize build-time optimization for first time exec].
+When temperature is 70 open all windows.                                // makes sense.
+When temperature is 70 open all closed[shut] windows.                   // closed is redundant. [recognize synonym].
+When temperature is 70 open all opened windows.                         // action is redundant.
+When temperature raises above 70 open all windows.                      // recognize overlap.
+When temperature drops to 61 open all windows.                          // recognize redundancy (windows are open already).
+When temperature drops to 61 close all windows.                         // recognize contracdiction and reduncancy.
+
+ontology:   temperature ==> variable, quantity, variation (raise, drop)
             window ==> open/close
+                closed ==> opposite (open[ed])
+
+

@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29201.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueTalkLanguageStudio", "TrueTalkLanguageStudio\TrueTalkLanguageStudio.csproj", "{7A52B7B6-1FC1-47C3-A614-EE3FAD1F008F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{659ABE74-970A-42CD-B14F-F7777185A530}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{9189A42D-94B8-4410-B5AB-6269A7A9E2E3}"
+	ProjectSection(SolutionItems) = preProject
+		Resources\Models\englishPCFG.ser.gz = Resources\Models\englishPCFG.ser.gz
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrueTalk", "Language\TrueTalk.csproj", "{11EB7FD8-18D5-435F-A631-4C87399C1928}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrueTalkTests", "TueTalkTests\TrueTalkTests.csproj", "{7F6611C3-3C18-4588-BE00-A051019FCA43}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{30FC4A87-F23A-402C-806E-0FFD04201951}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stanford Parser", "Stanford Parser", "{E8D9CAC3-5459-4C5B-A37F-FEDBC4954DC9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archive", "Archive", "{AE195C88-C6C4-4A12-B1BA-AA0D001FA444}"
+	ProjectSection(SolutionItems) = preProject
+		Resources\Docs\Stanford Parser\Archive\stanford-parser-3.9.2-javadoc.jar = Resources\Docs\Stanford Parser\Archive\stanford-parser-3.9.2-javadoc.jar
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test Set", "Test Set", "{D9215DB5-EFBF-4900-ACFA-B11AE59EF82D}"
+	ProjectSection(SolutionItems) = preProject
+		Resources\Test Set\Expression evaluation.txt = Resources\Test Set\Expression evaluation.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A52B7B6-1FC1-47C3-A614-EE3FAD1F008F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A52B7B6-1FC1-47C3-A614-EE3FAD1F008F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A52B7B6-1FC1-47C3-A614-EE3FAD1F008F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A52B7B6-1FC1-47C3-A614-EE3FAD1F008F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11EB7FD8-18D5-435F-A631-4C87399C1928}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11EB7FD8-18D5-435F-A631-4C87399C1928}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11EB7FD8-18D5-435F-A631-4C87399C1928}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11EB7FD8-18D5-435F-A631-4C87399C1928}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F6611C3-3C18-4588-BE00-A051019FCA43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F6611C3-3C18-4588-BE00-A051019FCA43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F6611C3-3C18-4588-BE00-A051019FCA43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F6611C3-3C18-4588-BE00-A051019FCA43}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9189A42D-94B8-4410-B5AB-6269A7A9E2E3} = {659ABE74-970A-42CD-B14F-F7777185A530}
+		{30FC4A87-F23A-402C-806E-0FFD04201951} = {659ABE74-970A-42CD-B14F-F7777185A530}
+		{E8D9CAC3-5459-4C5B-A37F-FEDBC4954DC9} = {30FC4A87-F23A-402C-806E-0FFD04201951}
+		{AE195C88-C6C4-4A12-B1BA-AA0D001FA444} = {E8D9CAC3-5459-4C5B-A37F-FEDBC4954DC9}
+		{D9215DB5-EFBF-4900-ACFA-B11AE59EF82D} = {659ABE74-970A-42CD-B14F-F7777185A530}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B34DE40C-9011-435E-BB98-CB3F4635A3EB}
+	EndGlobalSection
+EndGlobal
