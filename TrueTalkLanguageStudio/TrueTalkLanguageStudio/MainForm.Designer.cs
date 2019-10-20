@@ -166,6 +166,7 @@ namespace TrueTalk.IrViewer
             this.Name = "MainForm";
             this.Text = "IR Viewer";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Resize += new System.EventHandler( this.MainForm_Resize );
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();

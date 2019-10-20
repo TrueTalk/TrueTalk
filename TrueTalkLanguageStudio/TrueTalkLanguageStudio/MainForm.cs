@@ -282,5 +282,14 @@ namespace TrueTalk.IrViewer
         //    }
         //}
 
+        private void MainForm_Resize( object sender, EventArgs e )
+        {
+            const int margin = 3;
+            gViewer1.Height = splitContainer1.Panel1.Height - margin;
+            gViewer2.Height = splitContainer2.Panel1.Height - margin;
+
+            //listBoxClauses.Width = textBoxFilter.Width;
+        }
+
     }
 }

@@ -44,13 +44,13 @@ namespace TrueTalk.SpeechRepresentation
             TokenGraph grammaticalStructure = new TokenGraph(phraseStructure: false);
             {
                 var visited = new HashSet<IndexedWord>();
-                var visitQueue = new Queue<IndexedWord>();
+                var visitQueue = new Stack<IndexedWord>();
 
-                visitQueue.Enqueue( sg.getFirstRoot( ) );
+                visitQueue.Push( sg.getFirstRoot( ) );
 
                 while( visitQueue.Count > 0 )
                 {
-                    var current = visitQueue.Dequeue();
+                    var current = visitQueue.Pop();
 
                     visited.Add( current );
 
@@ -63,11 +63,11 @@ namespace TrueTalk.SpeechRepresentation
 
                         if( visited.Contains( src ) == false )
                         {
-                            visitQueue.Enqueue( src );
+                            visitQueue.Push( src );
                         }
                         if( visited.Contains( tgt ) == false )
                         {
-                            visitQueue.Enqueue( tgt );
+                            visitQueue.Push( tgt );
                         }
 
                         grammaticalStructure.AddEdge(
@@ -90,13 +90,13 @@ namespace TrueTalk.SpeechRepresentation
                 Tree root = tree;
 
                 var visited = new HashSet<Tree>();
-                var visitQueue = new Queue<Tree>();
+                var visitQueue = new Stack<Tree>();
 
-                visitQueue.Enqueue( root );
+                visitQueue.Push( root );
 
                 while( visitQueue.Count > 0 )
                 {
-                    var current = visitQueue.Dequeue();
+                    var current = visitQueue.Pop();
 
                     visited.Add( current );
 
@@ -109,11 +109,11 @@ namespace TrueTalk.SpeechRepresentation
 
                         if( visited.Contains( src ) == false )
                         {
-                            visitQueue.Enqueue( src );
+                            visitQueue.Push( src );
                         }
                         if( visited.Contains( tgt ) == false )
                         {
-                            visitQueue.Enqueue( tgt );
+                            visitQueue.Push( tgt );
                         }
 
                         phraseStructure.AddEdge(
