@@ -24,6 +24,8 @@ When temperature is 70 open all opened windows.                         // actio
 When temperature raises above 70 open all windows.                      // recognize overlap.
 When temperature drops to 61 open all windows.                          // recognize redundancy (windows are open already).
 When temperature drops to 61 close all windows.                         // recognize contracdiction and reduncancy.
+When temperature is 68 and it is not raining, open all windows.         // and
+When temperature is 68 or it is not raining, open all windows.          // or
 
 ontology:   temperature ==> variable, quantity, variation (raise, drop)
             window ==> open/close

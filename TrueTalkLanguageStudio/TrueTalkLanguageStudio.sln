@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueTalkLanguageStudio", "TrueTalkLanguageStudio\TrueTalkLanguageStudio.csproj", "{7A52B7B6-1FC1-47C3-A614-EE3FAD1F008F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{659ABE74-970A-42CD-B14F-F7777185A530}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{9189A42D-94B8-4410-B5AB-6269A7A9E2E3}"
@@ -13,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{9189A4
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrueTalk", "Language\TrueTalk.csproj", "{11EB7FD8-18D5-435F-A631-4C87399C1928}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrueTalkTests", "TueTalkTests\TrueTalkTests.csproj", "{7F6611C3-3C18-4588-BE00-A051019FCA43}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{30FC4A87-F23A-402C-806E-0FFD04201951}"
 EndProject
@@ -28,26 +24,72 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test Set", "Test Set", "{D9215DB5-EFBF-4900-ACFA-B11AE59EF82D}"
 	ProjectSection(SolutionItems) = preProject
 		Resources\Test Set\Expression evaluation.txt = Resources\Test Set\Expression evaluation.txt
+		Resources\Test Set\IrViewerTestFile.xml = Resources\Test Set\IrViewerTestFile.xml
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{1CB3F156-4F0F-4EF5-AD44-E579A955B49B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GLEE", "GLEE", "{B922C56F-59E2-400E-99F6-EBFCDBF95284}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Debug", "Debug", "{50A1A2CD-E2BC-441E-AF35-569ABFCAD638}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Release", "Release", "{48301D45-BCBA-498A-B50E-6079E45BF3CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRViewer", "TrueTalkLanguageStudio\IRViewer.csproj", "{186F31A3-EF89-4A25-B2D5-20060721AA01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeechRepresentation", "TestParser\SpeechRepresentation.csproj", "{52B22CE1-9598-4BAD-92A9-FC16302F5A43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analysys", "Analysys\Analysys.csproj", "{52034EF5-D186-4897-B01D-1327C8730DDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{BBDCC7C1-56CB-40A2-B7AF-03C0A0CBAAD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGraph", "TestGraph\TestGraph.csproj", "{46200C16-5607-454F-9739-91A16D56CAC8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{F84DD0EA-5DF3-493A-8EF4-32472F6E9F75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Instrumentation|Any CPU = Instrumentation|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7A52B7B6-1FC1-47C3-A614-EE3FAD1F008F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A52B7B6-1FC1-47C3-A614-EE3FAD1F008F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A52B7B6-1FC1-47C3-A614-EE3FAD1F008F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A52B7B6-1FC1-47C3-A614-EE3FAD1F008F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{11EB7FD8-18D5-435F-A631-4C87399C1928}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{11EB7FD8-18D5-435F-A631-4C87399C1928}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11EB7FD8-18D5-435F-A631-4C87399C1928}.Instrumentation|Any CPU.ActiveCfg = Release|Any CPU
+		{11EB7FD8-18D5-435F-A631-4C87399C1928}.Instrumentation|Any CPU.Build.0 = Release|Any CPU
 		{11EB7FD8-18D5-435F-A631-4C87399C1928}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11EB7FD8-18D5-435F-A631-4C87399C1928}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F6611C3-3C18-4588-BE00-A051019FCA43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F6611C3-3C18-4588-BE00-A051019FCA43}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F6611C3-3C18-4588-BE00-A051019FCA43}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F6611C3-3C18-4588-BE00-A051019FCA43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{186F31A3-EF89-4A25-B2D5-20060721AA01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{186F31A3-EF89-4A25-B2D5-20060721AA01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{186F31A3-EF89-4A25-B2D5-20060721AA01}.Instrumentation|Any CPU.ActiveCfg = Instrumentation|Any CPU
+		{186F31A3-EF89-4A25-B2D5-20060721AA01}.Instrumentation|Any CPU.Build.0 = Instrumentation|Any CPU
+		{186F31A3-EF89-4A25-B2D5-20060721AA01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{186F31A3-EF89-4A25-B2D5-20060721AA01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52B22CE1-9598-4BAD-92A9-FC16302F5A43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52B22CE1-9598-4BAD-92A9-FC16302F5A43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52B22CE1-9598-4BAD-92A9-FC16302F5A43}.Instrumentation|Any CPU.ActiveCfg = Release|Any CPU
+		{52B22CE1-9598-4BAD-92A9-FC16302F5A43}.Instrumentation|Any CPU.Build.0 = Release|Any CPU
+		{52B22CE1-9598-4BAD-92A9-FC16302F5A43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52B22CE1-9598-4BAD-92A9-FC16302F5A43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52034EF5-D186-4897-B01D-1327C8730DDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52034EF5-D186-4897-B01D-1327C8730DDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52034EF5-D186-4897-B01D-1327C8730DDB}.Instrumentation|Any CPU.ActiveCfg = Release|Any CPU
+		{52034EF5-D186-4897-B01D-1327C8730DDB}.Instrumentation|Any CPU.Build.0 = Release|Any CPU
+		{52034EF5-D186-4897-B01D-1327C8730DDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52034EF5-D186-4897-B01D-1327C8730DDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBDCC7C1-56CB-40A2-B7AF-03C0A0CBAAD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBDCC7C1-56CB-40A2-B7AF-03C0A0CBAAD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBDCC7C1-56CB-40A2-B7AF-03C0A0CBAAD0}.Instrumentation|Any CPU.ActiveCfg = Release|Any CPU
+		{BBDCC7C1-56CB-40A2-B7AF-03C0A0CBAAD0}.Instrumentation|Any CPU.Build.0 = Release|Any CPU
+		{BBDCC7C1-56CB-40A2-B7AF-03C0A0CBAAD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBDCC7C1-56CB-40A2-B7AF-03C0A0CBAAD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46200C16-5607-454F-9739-91A16D56CAC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46200C16-5607-454F-9739-91A16D56CAC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46200C16-5607-454F-9739-91A16D56CAC8}.Instrumentation|Any CPU.ActiveCfg = Release|Any CPU
+		{46200C16-5607-454F-9739-91A16D56CAC8}.Instrumentation|Any CPU.Build.0 = Release|Any CPU
+		{46200C16-5607-454F-9739-91A16D56CAC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46200C16-5607-454F-9739-91A16D56CAC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +100,11 @@ Global
 		{E8D9CAC3-5459-4C5B-A37F-FEDBC4954DC9} = {30FC4A87-F23A-402C-806E-0FFD04201951}
 		{AE195C88-C6C4-4A12-B1BA-AA0D001FA444} = {E8D9CAC3-5459-4C5B-A37F-FEDBC4954DC9}
 		{D9215DB5-EFBF-4900-ACFA-B11AE59EF82D} = {659ABE74-970A-42CD-B14F-F7777185A530}
+		{B922C56F-59E2-400E-99F6-EBFCDBF95284} = {1CB3F156-4F0F-4EF5-AD44-E579A955B49B}
+		{50A1A2CD-E2BC-441E-AF35-569ABFCAD638} = {B922C56F-59E2-400E-99F6-EBFCDBF95284}
+		{48301D45-BCBA-498A-B50E-6079E45BF3CA} = {B922C56F-59E2-400E-99F6-EBFCDBF95284}
+		{186F31A3-EF89-4A25-B2D5-20060721AA01} = {F84DD0EA-5DF3-493A-8EF4-32472F6E9F75}
+		{46200C16-5607-454F-9739-91A16D56CAC8} = {F84DD0EA-5DF3-493A-8EF4-32472F6E9F75}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B34DE40C-9011-435E-BB98-CB3F4635A3EB}

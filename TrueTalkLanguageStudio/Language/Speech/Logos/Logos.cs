@@ -1,6 +1,8 @@
 ﻿namespace TrueTalk.Speech
 {
-    using Synonyms = System.Collections.Generic.Dictionary<Token, System.Collections.Generic.List<Token>>;
+    using TrueTalk.SpeechRepresentation;
+
+    using Synonyms = System.Collections.Generic.Dictionary<SpeechRepresentation.Token, System.Collections.Generic.List<SpeechRepresentation.Token>>;
 
     public class Logos
     {

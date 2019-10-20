@@ -4,4 +4,9 @@
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Analysys\Analysys.csproj" />
+    <ProjectReference Include="..\TestParser\SpeechRepresentation.csproj" />
+  </ItemGroup>
+
 </Project>

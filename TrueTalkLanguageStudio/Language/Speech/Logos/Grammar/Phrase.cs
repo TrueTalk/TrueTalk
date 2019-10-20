@@ -8,6 +8,6 @@ namespace TrueTalk.Speech.Grammar
 
     public class Phrase : ITransform
     {
-        public bool Transform( Analysis analysis ) => throw new NotImplementedException( );
+        public bool Transform( IAnalysis analysis ) => throw new NotImplementedException( );
     }
 }
