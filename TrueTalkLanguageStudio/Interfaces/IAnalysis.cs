@@ -1,4 +1,5 @@
 ﻿
+
 namespace TrueTalk.Interfaces
 {
     public interface IAnalysis

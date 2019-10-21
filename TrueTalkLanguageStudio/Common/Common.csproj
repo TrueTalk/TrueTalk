@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BBDCC7C1-56CB-40A2-B7AF-03C0A0CBAAD0}</ProjectGuid>
+    <ProjectGuid>{96A035DF-8DDC-4B92-B050-9229E2D45172}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>TrueTalk.Interfaces</RootNamespace>
-    <AssemblyName>Interfaces</AssemblyName>
+    <RootNamespace>TrueTalk.Common</RootNamespace>
+    <AssemblyName>Common</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -36,10 +36,25 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="IEvaluate.cs" />
-    <Compile Include="IAnalysis.cs" />
-    <Compile Include="ITransformable.cs" />
-    <Compile Include="TransformableItem.cs" />
+    <Compile Include="ArrayUtility.cs" />
+    <Compile Include="AssertionViolationException.cs" />
+    <Compile Include="BitVector.cs" />
+    <Compile Include="Tree.cs" />
+    <Compile Include="Checks.cs" />
+    <Compile Include="GrowOnlyHashTable.cs" />
+    <Compile Include="GrowOnlyList.cs" />
+    <Compile Include="GrowOnlySet.cs" />
+    <Compile Include="HashHelpers.cs" />
+    <Compile Include="HashTableFactory.cs" />
+    <Compile Include="HashTableWithListFactory.cs" />
+    <Compile Include="HashTableWithSetFactory.cs" />
+    <Compile Include="ReferenceEqualityComparer.cs" />
+    <Compile Include="SetFactory.cs" />
+    <Compile Include="UniqueList.cs" />
+    <Compile Include="WeakEqualityComparer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

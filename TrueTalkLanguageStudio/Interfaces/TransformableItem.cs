@@ -26,9 +26,9 @@ namespace TrueTalk.Interfaces
             return cpy;
         }
 
-        public virtual void ApplyTransformation( IAnalysis context )
+        public virtual void ApplyTransformation( IAnalysis analysis )
         {
-            context.Apply( this );
+            analysis.Apply( this );
         }
 
         public virtual void InnerToString( StringBuilder sb )

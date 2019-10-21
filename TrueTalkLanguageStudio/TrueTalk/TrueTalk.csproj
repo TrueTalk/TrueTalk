@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BBDCC7C1-56CB-40A2-B7AF-03C0A0CBAAD0}</ProjectGuid>
+    <ProjectGuid>{98D3F166-78B6-4437-90DE-CC00AFD4FD5E}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>TrueTalk.Interfaces</RootNamespace>
-    <AssemblyName>Interfaces</AssemblyName>
+    <RootNamespace>TrueTalk.Speech</RootNamespace>
+    <AssemblyName>TrueTalk</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -36,10 +36,28 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="IEvaluate.cs" />
-    <Compile Include="IAnalysis.cs" />
-    <Compile Include="ITransformable.cs" />
-    <Compile Include="TransformableItem.cs" />
+    <Compile Include="Speech\Ethos\Ethos.cs" />
+    <Compile Include="Speech\Logos\Grammar\Clause.cs" />
+    <Compile Include="Speech\Logos\Grammar\Phrase.cs" />
+    <Compile Include="Speech\Logos\Judging.cs" />
+    <Compile Include="Speech\Logos\Logos.cs" />
+    <Compile Include="Speech\Logos\Reasoning.cs" />
+    <Compile Include="Speech\Logos\Understanding.cs" />
+    <Compile Include="Speech\Pathos\Pathos.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Analysys\Analysys.csproj">
+      <Project>{52034ef5-d186-4897-b01d-1327c8730ddb}</Project>
+      <Name>Analysys</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{bbdcc7c1-56cb-40a2-b7af-03c0a0cbaad0}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestParser\SpeechRepresentation.csproj">
+      <Project>{52b22ce1-9598-4bad-92a9-fc16302f5a43}</Project>
+      <Name>SpeechRepresentation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

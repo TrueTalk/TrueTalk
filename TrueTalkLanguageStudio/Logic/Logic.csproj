@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BBDCC7C1-56CB-40A2-B7AF-03C0A0CBAAD0}</ProjectGuid>
+    <ProjectGuid>{E6B40086-CE7A-477A-9B2F-45C2F1323FE4}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>TrueTalk.Interfaces</RootNamespace>
-    <AssemblyName>Interfaces</AssemblyName>
+    <RootNamespace>Logic</RootNamespace>
+    <AssemblyName>Logic</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -36,10 +36,23 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="IEvaluate.cs" />
-    <Compile Include="IAnalysis.cs" />
-    <Compile Include="ITransformable.cs" />
-    <Compile Include="TransformableItem.cs" />
+    <Compile Include="LogicFormula.cs" />
+    <Compile Include="Atom.cs" />
+    <Compile Include="Truth.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{96a035df-8ddc-4b92-b050-9229e2d45172}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestParser\SpeechRepresentation.csproj">
+      <Project>{52b22ce1-9598-4bad-92a9-fc16302f5a43}</Project>
+      <Name>SpeechRepresentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrueTalk\TrueTalk.csproj">
+      <Project>{98d3f166-78b6-4437-90de-cc00afd4fd5e}</Project>
+      <Name>TrueTalk</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
