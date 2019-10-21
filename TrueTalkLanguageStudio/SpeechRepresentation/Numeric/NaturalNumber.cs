@@ -8,7 +8,7 @@ namespace TrueTalk.SpeechRepresentation
 
     public sealed class NaturalNumber : Number
     {
-        private NaturalNumber( String value ) : base( value, DigitKind.Integer )
+        private NaturalNumber( String value ) : base( value, DigitKind.Natural )
         { }
 
         //--//
@@ -17,6 +17,10 @@ namespace TrueTalk.SpeechRepresentation
         {
             return new NaturalNumber( value );
         }
+
+        //--//
+
+        public new int Value => (int)(base.Value - (base.Value % 1));
 
         public override bool ApplyTransformation(IAnalysis analysis)
         {

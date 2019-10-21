@@ -21,7 +21,7 @@ namespace TrueTalk.SpeechRepresentation
 
         //--//
 
-        protected Number( String rawValue, DigitKind kind ) : base( rawValue, TokenKind.Digit )
+        protected Number( String rawValue, DigitKind kind ) : base( rawValue, TokenKind.Numberic )
         {
             Value       = Parse( rawValue );
             KindOfDigit = kind;

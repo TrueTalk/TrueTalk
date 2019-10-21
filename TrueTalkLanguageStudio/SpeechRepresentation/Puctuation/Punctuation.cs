@@ -56,7 +56,7 @@ namespace TrueTalk.SpeechRepresentation
         {
             var kind = Parse( rawValue );
 
-            return new Punctuation( rawValue, kind, Token.TokenKind.Mark );
+            return new Punctuation( rawValue, kind, Token.TokenKind.Puctuation );
         }
 
         //--//

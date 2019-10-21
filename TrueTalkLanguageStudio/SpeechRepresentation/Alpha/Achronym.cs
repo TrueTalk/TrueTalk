@@ -5,19 +5,17 @@ namespace TrueTalk.SpeechRepresentation
     using System.Text;
     using TrueTalk.Interfaces;
 
-    public class Word : Token
+    public class Achronym : Text
     {
-        protected Word( String value, TokenKind type ) : base( value, type )
+        protected Achronym( String value ) : base( value )
         { }
 
-        public static Word New( String value )
+        public static Achronym New( String value )
         {
-            return new Word( value, Token.TokenKind.Word );
+            return new Achronym( value );
         }
 
         //--//
-
-        public String Value => base.RawValue;
 
         public override bool ApplyTransformation(IAnalysis analysis)
         {
@@ -28,7 +26,7 @@ namespace TrueTalk.SpeechRepresentation
         {
             base.InnerToString( sb );
 
-            sb.AppendFormat( @"Word('{0}')", this.Value );
+            sb.AppendFormat(@"Achronym('{0}')", this.Value );
         }
     }
 }

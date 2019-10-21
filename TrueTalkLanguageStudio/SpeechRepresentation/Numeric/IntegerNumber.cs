@@ -20,6 +20,11 @@ namespace TrueTalk.SpeechRepresentation
 
         //--//
 
+        public override bool ApplyTransformation(IAnalysis analysis)
+        {
+            throw new NotImplementedException();
+        }
+
         public new int Value => (int)( base.Value - ( base.Value % 1 ) );
 
         public override void InnerToString( StringBuilder sb )
@@ -27,11 +32,6 @@ namespace TrueTalk.SpeechRepresentation
             base.InnerToString( sb );
 
             sb.AppendFormat( @"Integer('{0}')", this.Value );
-        }
-
-        public override bool ApplyTransformation(IAnalysis analysis)
-        {
-            throw new NotImplementedException();
         }
 
         public override string ToString( )

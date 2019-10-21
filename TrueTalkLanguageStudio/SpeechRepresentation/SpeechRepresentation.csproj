@@ -150,13 +150,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IntegerNumber.cs" />
-    <Compile Include="NaturalNumber.cs" />
-    <Compile Include="Number.cs" />
-    <Compile Include="Punctuation.cs" />
-    <Compile Include="RealNumber.cs" />
+    <Compile Include="Alpha\Text.cs" />
+    <Compile Include="Alpha\Achronym.cs" />
+    <Compile Include="Numeric\IntegerNumber.cs" />
+    <Compile Include="Numeric\NaturalNumber.cs" />
+    <Compile Include="Numeric\Number.cs" />
+    <Compile Include="Puctuation\Punctuation.cs" />
+    <Compile Include="Numeric\RealNumber.cs" />
     <Compile Include="Token.cs" />
-    <Compile Include="Word.cs" />
+    <Compile Include="Alpha\Word.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
