@@ -2,6 +2,7 @@
 namespace TrueTalk.TestGraph
 {
     using System;
+    using TrueTalk.Speech.Grammar;
     using TrueTalk.SpeechRepresentation;
 
     class Program

@@ -1,7 +1,7 @@
 ﻿
 
 
-namespace TrueTalk.SpeechRepresentation
+namespace TrueTalk.Speech.Grammar
 {
     using System;
 

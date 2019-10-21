@@ -7,6 +7,7 @@ namespace TrueTalk.IrViewer
     using System;
     using System.Collections.Generic;
     using System.Xml;
+    using TrueTalk.Speech.Grammar;
     using TrueTalk.SpeechRepresentation;
 
     public class Clause

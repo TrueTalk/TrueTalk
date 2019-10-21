@@ -45,7 +45,7 @@
       <Project>{96a035df-8ddc-4b92-b050-9229e2d45172}</Project>
       <Name>Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TestParser\SpeechRepresentation.csproj">
+    <ProjectReference Include="..\SpeechRepresentation\SpeechRepresentation.csproj">
       <Project>{52b22ce1-9598-4bad-92a9-fc16302f5a43}</Project>
       <Name>SpeechRepresentation</Name>
     </ProjectReference>

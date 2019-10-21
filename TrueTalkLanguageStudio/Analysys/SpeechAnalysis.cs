@@ -3,7 +3,6 @@ namespace TrueTalk.Analysis
 {
     using System;
     using TrueTalk.Interfaces;
-    using TrueTalk.SpeechRepresentation;
 
     public class SpeechAnalysis : IAnalysis
     {

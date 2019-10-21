@@ -11,8 +11,9 @@ namespace TrueTalk.IrViewer
     using System.Windows.Forms;
     using System.IO;
     using System.Diagnostics;
-    using static TrueTalk.SpeechRepresentation.TokenGraph;
+    using static TrueTalk.Speech.Grammar.TokenGraph;
     using TrueTalk.SpeechRepresentation;
+    using TrueTalk.Speech.Grammar;
 
     //--//
 

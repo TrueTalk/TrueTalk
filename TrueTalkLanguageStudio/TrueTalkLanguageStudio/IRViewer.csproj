@@ -104,9 +104,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TestParser\SpeechRepresentation.csproj">
+    <ProjectReference Include="..\SpeechRepresentation\SpeechRepresentation.csproj">
       <Project>{52b22ce1-9598-4bad-92a9-fc16302f5a43}</Project>
       <Name>SpeechRepresentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrueTalk\TrueTalk.csproj">
+      <Project>{98d3f166-78b6-4437-90de-cc00afd4fd5e}</Project>
+      <Name>TrueTalk</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -141,38 +141,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SpeechRepresentation\ClauseGraphFactory.cs">
-      <Link>ClauseGraphFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\SpeechRepresentation\IntegerNumber.cs">
-      <Link>IntegerNumber.cs</Link>
-    </Compile>
-    <Compile Include="..\SpeechRepresentation\NaturalNumber.cs">
-      <Link>NaturalNumber.cs</Link>
-    </Compile>
-    <Compile Include="..\SpeechRepresentation\Number.cs">
-      <Link>Number.cs</Link>
-    </Compile>
-    <Compile Include="..\SpeechRepresentation\Punctuation.cs">
-      <Link>Punctuation.cs</Link>
-    </Compile>
-    <Compile Include="..\SpeechRepresentation\RealNumber.cs">
-      <Link>RealNumber.cs</Link>
-    </Compile>
-    <Compile Include="..\SpeechRepresentation\Token.cs">
-      <Link>Token.cs</Link>
-    </Compile>
-    <Compile Include="..\SpeechRepresentation\ClauseGraph.cs">
-      <Link>ClauseGraph.cs</Link>
-    </Compile>
-    <Compile Include="..\SpeechRepresentation\TokenGraph.cs">
-      <Link>TokenGraph.cs</Link>
-    </Compile>
-    <Compile Include="..\SpeechRepresentation\Word.cs">
-      <Link>Word.cs</Link>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{bbdcc7c1-56cb-40a2-b7af-03c0a0cbaad0}</Project>
       <Name>Interfaces</Name>
@@ -180,6 +148,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IntegerNumber.cs" />
+    <Compile Include="NaturalNumber.cs" />
+    <Compile Include="Number.cs" />
+    <Compile Include="Punctuation.cs" />
+    <Compile Include="RealNumber.cs" />
+    <Compile Include="Token.cs" />
+    <Compile Include="Word.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

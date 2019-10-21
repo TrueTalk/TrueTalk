@@ -1,6 +1,6 @@
 ﻿
 
-namespace TrueTalk.SpeechRepresentation
+namespace TrueTalk.Speech.Grammar
 {
     using edu.stanford.nlp.trees;
     using edu.stanford.nlp.parser.lexparser;
