@@ -15,8 +15,8 @@ namespace TrueTalk.TestGraph
 
             var clause = factory.FromString( "The big brown dog jumped over the lazy fox." );
 
-            clause.GrammaticalStructure.Display( );
-            clause.PhrasalStructure    .Display( );
+            clause.Graph.GrammaticalStructure.Display( );
+            clause.Graph.PhrasalStructure    .Display( );
         }
     }
 }

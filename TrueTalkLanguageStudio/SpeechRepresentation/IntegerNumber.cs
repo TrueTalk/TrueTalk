@@ -4,6 +4,7 @@ namespace TrueTalk.SpeechRepresentation
 {
     using System;
     using System.Text;
+    using TrueTalk.Interfaces;
 
     public sealed class IntegerNumber : Number
     {
@@ -26,6 +27,11 @@ namespace TrueTalk.SpeechRepresentation
             base.InnerToString( sb );
 
             sb.AppendFormat( @"Integer('{0}')", this.Value );
+        }
+
+        public override bool ApplyTransformation(IAnalysis analysis)
+        {
+            throw new NotImplementedException();
         }
 
         public override string ToString( )

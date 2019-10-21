@@ -7,7 +7,7 @@ namespace TrueTalk.Speech.Grammar
 
     public class ClauseGraph
     {
-        public String RawClause { get; internal set; }
+        public Clause Clause { get; internal set; } = null;
 
         public String GrammaticalRepresentation { get; internal set; }
 

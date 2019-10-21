@@ -4,7 +4,7 @@ namespace TrueTalk.SpeechRepresentation
 {
     using System;
 
-    public class Number : Token
+    public abstract class Number : Token
     {
         public enum DigitKind
         {

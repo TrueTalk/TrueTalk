@@ -6,7 +6,7 @@ namespace TrueTalk.Analysis
 
     public class SpeechAnalysis : IAnalysis
     {
-        public bool Apply( Interfaces.TransformableItem item ) => throw new NotImplementedException( );
+        public bool Apply( TransformableItem item ) => throw new NotImplementedException( );
 
     }
 }

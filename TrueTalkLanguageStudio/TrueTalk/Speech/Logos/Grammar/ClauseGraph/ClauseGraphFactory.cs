@@ -24,13 +24,13 @@ namespace TrueTalk.Speech.Grammar
 
         public ClauseGraphFactory( String modelPath ) { this.modelPath = modelPath; }
 
-        public ClauseGraph FromString( String clause )
+        public Clause FromString( String rawClause )
         {
             // Loading english PCFG parser from file
             var lp = LexicalizedParser.loadModel(modelPath);
 
             var tokenizerFactory = PTBTokenizer.factory(new CoreLabelTokenFactory(), "");
-            var reader = new StringReader(clause);
+            var reader = new StringReader(rawClause);
             var rawWords = tokenizerFactory.getTokenizer(reader).tokenize();
             reader.close( );
             var tree = lp.apply(rawWords);
@@ -145,13 +145,19 @@ namespace TrueTalk.Speech.Grammar
             String phrase = tree.pennString();
             string resPhrase = Regex.Replace(phrase, @"\n", "\r\n");
 
-            return new ClauseGraph { 
-                RawClause = clause,
+            var clause = new Clause(rawClause);
+
+            var clauseGraph = new ClauseGraph { 
+                Clause = clause,
                 GrammaticalRepresentation = resGrammar,
                 PhraseRepresentation = resPhrase,
                 GrammaticalStructure = grammaticalStructure,
                 PhrasalStructure = phraseStructure,
             };
+
+            clause.Graph = clauseGraph;
+
+            return clause;
 
             //////var tp = new TreePrint("penn,typedDependencies");
             //////tp.printTree( tree2 );

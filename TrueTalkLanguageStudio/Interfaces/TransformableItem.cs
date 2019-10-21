@@ -3,7 +3,7 @@ namespace TrueTalk.Interfaces
 {
     using System.Text;
 
-    public class TransformableItem
+    public abstract class TransformableItem
     {
         //--//
 
@@ -15,6 +15,8 @@ namespace TrueTalk.Interfaces
 
         public int Version { get; private set; }
 
+        public abstract bool ApplyTransformation(IAnalysis analysis);
+
         //--//
 
         public virtual TransformableItem CloneAndBumpVersion()
@@ -24,11 +26,6 @@ namespace TrueTalk.Interfaces
             cpy.Version += 1;
 
             return cpy;
-        }
-
-        public virtual void ApplyTransformation( IAnalysis analysis )
-        {
-            analysis.Apply( this );
         }
 
         public virtual void InnerToString( StringBuilder sb )

@@ -3,6 +3,7 @@ namespace TrueTalk.SpeechRepresentation
 {
     using System;
     using System.Text;
+    using TrueTalk.Interfaces;
 
     public class Punctuation : Token
     {
@@ -63,6 +64,11 @@ namespace TrueTalk.SpeechRepresentation
         public PuctuationKind KindOfPunctuation { get; private set; }
 
         public String Value => base.RawValue;
+
+        public override bool ApplyTransformation(IAnalysis analysis)
+        {
+            throw new NotImplementedException();
+        }
 
         public override void InnerToString( StringBuilder sb )
         {

@@ -38,7 +38,7 @@ namespace TrueTalk.IrViewer
 
                 var clauseGraph = Factory.FromString( clause.Text );
 
-                Clause.ClauseGraphs[ clause.Text ] = clauseGraph;
+                Clause.ClauseGraphs[ clause.Text ] = clauseGraph.Graph;
             }
 
             //////clauseGraph.GrammaticalStructure.Display( );

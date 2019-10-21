@@ -4,6 +4,7 @@ namespace TrueTalk.SpeechRepresentation
 {
     using System;
     using System.Text;
+    using TrueTalk.Interfaces;
 
     public sealed class RealNumber : Number
     {
@@ -17,12 +18,9 @@ namespace TrueTalk.SpeechRepresentation
             return new RealNumber( value );
         }
 
-        //--//
-        public override void InnerToString( StringBuilder sb )
+        public override bool ApplyTransformation(IAnalysis analysis)
         {
-            base.InnerToString( sb );
-
-            sb.AppendFormat( @"Real('{0}')", this.Value );
+            throw new NotImplementedException();
         }
 
         public override string ToString( )
@@ -32,6 +30,14 @@ namespace TrueTalk.SpeechRepresentation
             InnerToString( sb );
 
             return sb.ToString( );
+        }
+
+        //--//
+        public override void InnerToString( StringBuilder sb )
+        {
+            base.InnerToString( sb );
+
+            sb.AppendFormat( @"Real('{0}')", this.Value );
         }
     }
 }

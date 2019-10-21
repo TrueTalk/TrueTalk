@@ -4,6 +4,7 @@ namespace TrueTalk.SpeechRepresentation
 {
     using System;
     using System.Text;
+    using TrueTalk.Interfaces;
 
     public sealed class NaturalNumber : Number
     {
@@ -17,7 +18,13 @@ namespace TrueTalk.SpeechRepresentation
             return new NaturalNumber( value );
         }
 
+        public override bool ApplyTransformation(IAnalysis analysis)
+        {
+            throw new NotImplementedException();
+        }
+
         //--//
+
         public override void InnerToString( StringBuilder sb )
         {
             base.InnerToString( sb );

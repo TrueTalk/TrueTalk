@@ -5,7 +5,7 @@ namespace TrueTalk.SpeechRepresentation
     using System.Text;
     using TrueTalk.Interfaces;
 
-    public class Token : TransformableItem
+    public abstract class Token : TransformableItem
     {
         public enum TokenKind
         {

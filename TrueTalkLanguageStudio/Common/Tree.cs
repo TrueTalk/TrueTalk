@@ -21,7 +21,7 @@ namespace TrueTalk.Common
 
         //--//
 
-        public class Edge<T>
+        public class Edge
         {
             public ExpressionTree<T> Source;
             public ExpressionTree<T> Target;
@@ -40,9 +40,9 @@ namespace TrueTalk.Common
 
         //--//
 
-        public Edge<T> Left;
-        public Edge<T> Right;
-        public T       Value;
+        public Edge Left;
+        public Edge Right;
+        public T    Value;
 
         //--//
 
@@ -56,15 +56,15 @@ namespace TrueTalk.Common
 
         public void InsertLeft( ExpressionTree<T> tree, EdgeKind k )
         {
-            this.Left = new Edge<T>( this, tree, k );
+            this.Left = new Edge( this, tree, k );
         }
 
         public void InsertRight( ExpressionTree<T> tree, EdgeKind k )
         {
-            this.Right = new Edge<T>( this, tree, k );
+            this.Right = new Edge( this, tree, k );
         }
 
-        public Edge<T> RemoveLeft( )
+        public Edge RemoveLeft( )
         {
             var l = this.Left;
 
@@ -73,7 +73,7 @@ namespace TrueTalk.Common
             return l;
         }
 
-        public Edge<T> RemoveRight( )
+        public Edge RemoveRight( )
         {
             var r = this.Right;
 
@@ -82,20 +82,20 @@ namespace TrueTalk.Common
             return r;
         }
 
-        public Edge<T> ExchangeLeft( ExpressionTree<T> tree, EdgeKind k )
+        public Edge ExchangeLeft( ExpressionTree<T> tree, EdgeKind k )
         {
             var l = this.Left;
 
-            this.Left = new Edge<T>( this, tree, k );
+            this.Left = new Edge( this, tree, k );
 
             return l;
         }
 
-        public Edge<T> ExchangeRight( ExpressionTree<T> tree, EdgeKind k )
+        public Edge ExchangeRight( ExpressionTree<T> tree, EdgeKind k )
         {
             var r = this.Right;
 
-            this.Right = new Edge<T>( this, tree, k );
+            this.Right = new Edge( this, tree, k );
 
             return r;
         }

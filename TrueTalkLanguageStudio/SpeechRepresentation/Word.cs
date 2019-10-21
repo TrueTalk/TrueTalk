@@ -3,6 +3,7 @@ namespace TrueTalk.SpeechRepresentation
 {
     using System;
     using System.Text;
+    using TrueTalk.Interfaces;
 
     public class Word : Token
     {
@@ -17,6 +18,11 @@ namespace TrueTalk.SpeechRepresentation
         //--//
 
         public String Value => base.RawValue;
+
+        public override bool ApplyTransformation(IAnalysis analysis)
+        {
+            throw new NotImplementedException();
+        }
 
         public override void InnerToString( StringBuilder sb )
         {

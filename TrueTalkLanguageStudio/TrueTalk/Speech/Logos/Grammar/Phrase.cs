@@ -6,8 +6,11 @@ namespace TrueTalk.Speech.Grammar
     using TrueTalk.Interfaces;
     using TrueTalk.Analysis;
 
-    public class Phrase : ITransformable
+    public class Phrase : TransformableItem
     {
-        public bool ApplyTransformation( IAnalysis analysis ) => throw new NotImplementedException( );
+        public override bool ApplyTransformation(IAnalysis analysis)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
