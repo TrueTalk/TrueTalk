@@ -119,9 +119,17 @@ namespace TrueTalk.TestGraph
             CHECKS.ASSERT( openParenthesis.Value == "(", "Failed to parse open bracket '('." );
             CHECKS.ASSERT( openParenthesis.KindOfBracket == Bracket.BracketKind.Parenthesis_Open, "Failed to parse open bracket '('." );
 
+            var openParenthesis1 = MathematicalSymbolFactory.NewMathematicalSymbol("(");
+            CHECKS.ASSERT( openParenthesis1.Value == "(", "Failed to parse open bracket '('." );
+            CHECKS.ASSERT( openParenthesis1.KindOfSymbol == Symbol.SymbolKind.Mathematical, "Failed to parse open bracket '('." );
+
             var closedParenthesis = Bracket.New(")");
             CHECKS.ASSERT( closedParenthesis.Value == ")", "Failed to parse open bracket ')'." );
-            CHECKS.ASSERT( closedParenthesis.KindOfBracket == Bracket.BracketKind.Parenthesis_Close, "Failed to parse open bracket ')'." );
+            CHECKS.ASSERT( closedParenthesis.KindOfBracket == Bracket.BracketKind.Parenthesis_Close, "Failed to parse close bracket ')'." );
+
+            var closedParenthesis1 = MathematicalSymbolFactory.NewMathematicalSymbol(")");
+            CHECKS.ASSERT( closedParenthesis1.Value == ")", "Failed to parse open bracket ')'." );
+            CHECKS.ASSERT( openParenthesis1.KindOfSymbol == Symbol.SymbolKind.Mathematical, "Failed to parse open bracket ')'." );
 
             //--//
 
@@ -130,20 +138,40 @@ namespace TrueTalk.TestGraph
             CHECKS.ASSERT( plus.KindOfSymbol == Symbol.SymbolKind.Mathematical, "Failed to parse plus symbol '+'." );
             CHECKS.ASSERT( typeof( Plus ) == plus.GetType( ), "Failed to generate correct type of plus symbol '+'." );
 
+            var plus1 = MathematicalSymbolFactory.NewMathematicalSymbol("+");
+            CHECKS.ASSERT( plus1.Value == "+", "Failed to parse open bracket '+'." );
+            CHECKS.ASSERT( plus1.KindOfSymbol == Symbol.SymbolKind.Mathematical, "Failed to parse plus symbol '+'." );
+            CHECKS.ASSERT( typeof( Plus ) == plus1.GetType( ), "Failed to generate correct type of plus symbol '+'." );
+
             var minus = Minus.New("-");
-            CHECKS.ASSERT( minus.Value == "-", "Failed to parse open bracket '+'." );
+            CHECKS.ASSERT( minus.Value == "-", "Failed to parse open bracket '-'." );
             CHECKS.ASSERT( minus.KindOfSymbol == Symbol.SymbolKind.Mathematical, "Failed to parse minus symbol '-'." );
             CHECKS.ASSERT( typeof( Minus ) == minus.GetType( ), "Failed to generate correct type of minus symbol '-'." );
 
+            var minus1 = MathematicalSymbolFactory.NewMathematicalSymbol("-");
+            CHECKS.ASSERT( minus1.Value == "-", "Failed to parse open bracket '-'." );
+            CHECKS.ASSERT( minus1.KindOfSymbol == Symbol.SymbolKind.Mathematical, "Failed to parse minus symbol '+'." );
+            CHECKS.ASSERT( typeof( Minus ) == minus1.GetType( ), "Failed to generate correct type of minus symbol '+'." );
+
             var multipliedBy = MultipliedBy.New("*");
-            CHECKS.ASSERT( multipliedBy.Value == "*", "Failed to parse open bracket '+'." );
+            CHECKS.ASSERT( multipliedBy.Value == "*", "Failed to parse open bracket '*'." );
             CHECKS.ASSERT( multipliedBy.KindOfSymbol == Symbol.SymbolKind.Mathematical, "Failed to parse MltipliedBy symbol '*'." );
             CHECKS.ASSERT( typeof( MultipliedBy ) == multipliedBy.GetType( ), "Failed to generate correct type of MultipliedBy symbol '*'." );
 
+            var multipliedBy1 = MathematicalSymbolFactory.NewMathematicalSymbol("*");
+            CHECKS.ASSERT( multipliedBy1.Value == "*", "Failed to parse open bracket '*'." );
+            CHECKS.ASSERT( multipliedBy1.KindOfSymbol == Symbol.SymbolKind.Mathematical, "Failed to parse MltipliedBy symbol '*'." );
+            CHECKS.ASSERT( typeof( MultipliedBy ) == multipliedBy1.GetType( ), "Failed to generate correct type of MultipliedBy symbol '*'." );
+
             var dividedBy = DividedBy.New("/");
-            CHECKS.ASSERT( dividedBy.Value == "/", "Failed to parse open bracket '+'." );
+            CHECKS.ASSERT( dividedBy.Value == "/", "Failed to parse open bracket '/'." );
             CHECKS.ASSERT( dividedBy.KindOfSymbol == Symbol.SymbolKind.Mathematical, "Failed to parse dividedBy symbol '/'." );
             CHECKS.ASSERT( typeof( DividedBy ) == dividedBy.GetType( ), "Failed to generate correct type of dividedBy symbol '/'." );
+
+            var dividedBy1 = MathematicalSymbolFactory.NewMathematicalSymbol("/");
+            CHECKS.ASSERT( dividedBy1.Value == "/", "Failed to parse open bracket '/'." );
+            CHECKS.ASSERT( dividedBy1.KindOfSymbol == Symbol.SymbolKind.Mathematical, "Failed to parse dividedBy symbol '/'." );
+            CHECKS.ASSERT( typeof( DividedBy ) == dividedBy1.GetType( ), "Failed to generate correct type of dividedBy symbol '/'." );
 
             //--//
 

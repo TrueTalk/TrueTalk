@@ -30,8 +30,24 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GLEE", "GLEE", "{B922C56F-59E2-400E-99F6-EBFCDBF95284}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Debug", "Debug", "{50A1A2CD-E2BC-441E-AF35-569ABFCAD638}"
+	ProjectSection(SolutionItems) = preProject
+		..\Binaries\GLEE\Debug\Microsoft.GLEE.dll = ..\Binaries\GLEE\Debug\Microsoft.GLEE.dll
+		..\Binaries\GLEE\Debug\Microsoft.GLEE.Drawing.dll = ..\Binaries\GLEE\Debug\Microsoft.GLEE.Drawing.dll
+		..\Binaries\GLEE\Debug\Microsoft.GLEE.Drawing.pdb = ..\Binaries\GLEE\Debug\Microsoft.GLEE.Drawing.pdb
+		..\Binaries\GLEE\Debug\Microsoft.GLEE.GraphViewerGDI.dll = ..\Binaries\GLEE\Debug\Microsoft.GLEE.GraphViewerGDI.dll
+		..\Binaries\GLEE\Debug\Microsoft.GLEE.GraphViewerGDI.pdb = ..\Binaries\GLEE\Debug\Microsoft.GLEE.GraphViewerGDI.pdb
+		..\Binaries\GLEE\Debug\Microsoft.GLEE.pdb = ..\Binaries\GLEE\Debug\Microsoft.GLEE.pdb
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Release", "Release", "{48301D45-BCBA-498A-B50E-6079E45BF3CA}"
+	ProjectSection(SolutionItems) = preProject
+		..\Binaries\GLEE\Release\Microsoft.GLEE.dll = ..\Binaries\GLEE\Release\Microsoft.GLEE.dll
+		..\Binaries\GLEE\Release\Microsoft.GLEE.Drawing.dll = ..\Binaries\GLEE\Release\Microsoft.GLEE.Drawing.dll
+		..\Binaries\GLEE\Release\Microsoft.GLEE.Drawing.pdb = ..\Binaries\GLEE\Release\Microsoft.GLEE.Drawing.pdb
+		..\Binaries\GLEE\Release\Microsoft.GLEE.GraphViewerGDI.dll = ..\Binaries\GLEE\Release\Microsoft.GLEE.GraphViewerGDI.dll
+		..\Binaries\GLEE\Release\Microsoft.GLEE.GraphViewerGDI.pdb = ..\Binaries\GLEE\Release\Microsoft.GLEE.GraphViewerGDI.pdb
+		..\Binaries\GLEE\Release\Microsoft.GLEE.pdb = ..\Binaries\GLEE\Release\Microsoft.GLEE.pdb
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRViewer", "TrueTalkLanguageStudio\IRViewer.csproj", "{186F31A3-EF89-4A25-B2D5-20060721AA01}"
 EndProject
