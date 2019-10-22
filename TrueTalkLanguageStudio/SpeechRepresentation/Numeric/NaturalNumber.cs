@@ -8,14 +8,22 @@ namespace TrueTalk.SpeechRepresentation
 
     public sealed class NaturalNumber : Number
     {
-        private NaturalNumber( String value ) : base( value, DigitKind.Natural )
+        private NaturalNumber( String value ) : base( value, NumberKind.Natural )
         { }
 
         //--//
 
         public static NaturalNumber New( String value )
         {
-            return new NaturalNumber( value );
+            if (Number.TryParse(value, out Double result, out NumberKind kind))
+            {
+                if (kind == NumberKind.Natural)
+                {
+                    return new NaturalNumber(value);
+                }
+            }
+
+            throw new ArgumentException($"Token '{value}' could not be parsed as a natural number");
         }
 
         //--//

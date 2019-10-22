@@ -8,7 +8,7 @@ namespace TrueTalk.SpeechRepresentation
 
     public sealed class IntegerNumber : Number
     {
-        private IntegerNumber( String value ) : base( value, DigitKind.Integer )
+        private IntegerNumber( String value ) : base( value, NumberKind.Integer )
         { }
 
         //--//

@@ -9,7 +9,7 @@ namespace TrueTalk.SpeechRepresentation
     {
         public enum TokenKind
         {
-            Numberic,
+            Numeric,
             Alpha,
             Symbol,
             Puctuation,

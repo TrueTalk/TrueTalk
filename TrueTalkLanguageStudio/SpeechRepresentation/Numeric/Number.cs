@@ -2,11 +2,13 @@
 
 namespace TrueTalk.SpeechRepresentation
 {
+    using jdk.@internal.org.objectweb.asm.util;
     using System;
+    using TrueTalk.Common;
 
     public abstract class Number : Token
     {
-        public enum DigitKind
+        public enum NumberKind
         {
             Natural,
             Integer,
@@ -21,36 +23,50 @@ namespace TrueTalk.SpeechRepresentation
 
         //--//
 
-        protected Number( String rawValue, DigitKind kind ) : base( rawValue, TokenKind.Numberic )
+        protected Number( String rawValue, NumberKind kind ) : base( rawValue, TokenKind.Numeric )
         {
-            Value       = Parse( rawValue );
-            KindOfDigit = kind;
-        }
-
-        //--//
-
-        public static Double Parse( string rawValue )
-        {
-            if( Double.TryParse( rawValue, out double result ) )
+            if (Number.TryParse(rawValue, out Double result, out NumberKind kind1) == false)
             {
-                return result;
+                throw new ArgumentException($"Token '{rawValue}' could not be parsed as a natural number");
             }
 
-            throw new ArgumentException( "Value {rawvalue} cannot be parsed as a double-precision digit." );
-        }
+            if (kind == NumberKind.Natural)
+            {
+                CHECKS.ASSERT(kind == kind1, "Number kind does not match.");
+            }
+            else if (kind == NumberKind.Integer)
+            {
+                CHECKS.ASSERT((kind == kind1) || (kind1 == NumberKind.Natural), "Number kind does not match.");
+            }
 
-        public static Double Parse( string rawValue, out DigitKind kind )
-        {
-            var result = Parse( rawValue );
-
-            kind = Math.Abs( result % 1 ) > 0 ? DigitKind.Real : ( result > 0 ) ? DigitKind.Integer : DigitKind.Natural;
-
-            return result;
+            Value        = result;
+            KindOfNumber = kind;
         }
 
         //--//
 
-        public DigitKind KindOfDigit { get; private set; }
+        public static bool TryParse( string rawValue, out Double result )
+        {
+            if( Double.TryParse( rawValue, out result ) )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool TryParse( string rawValue, out Double result, out NumberKind kind )
+        {
+            var res = TryParse( rawValue, out result );
+
+            kind = res ? (Math.Abs(result % 1) > 0 ? NumberKind.Real : (result > 0) ? NumberKind.Natural : NumberKind.Integer) : NumberKind.Irrational;
+
+            return res;
+        }
+
+        //--//
+
+        public NumberKind KindOfNumber { get; private set; }
 
         public Double Value { get; private set; }
 

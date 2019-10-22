@@ -141,6 +141,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{96a035df-8ddc-4b92-b050-9229e2d45172}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{bbdcc7c1-56cb-40a2-b7af-03c0a0cbaad0}</Project>
       <Name>Interfaces</Name>
@@ -157,8 +161,16 @@
     <Compile Include="Numeric\Number.cs" />
     <Compile Include="Puctuation\Punctuation.cs" />
     <Compile Include="Numeric\RealNumber.cs" />
+    <Compile Include="Symbol\Mathematical\Bracket.cs" />
+    <Compile Include="Symbol\Mathematical\MathematicalSymbol.cs" />
+    <Compile Include="Symbol\Mathematical\Minus.cs" />
+    <Compile Include="Symbol\Mathematical\MultipliedBy.cs" />
+    <Compile Include="Symbol\Mathematical\DividedBy.cs" />
+    <Compile Include="Symbol\Mathematical\Plus.cs" />
+    <Compile Include="Symbol\Symbol.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="Alpha\Word.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
