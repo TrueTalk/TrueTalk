@@ -8,6 +8,10 @@ namespace TrueTalk.SpeechRepresentation
 
     public sealed class DividedBy : MathematicalSymbol
     {
+        public static readonly string DividedByRepresentation = "/";
+
+        //--//
+
         private DividedBy( String value ) : base( value )
         { }
 
@@ -15,6 +19,11 @@ namespace TrueTalk.SpeechRepresentation
 
         public static DividedBy New( String value )
         {
+            if( value.Equals( DividedByRepresentation ) == false )
+            {
+                throw new ArgumentException( $"Plus value {value} does not match required represenation {DividedByRepresentation}." );
+            }
+
             return new DividedBy( value );
         }
 

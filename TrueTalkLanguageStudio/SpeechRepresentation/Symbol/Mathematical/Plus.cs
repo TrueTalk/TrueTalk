@@ -8,6 +8,10 @@ namespace TrueTalk.SpeechRepresentation
 
     public sealed class Plus : MathematicalSymbol
     {
+        public static readonly string PlusRepresentation = "+";
+
+        //--//
+
         private Plus( String value ) : base( value )
         { }
 
@@ -15,6 +19,11 @@ namespace TrueTalk.SpeechRepresentation
 
         public static Plus New( String value )
         {
+            if( value.Equals( PlusRepresentation ) == false)
+            {
+                throw new ArgumentException( $"Plus value {value} does not match required represenation {PlusRepresentation}." ); 
+            }
+
             return new Plus( value );
         }
 

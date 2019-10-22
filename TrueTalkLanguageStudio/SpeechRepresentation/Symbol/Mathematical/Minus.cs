@@ -8,6 +8,10 @@ namespace TrueTalk.SpeechRepresentation
 
     public sealed class Minus : MathematicalSymbol
     {
+        public static readonly string MinusRepresentation = "-";
+
+        //--//
+
         private Minus( String value ) : base( value )
         { }
 
@@ -15,6 +19,11 @@ namespace TrueTalk.SpeechRepresentation
 
         public static Minus New( String value )
         {
+            if( value.Equals( MinusRepresentation ) == false )
+            {
+                throw new ArgumentException( $"Minus value {value} does not match required represenation {MinusRepresentation}." );
+            }
+
             return new Minus( value );
         }
 

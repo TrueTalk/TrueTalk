@@ -6,7 +6,7 @@ namespace TrueTalk.SpeechRepresentation
     using System.Text;
     using TrueTalk.Interfaces;
 
-    public sealed class Bracket : Symbol
+    public sealed class Bracket : MathematicalSymbol
     {
         public enum BracketKind
         {
@@ -14,7 +14,7 @@ namespace TrueTalk.SpeechRepresentation
             Parenthesis_Close,
         }
 
-        private Bracket( String value, BracketKind kind ) : base( value, SymbolKind.Mathematical )
+        private Bracket( String value, BracketKind kind ) : base( value )
         {
             KindOfBracket = kind;
         }
@@ -33,6 +33,27 @@ namespace TrueTalk.SpeechRepresentation
             }
 
             return new Bracket( value, kind );
+        }
+
+        public static Bracket New( BracketKind kind )
+        {
+            Bracket br = default;
+
+            switch( kind )
+            {
+                case BracketKind.Parenthesis_Open : 
+                    br = new Bracket( "(", BracketKind.Parenthesis_Open );
+                    break;
+
+                case BracketKind.Parenthesis_Close:
+                    br = new Bracket( ")", BracketKind.Parenthesis_Close );
+                    break;
+
+                default: 
+                    throw new ArgumentException( $"Bracket kind '{kind}' is not supported." );
+            }
+
+            return br;
         }
 
         //--//

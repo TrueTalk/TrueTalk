@@ -8,6 +8,10 @@ namespace TrueTalk.SpeechRepresentation
 
     public sealed class MultipliedBy : MathematicalSymbol
     {
+        public static readonly string MultipliedByRepresentation = "*";
+
+        //--//
+
         private MultipliedBy( String value ) : base( value )
         { }
 
@@ -15,6 +19,11 @@ namespace TrueTalk.SpeechRepresentation
 
         public static MultipliedBy New( String value )
         {
+            if( value.Equals( MultipliedByRepresentation ) == false )
+            {
+                throw new ArgumentException( $"Plus value {value} does not match required represenation {MultipliedByRepresentation}." );
+            }
+
             return new MultipliedBy( value );
         }
 

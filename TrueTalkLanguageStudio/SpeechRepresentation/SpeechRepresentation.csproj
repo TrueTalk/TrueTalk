@@ -158,10 +158,12 @@
     <Compile Include="Alpha\Achronym.cs" />
     <Compile Include="Numeric\IntegerNumber.cs" />
     <Compile Include="Numeric\NaturalNumber.cs" />
+    <Compile Include="Numeric\NumberFactory.cs" />
     <Compile Include="Numeric\Number.cs" />
     <Compile Include="Puctuation\Punctuation.cs" />
     <Compile Include="Numeric\RealNumber.cs" />
     <Compile Include="Symbol\Mathematical\Bracket.cs" />
+    <Compile Include="Symbol\Mathematical\MathematicalSymbolFactory.cs" />
     <Compile Include="Symbol\Mathematical\MathematicalSymbol.cs" />
     <Compile Include="Symbol\Mathematical\Minus.cs" />
     <Compile Include="Symbol\Mathematical\MultipliedBy.cs" />

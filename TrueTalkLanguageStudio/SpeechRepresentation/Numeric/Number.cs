@@ -26,7 +26,7 @@ namespace TrueTalk.SpeechRepresentation
         {
             if( Number.TryParse( rawValue, out Double result, out NumberKind kind1 ) == false )
             {
-                throw new ArgumentException( $"Token '{rawValue}' could not be parsed as a natural number" );
+                throw new ArgumentException( $"Token '{rawValue}' could not be parsed as a natural number." );
             }
 
             if( kind == NumberKind.Natural )
