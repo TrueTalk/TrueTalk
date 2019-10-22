@@ -4,11 +4,9 @@
 
 namespace TrueTalk.IrViewer
 {
-    using System;
     using System.Collections.Generic;
     using System.Xml;
     using TrueTalk.Speech.Grammar;
-    using TrueTalk.SpeechRepresentation;
 
     public class Clause
     {
@@ -19,7 +17,7 @@ namespace TrueTalk.IrViewer
         public string Id;
         public string Text;
 
-        public static Dictionary<string, ClauseGraph> ClauseGraphs = new Dictionary<string, ClauseGraph>(); 
+        public static Dictionary<string, ClauseGraph> ClauseGraphs = new Dictionary<string, ClauseGraph>();
     }
 
     public class Parser
@@ -32,7 +30,7 @@ namespace TrueTalk.IrViewer
 
         public Parser( XmlNode node )
         {
-            foreach(XmlNode subnode in node.SelectNodes( "clause" ))
+            foreach( XmlNode subnode in node.SelectNodes( "clause" ) )
             {
                 Clause clause = ParseClause( subnode );
 
@@ -49,11 +47,11 @@ namespace TrueTalk.IrViewer
 
         private Clause ParseClause( XmlNode node )
         {
-            Clause res = new Clause(); 
+            Clause res = new Clause();
 
             res.Id = GetAttribute( node, "id" );
 
-            foreach(XmlNode subnode in node.SelectNodes( "content" ))
+            foreach( XmlNode subnode in node.SelectNodes( "content" ) )
             {
                 ParseClause( subnode, res );
             }

@@ -18,9 +18,9 @@ namespace TrueTalk.SpeechRepresentation
             return new RealNumber( value );
         }
 
-        public override bool ApplyTransformation(IAnalysis analysis)
+        public override bool ApplyTransformation( IAnalysis analysis )
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException( );
         }
 
         public override string ToString( )

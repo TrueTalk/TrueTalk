@@ -1,8 +1,6 @@
 ﻿namespace TrueTalk.Logic
 {
     using TrueTalk.Common;
-    using TrueTalk.Speech.Grammar;
-    using TrueTalk.SpeechRepresentation;
 
     public class LogicFormula
     {

@@ -20,12 +20,12 @@ namespace TrueTalk.SpeechRepresentation
 
         //--//
 
-        public override bool ApplyTransformation(IAnalysis analysis)
+        public override bool ApplyTransformation( IAnalysis analysis )
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException( );
         }
 
-        public new int Value => (int)( base.Value - ( base.Value % 1 ) );
+        public new int Value => ( int )( base.Value - ( base.Value % 1 ) );
 
         public override void InnerToString( StringBuilder sb )
         {

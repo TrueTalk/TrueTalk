@@ -17,9 +17,9 @@ namespace TrueTalk.Speech.Grammar
 
         public ClauseGraph Graph { get; internal set; } = null;
 
-        public override bool ApplyTransformation(IAnalysis analysis)
+        public override bool ApplyTransformation( IAnalysis analysis )
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException( );
         }
     }
 }

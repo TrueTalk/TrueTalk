@@ -25,11 +25,11 @@ namespace TrueTalk.SpeechRepresentation
         {
             BracketKind kind;
 
-            switch(value)
+            switch( value )
             {
-                case "(": kind = BracketKind.Parenthesis_Open;  break;
+                case "(": kind = BracketKind.Parenthesis_Open; break;
                 case ")": kind = BracketKind.Parenthesis_Close; break;
-                default: throw new ArgumentException( $"Symbol '{value}' is not supported." ); 
+                default: throw new ArgumentException( $"Symbol '{value}' is not supported." );
             }
 
             return new Bracket( value, kind );
@@ -39,9 +39,9 @@ namespace TrueTalk.SpeechRepresentation
 
         public BracketKind KindOfBracket { get; internal set; }
 
-        public override bool ApplyTransformation(IAnalysis analysis)
+        public override bool ApplyTransformation( IAnalysis analysis )
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException( );
         }
 
         //--//

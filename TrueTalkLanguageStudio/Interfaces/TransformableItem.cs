@@ -15,11 +15,11 @@ namespace TrueTalk.Interfaces
 
         public int Version { get; private set; }
 
-        public abstract bool ApplyTransformation(IAnalysis analysis);
+        public abstract bool ApplyTransformation( IAnalysis analysis );
 
         //--//
 
-        public virtual TransformableItem CloneAndBumpVersion()
+        public virtual TransformableItem CloneAndBumpVersion( )
         {
             TransformableItem cpy = (TransformableItem)this.MemberwiseClone();
 
@@ -39,7 +39,7 @@ namespace TrueTalk.Interfaces
 
             InnerToString( sb );
 
-            return sb.ToString( ); 
+            return sb.ToString( );
         }
     }
 }

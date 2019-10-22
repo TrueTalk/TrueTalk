@@ -4,10 +4,9 @@
 
 namespace TrueTalk.GraphsAlgorithms
 {
-    using System;
     using System.Collections.Generic;
 
-    public class PostOrderVisit< N, FC > : GenericDepthFirst< FC >
+    public class PostOrderVisit<N, FC> : GenericDepthFirst<FC>
     {
         //
         // State
@@ -19,16 +18,16 @@ namespace TrueTalk.GraphsAlgorithms
         // Constructor Methods
         //
 
-        protected PostOrderVisit()
+        protected PostOrderVisit( )
         {
-            m_nodes = new List<N>();
+            m_nodes = new List<N>( );
         }
 
         //--//
 
         protected override void ProcessAfter( ITreeNode<FC> bb )
         {
-            m_nodes.Add( (N)bb );
+            m_nodes.Add( ( N )bb );
         }
     }
 }

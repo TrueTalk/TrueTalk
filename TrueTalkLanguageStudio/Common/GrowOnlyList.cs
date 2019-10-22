@@ -5,11 +5,9 @@
 namespace TrueTalk.Common
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
 
 
-    public class GrowOnlyList< T >
+    public class GrowOnlyList<T>
     {
         class Cluster
         {
@@ -30,7 +28,7 @@ namespace TrueTalk.Common
 
             internal Cluster( int capacity )
             {
-                m_elements = new T[capacity];
+                m_elements = new T[ capacity ];
                 m_pos      = 0;
             }
 
@@ -42,14 +40,14 @@ namespace TrueTalk.Common
             {
                 int capacity = m_elements.Length;
 
-                if(m_pos == capacity)
+                if( m_pos == capacity )
                 {
                     m_next = new Cluster( Math.Min( capacity * 2, MaxCapacity ) );
 
                     return m_next.Add( obj );
                 }
 
-                m_elements[m_pos++] = obj;
+                m_elements[ m_pos++ ] = obj;
 
                 return this;
             }
@@ -67,16 +65,16 @@ namespace TrueTalk.Common
         // Costructor Methods
         //
 
-        public GrowOnlyList()
+        public GrowOnlyList( )
         {
-            Clear();
+            Clear( );
         }
 
         //
         // Helper Methods
         //
 
-        public void Clear()
+        public void Clear( )
         {
             m_first = new Cluster( Cluster.DefaultCapacity );
             m_last  = m_first;
@@ -91,7 +89,7 @@ namespace TrueTalk.Common
 
         //--//
 
-        public Enumerator GetEnumerator()
+        public Enumerator GetEnumerator( )
         {
             return new Enumerator( this );
         }
@@ -108,35 +106,35 @@ namespace TrueTalk.Common
             }
         }
 
-        public T this[int index]
+        public T this[ int index ]
         {
             get
             {
-                if(index >= 0 && index < m_count)
+                if( index >= 0 && index < m_count )
                 {
-                    for(Cluster cluster = m_first; cluster != null; cluster = cluster.m_next)
+                    for( Cluster cluster = m_first; cluster != null; cluster = cluster.m_next )
                     {
-                        if(index < cluster.m_pos)
+                        if( index < cluster.m_pos )
                         {
-                            return cluster.m_elements[index];
+                            return cluster.m_elements[ index ];
                         }
 
                         index -= cluster.m_pos;
                     }
                 }
 
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException( );
             }
 
             set
             {
-                if(index >= 0 && index < m_count)
+                if( index >= 0 && index < m_count )
                 {
-                    for(Cluster cluster = m_first; cluster != null; cluster = cluster.m_next)
+                    for( Cluster cluster = m_first; cluster != null; cluster = cluster.m_next )
                     {
-                        if(index < cluster.m_pos)
+                        if( index < cluster.m_pos )
                         {
-                            cluster.m_elements[index] = value;
+                            cluster.m_elements[ index ] = value;
                             return;
                         }
 
@@ -144,7 +142,7 @@ namespace TrueTalk.Common
                     }
                 }
 
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException( );
             }
         }
 
@@ -164,22 +162,22 @@ namespace TrueTalk.Common
             // Constructor Methods
             //
 
-            internal Enumerator( GrowOnlyList< T > list )
+            internal Enumerator( GrowOnlyList<T> list )
             {
                 m_first   = list.m_first;
                 m_current = m_first;
                 m_index   = 0;
             }
 
-            public void Dispose()
+            public void Dispose( )
             {
             }
 
-            public bool MoveNext()
+            public bool MoveNext( )
             {
-                while(m_current != null)
+                while( m_current != null )
                 {
-                    if(m_index < m_current.m_pos)
+                    if( m_index < m_current.m_pos )
                     {
                         m_index++;
                         return true;
@@ -196,11 +194,11 @@ namespace TrueTalk.Common
             {
                 get
                 {
-                    return m_current.m_elements[m_index-1];
+                    return m_current.m_elements[ m_index-1 ];
                 }
             }
 
-            void Reset()
+            void Reset( )
             {
                 m_current = m_first;
                 m_index   = 0;

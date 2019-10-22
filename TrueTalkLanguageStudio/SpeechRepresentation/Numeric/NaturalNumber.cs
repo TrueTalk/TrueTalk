@@ -15,24 +15,24 @@ namespace TrueTalk.SpeechRepresentation
 
         public static NaturalNumber New( String value )
         {
-            if (Number.TryParse(value, out Double result, out NumberKind kind))
+            if( Number.TryParse( value, out Double result, out NumberKind kind ) )
             {
-                if (kind == NumberKind.Natural)
+                if( kind == NumberKind.Natural )
                 {
-                    return new NaturalNumber(value);
+                    return new NaturalNumber( value );
                 }
             }
 
-            throw new ArgumentException($"Token '{value}' could not be parsed as a natural number");
+            throw new ArgumentException( $"Token '{value}' could not be parsed as a natural number" );
         }
 
         //--//
 
-        public new int Value => (int)(base.Value - (base.Value % 1));
+        public new int Value => ( int )( base.Value - ( base.Value % 1 ) );
 
-        public override bool ApplyTransformation(IAnalysis analysis)
+        public override bool ApplyTransformation( IAnalysis analysis )
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException( );
         }
 
         //--//

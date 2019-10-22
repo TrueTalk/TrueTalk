@@ -5,8 +5,6 @@
 namespace TrueTalk.Common
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
 
     public class BitVector
     {
@@ -32,24 +30,24 @@ namespace TrueTalk.Common
         // Constructor Methods
         //
 
-        public BitVector() : this( c_MinWords * c_BitsPerWord )
+        public BitVector( ) : this( c_MinWords * c_BitsPerWord )
         {
         }
 
         public BitVector( int size )
         {
             int arraySize = (size + c_BitsPerWord - 1) / c_BitsPerWord;
-            if(arraySize < c_MinWords)
+            if( arraySize < c_MinWords )
             {
                 arraySize = c_MinWords;
             }
 
-            m_bitArray         = new uint[arraySize];
+            m_bitArray         = new uint[ arraySize ];
             m_cardinalityCache = 0;
             m_version          = 0;
         }
 
-        public BitVector( uint[] state )
+        public BitVector( uint[ ] state )
         {
             m_bitArray         = ArrayUtility.CopyNotNullArray( state );
             m_cardinalityCache = -1;
@@ -62,48 +60,48 @@ namespace TrueTalk.Common
         // Helper Methods
         //
 
-        public static BitVector[] AllocateBitVectors( int num  ,
+        public static BitVector[ ] AllocateBitVectors( int num,
                                                       int size )
         {
             BitVector[] res = new BitVector[num];
 
-            for(int i = 0; i < num; i++)
+            for( int i = 0; i < num; i++ )
             {
-                res[i] = new BitVector( size );
+                res[ i ] = new BitVector( size );
             }
 
             return res;
         }
 
-        public static BitVector[] Pivot( BitVector[] arrayXbyY ,
-                                         int         sizeX     ,
-                                         int         sizeY     )
+        public static BitVector[ ] Pivot( BitVector[ ] arrayXbyY,
+                                         int sizeX,
+                                         int sizeY )
         {
             CHECKS.ASSERT( arrayXbyY.Length == sizeX, "Incorrect input array" );
 
             BitVector[] arrayYbyX = AllocateBitVectors( sizeY, sizeX );
 
-            for(int posX = 0; posX < sizeX; posX++)
+            for( int posX = 0; posX < sizeX; posX++ )
             {
                 BitVector vecX = arrayXbyY[posX];
 
                 CHECKS.ASSERT( vecX.Size >= sizeY, "Incorrect input array" );
 
-                if(vecX.m_cardinalityCache != 0)
+                if( vecX.m_cardinalityCache != 0 )
                 {
-                    for(int posY = 0; posY < sizeY; posY += c_BitsPerWord)
+                    for( int posY = 0; posY < sizeY; posY += c_BitsPerWord )
                     {
                         uint word = vecX.m_bitArray[posY / c_BitsPerWord];
 
-                        while(word != 0)
+                        while( word != 0 )
                         {
                             int bitPos = GetPositionOfFirstBitSet( word );
 
-                            word = word & ~(1U << bitPos);
+                            word = word & ~( 1U << bitPos );
 
                             BitVector vecY = arrayYbyX[posY + bitPos];
 
-                            vecY.m_bitArray[posX / c_BitsPerWord] |= 1U << (posX % c_BitsPerWord);
+                            vecY.m_bitArray[ posX / c_BitsPerWord ] |= 1U << ( posX % c_BitsPerWord );
                             vecY.m_cardinalityCache++;
                         }
                     }
@@ -117,37 +115,37 @@ namespace TrueTalk.Common
 
         public override bool Equals( object other )
         {
-            if(other is BitVector)
+            if( other is BitVector )
             {
-                return Equals( (BitVector)other );
+                return Equals( ( BitVector )other );
             }
 
             return false;
         }
 
-        public override int GetHashCode()
+        public override int GetHashCode( )
         {
             uint hash = 1234;
 
-            for(int i = m_bitArray.Length; i >= 0; i--)
+            for( int i = m_bitArray.Length; i >= 0; i-- )
             {
-                hash = (hash << 4) ^ (hash >> 28) ^ m_bitArray[i];
+                hash = ( hash << 4 ) ^ ( hash >> 28 ) ^ m_bitArray[ i ];
             }
 
-            return (int)((hash >> 32) ^ hash);
+            return ( int )( ( hash >> 32 ) ^ hash );
         }
 
         //--//
 
-        public static bool operator ==( BitVector left  ,
+        public static bool operator ==( BitVector left,
                                         BitVector right )
         {
-            if(left is null)
+            if( left is null )
             {
                 return right is null;
             }
 
-            if(right is null)
+            if( right is null )
             {
                 return false;
             }
@@ -155,10 +153,10 @@ namespace TrueTalk.Common
             return left.Equals( right );
         }
 
-        public static bool operator !=( BitVector left  ,
+        public static bool operator !=( BitVector left,
                                         BitVector right )
         {
-            return !(left == right);
+            return !( left == right );
         }
 
         public bool Equals( BitVector other )
@@ -166,10 +164,10 @@ namespace TrueTalk.Common
             //
             // Fast negative check.
             //
-            if(m_cardinalityCache != other.m_cardinalityCache)
+            if( m_cardinalityCache != other.m_cardinalityCache )
             {
-                if(      m_cardinalityCache >= 0 &&
-                   other.m_cardinalityCache >= 0  )
+                if( m_cardinalityCache >= 0 &&
+                   other.m_cardinalityCache >= 0 )
                 {
                     return false;
                 }
@@ -181,19 +179,19 @@ namespace TrueTalk.Common
             int    mySize     = myArray.Length;
             int    minimum    = Math.Min( mySize, otherSize );
 
-            for(int i = minimum - 1; i >= 0; i--)
+            for( int i = minimum - 1; i >= 0; i-- )
             {
-                if(myArray[i] != otherArray[i])
+                if( myArray[ i ] != otherArray[ i ] )
                 {
                     return false;
                 }
             }
 
-            if(mySize < otherSize)
+            if( mySize < otherSize )
             {
-                for(int i = mySize; i < otherSize; i++)
+                for( int i = mySize; i < otherSize; i++ )
                 {
-                    if(otherArray[i] != 0)
+                    if( otherArray[ i ] != 0 )
                     {
                         return false;
                     }
@@ -201,9 +199,9 @@ namespace TrueTalk.Common
             }
             else
             {
-                for(int i = otherSize; i < mySize; i++)
+                for( int i = otherSize; i < mySize; i++ )
                 {
-                    if(myArray[i] != 0)
+                    if( myArray[ i ] != 0 )
                     {
                         return false;
                     }
@@ -213,7 +211,7 @@ namespace TrueTalk.Common
             return true;
         }
 
-        public BitVector Clone()
+        public BitVector Clone( )
         {
             BitVector res = (BitVector)MemberwiseClone();
 
@@ -222,7 +220,7 @@ namespace TrueTalk.Common
             return res;
         }
 
-        public uint[] ToDirectArray()
+        public uint[ ] ToDirectArray( )
         {
             m_cardinalityCache = -1;
             m_version++;
@@ -236,11 +234,11 @@ namespace TrueTalk.Common
         {
             int arrayIndex = index / c_BitsPerWord;
 
-            if(arrayIndex < m_bitArray.Length)
+            if( arrayIndex < m_bitArray.Length )
             {
                 uint mask = 1U << (index % c_BitsPerWord);
 
-                return (m_bitArray[arrayIndex] & mask) != 0;
+                return ( m_bitArray[ arrayIndex ] & mask ) != 0;
             }
 
             return false;
@@ -248,7 +246,7 @@ namespace TrueTalk.Common
 
         public bool Set( int index )
         {
-            BumpVersion();
+            BumpVersion( );
 
             EnsureCapacityInBits( index + 1 );
 
@@ -259,11 +257,11 @@ namespace TrueTalk.Common
             uint newVal = old | mask;
 
             bool fChanged = (newVal != old);
-            if(fChanged)
+            if( fChanged )
             {
-                m_bitArray[arrayIndex] = newVal;
+                m_bitArray[ arrayIndex ] = newVal;
 
-                if(m_cardinalityCache != -1)
+                if( m_cardinalityCache != -1 )
                 {
                     m_cardinalityCache++;
                 }
@@ -274,7 +272,7 @@ namespace TrueTalk.Common
 
         public bool Clear( int index )
         {
-            BumpVersion();
+            BumpVersion( );
 
             EnsureCapacityInBits( index + 1 );
 
@@ -285,11 +283,11 @@ namespace TrueTalk.Common
             uint newVal = old & ~mask;
 
             bool fChanged = (newVal != old);
-            if(fChanged)
+            if( fChanged )
             {
-                m_bitArray[arrayIndex] = newVal;
+                m_bitArray[ arrayIndex ] = newVal;
 
-                if(m_cardinalityCache != -1)
+                if( m_cardinalityCache != -1 )
                 {
                     m_cardinalityCache--;
                 }
@@ -300,10 +298,10 @@ namespace TrueTalk.Common
 
         //--//
 
-        public void SetRange( int start ,
-                              int size  )
+        public void SetRange( int start,
+                              int size )
         {
-            if(size == 0)
+            if( size == 0 )
             {
                 return;
             }
@@ -315,47 +313,47 @@ namespace TrueTalk.Common
             int i = start / c_BitsPerWord;
 
             start = start % c_BitsPerWord;
-            if(start != 0)
+            if( start != 0 )
             {
                 uint mask = c_WordMask;
-                
-                if(size + start < c_BitsPerWord)
+
+                if( size + start < c_BitsPerWord )
                 {
-                    mask >>= (c_BitsPerWord - size);
+                    mask >>= ( c_BitsPerWord - size );
                     size   = 0;
                 }
                 else
                 {
-                    size -= (c_BitsPerWord - start);
+                    size -= ( c_BitsPerWord - start );
                 }
 
-                m_bitArray[i++] |= mask << start;
+                m_bitArray[ i++ ] |= mask << start;
             }
 
-            while(size >= c_BitsPerWord)
+            while( size >= c_BitsPerWord )
             {
-                m_bitArray[i++] = c_WordMask;
+                m_bitArray[ i++ ] = c_WordMask;
 
                 size -= c_BitsPerWord;
             }
 
-            if(size > 0)
+            if( size > 0 )
             {
-                m_bitArray[i] |= c_WordMask >> (c_BitsPerWord - size);
+                m_bitArray[ i ] |= c_WordMask >> ( c_BitsPerWord - size );
             }
         }
 
-        public void ClearRange( int start ,
-                                int size  )
+        public void ClearRange( int start,
+                                int size )
         {
-            if(size == 0)
+            if( size == 0 )
             {
                 return;
             }
 
             EnsureCapacityInBits( start + size );
 
-            if(m_cardinalityCache != 0)
+            if( m_cardinalityCache != 0 )
             {
                 m_cardinalityCache = -1;
             }
@@ -363,59 +361,59 @@ namespace TrueTalk.Common
             int i = start / c_BitsPerWord;
 
             start = start % c_BitsPerWord;
-            if(start != 0)
+            if( start != 0 )
             {
                 uint mask = c_WordMask;
-                
-                if(size + start < c_BitsPerWord)
+
+                if( size + start < c_BitsPerWord )
                 {
-                    mask >>= (c_BitsPerWord - size);
+                    mask >>= ( c_BitsPerWord - size );
                     size   = 0;
                 }
                 else
                 {
-                    size -= (c_BitsPerWord - start);
+                    size -= ( c_BitsPerWord - start );
                 }
 
-                m_bitArray[i++] &= ~(mask << start);
+                m_bitArray[ i++ ] &= ~( mask << start );
             }
 
-            while(size >= c_BitsPerWord)
+            while( size >= c_BitsPerWord )
             {
-                m_bitArray[i++] = 0;
+                m_bitArray[ i++ ] = 0;
 
                 size -= c_BitsPerWord;
             }
 
-            if(size > 0)
+            if( size > 0 )
             {
-                m_bitArray[i] &= ~(c_WordMask >> (c_BitsPerWord - size));
+                m_bitArray[ i ] &= ~( c_WordMask >> ( c_BitsPerWord - size ) );
             }
         }
 
-        public bool GetRange( out int low  ,
+        public bool GetRange( out int low,
                               out int high )
         {
             uint[] array = m_bitArray;
             int    size  = array.Length;
             int    pos   = 0;
 
-            while(pos < size)
+            while( pos < size )
             {
                 uint word = array[pos];
 
-                if(word != 0)
+                if( word != 0 )
                 {
-                    low = (pos * c_BitsPerWord) + GetPositionOfFirstBitSet( word );
+                    low = ( pos * c_BitsPerWord ) + GetPositionOfFirstBitSet( word );
 
                     pos = size;
-                    while(--pos >= 0)
+                    while( --pos >= 0 )
                     {
-                        word = array[pos];
+                        word = array[ pos ];
 
-                        if(word != 0)
+                        if( word != 0 )
                         {
-                            high = (pos * c_BitsPerWord) + GetPositionOfLastBitSet( word );
+                            high = ( pos * c_BitsPerWord ) + GetPositionOfLastBitSet( word );
                             return true;
                         }
                     }
@@ -430,16 +428,16 @@ namespace TrueTalk.Common
             return false;
         }
 
-        public void ClearAll()
+        public void ClearAll( )
         {
-            if(m_cardinalityCache == 0)
+            if( m_cardinalityCache == 0 )
             {
                 return; // Nothing to do.
             }
 
-            for(int i = 0; i < m_bitArray.Length; i++)
+            for( int i = 0; i < m_bitArray.Length; i++ )
             {
-                m_bitArray[i] = 0;
+                m_bitArray[ i ] = 0;
             }
 
             m_cardinalityCache = 0;
@@ -447,7 +445,7 @@ namespace TrueTalk.Common
 
         //--//
 
-        public bool this[int i]
+        public bool this[ int i ]
         {
             get
             {
@@ -456,7 +454,7 @@ namespace TrueTalk.Common
 
             set
             {
-                if(value)
+                if( value )
                 {
                     Set( i );
                 }
@@ -479,20 +477,20 @@ namespace TrueTalk.Common
         {
             get
             {
-                if(m_cardinalityCache == -1)
+                if( m_cardinalityCache == -1 )
                 {
                     uint card = 0;
 
-                    for(int i = m_bitArray.Length - 1; i >= 0; i--)
+                    for( int i = m_bitArray.Length - 1; i >= 0; i-- )
                     {
                         uint value = m_bitArray[i];
-                        if(value != 0)
+                        if( value != 0 )
                         {
                             card += CountBits( value );
                         }
                     }
 
-                    m_cardinalityCache = (int)card;
+                    m_cardinalityCache = ( int )card;
                 }
 
                 return m_cardinalityCache;
@@ -503,14 +501,14 @@ namespace TrueTalk.Common
         {
             get
             {
-                if(m_cardinalityCache >= 0)
+                if( m_cardinalityCache >= 0 )
                 {
-                    return (m_cardinalityCache == 0);
+                    return ( m_cardinalityCache == 0 );
                 }
 
-                for(int i = m_bitArray.Length - 1; i >= 0; i--)
+                for( int i = m_bitArray.Length - 1; i >= 0; i-- )
                 {
-                    if(m_bitArray[i] != 0)
+                    if( m_bitArray[ i ] != 0 )
                     {
                         return false;
                     }
@@ -524,7 +522,7 @@ namespace TrueTalk.Common
 
         public void Assign( BitVector other )
         {
-            BumpVersion();
+            BumpVersion( );
 
             uint[] otherArray = other.m_bitArray;
             int    otherSize  = otherArray.Length;
@@ -538,21 +536,21 @@ namespace TrueTalk.Common
             m_cardinalityCache = other.m_cardinalityCache;
 
             //--//
-            
-            for(int i = size; --i >= otherSize; ) // Clear excess part.
+
+            for( int i = size; --i >= otherSize; ) // Clear excess part.
             {
-                myArray[i] = 0;
+                myArray[ i ] = 0;
             }
 
-            for(int i = otherSize; --i >= 0; ) // Copy common part.
+            for( int i = otherSize; --i >= 0; ) // Copy common part.
             {
-                myArray[i] = otherArray[i];
+                myArray[ i ] = otherArray[ i ];
             }
         }
 
         public void AndInPlace( BitVector other )
         {
-            BumpVersion();
+            BumpVersion( );
 
             uint[] otherArray = other.m_bitArray;
             int    otherSize  = otherArray.Length;
@@ -567,20 +565,20 @@ namespace TrueTalk.Common
 
             //--//
 
-            for(int i = size; --i >= otherSize; ) // Clear excess part.
+            for( int i = size; --i >= otherSize; ) // Clear excess part.
             {
-                myArray[i] = 0;
+                myArray[ i ] = 0;
             }
 
-            for(int i = otherSize; --i >= 0; ) // And common part.
+            for( int i = otherSize; --i >= 0; ) // And common part.
             {
-                myArray[i] &= otherArray[i];
+                myArray[ i ] &= otherArray[ i ];
             }
         }
 
         public void OrInPlace( BitVector other )
         {
-            BumpVersion();
+            BumpVersion( );
 
             uint[] otherArray = other.m_bitArray;
             int    otherSize  = otherArray.Length;
@@ -594,16 +592,16 @@ namespace TrueTalk.Common
             m_cardinalityCache = -1;
 
             //--//
-            
-            for(int i = otherSize; --i >= 0; ) // Or common part (leave excess part as is).
+
+            for( int i = otherSize; --i >= 0; ) // Or common part (leave excess part as is).
             {
-                myArray[i] |= otherArray[i];
+                myArray[ i ] |= otherArray[ i ];
             }
         }
 
         public void XorInPlace( BitVector other )
         {
-            BumpVersion();
+            BumpVersion( );
 
             uint[] otherArray = other.m_bitArray;
             int    otherSize  = otherArray.Length;
@@ -617,16 +615,16 @@ namespace TrueTalk.Common
             m_cardinalityCache = -1;
 
             //--//
-            
-            for(int i = otherSize; --i >= 0; ) // Xor common part (leave excess part as is).
+
+            for( int i = otherSize; --i >= 0; ) // Xor common part (leave excess part as is).
             {
-                myArray[i] ^= otherArray[i];
+                myArray[ i ] ^= otherArray[ i ];
             }
         }
 
         public void DifferenceInPlace( BitVector other )
         {
-            BumpVersion();
+            BumpVersion( );
 
             uint[] otherArray = other.m_bitArray;
             int    otherSize  = otherArray.Length;
@@ -641,9 +639,9 @@ namespace TrueTalk.Common
 
             //--//
 
-            for(int i = otherSize; --i >= 0; ) // Diff common part (leave excess part as is).
+            for( int i = otherSize; --i >= 0; ) // Diff common part (leave excess part as is).
             {
-                myArray[i] &= ~otherArray[i];
+                myArray[ i ] &= ~otherArray[ i ];
             }
         }
 
@@ -655,9 +653,9 @@ namespace TrueTalk.Common
             int    otherSize  = otherArray.Length;
             int    minSize    = Math.Min( mySize, otherSize );
 
-            for(int i = minSize; --i >= 0; ) // Check common part.
+            for( int i = minSize; --i >= 0; ) // Check common part.
             {
-                if((myArray[i] & otherArray[i]) != 0)
+                if( ( myArray[ i ] & otherArray[ i ] ) != 0 )
                 {
                     return false;
                 }
@@ -674,12 +672,12 @@ namespace TrueTalk.Common
             int    otherSize  = otherArray.Length;
             int    maxSize    = Math.Max( mySize, otherSize );
 
-            for(int i = maxSize; --i >= 0; ) // Check the maximal overlap.
+            for( int i = maxSize; --i >= 0; ) // Check the maximal overlap.
             {
                 uint myValue    = (i < mySize   ) ? myArray   [i] : 0;
                 uint otherValue = (i < otherSize) ? otherArray[i] : 0;
 
-                if((myValue & otherValue) != myValue)
+                if( ( myValue & otherValue ) != myValue )
                 {
                     return false;
                 }
@@ -690,10 +688,10 @@ namespace TrueTalk.Common
 
         //--//
 
-        public void And( BitVector left  ,
+        public void And( BitVector left,
                          BitVector right )
         {
-            BumpVersion();
+            BumpVersion( );
 
             uint[] leftArray  = left .m_bitArray;
             uint[] rightArray = right.m_bitArray;
@@ -711,21 +709,21 @@ namespace TrueTalk.Common
 
             //--//
 
-            for(int i = mySize; --i >= minSize; ) // Clear part not in common.
+            for( int i = mySize; --i >= minSize; ) // Clear part not in common.
             {
-                myArray[i] = 0;
+                myArray[ i ] = 0;
             }
 
-            for(int i = minSize; --i >= 0; ) // And part in common.
+            for( int i = minSize; --i >= 0; ) // And part in common.
             {
-                myArray[i] = leftArray[i] & rightArray[i];
+                myArray[ i ] = leftArray[ i ] & rightArray[ i ];
             }
         }
-    
-        public void Or( BitVector left  ,
+
+        public void Or( BitVector left,
                         BitVector right )
         {
-            BumpVersion();
+            BumpVersion( );
 
             uint[] leftArray  = left .m_bitArray;
             uint[] rightArray = right.m_bitArray;
@@ -743,36 +741,36 @@ namespace TrueTalk.Common
 
             //--//
 
-            for(int i = mySize; --i >= maxSize; ) // Clear part not in common.
+            for( int i = mySize; --i >= maxSize; ) // Clear part not in common.
             {
-                myArray[i] = 0;
+                myArray[ i ] = 0;
             }
 
-            if(leftSize < maxSize) // Copy non-overlapping part.
+            if( leftSize < maxSize ) // Copy non-overlapping part.
             {
-                for(int i = maxSize; --i >= minSize; )
+                for( int i = maxSize; --i >= minSize; )
                 {
-                    myArray[i] = rightArray[i];
+                    myArray[ i ] = rightArray[ i ];
                 }
             }
             else
             {
-                for(int i = maxSize; --i >= minSize; )
+                for( int i = maxSize; --i >= minSize; )
                 {
-                    myArray[i] = leftArray[i];
+                    myArray[ i ] = leftArray[ i ];
                 }
             }
 
-            for(int i = minSize; --i >= 0; ) // Or part in common.
+            for( int i = minSize; --i >= 0; ) // Or part in common.
             {
-                myArray[i] = leftArray[i] | rightArray[i];
+                myArray[ i ] = leftArray[ i ] | rightArray[ i ];
             }
         }
-    
-        public void Xor( BitVector left  ,
+
+        public void Xor( BitVector left,
                          BitVector right )
         {
-            BumpVersion();
+            BumpVersion( );
 
             uint[] leftArray  = left .m_bitArray;
             uint[] rightArray = right.m_bitArray;
@@ -789,37 +787,37 @@ namespace TrueTalk.Common
             m_cardinalityCache = -1;
 
             //--//
-            
-            for(int i = mySize; --i >= maxSize; ) // Clear excess part.
+
+            for( int i = mySize; --i >= maxSize; ) // Clear excess part.
             {
-                myArray[i] = 0;
+                myArray[ i ] = 0;
             }
 
-            if(leftSize < maxSize) // Copy non-overlapping part.
+            if( leftSize < maxSize ) // Copy non-overlapping part.
             {
-                for(int i = maxSize; --i >= minSize; )
+                for( int i = maxSize; --i >= minSize; )
                 {
-                    myArray[i] = rightArray[i];
+                    myArray[ i ] = rightArray[ i ];
                 }
             }
             else
             {
-                for(int i = maxSize; --i >= minSize; )
+                for( int i = maxSize; --i >= minSize; )
                 {
-                    myArray[i] = leftArray[i];
+                    myArray[ i ] = leftArray[ i ];
                 }
             }
 
-            for(int i = minSize; --i >= 0; ) // Xor part in common.
+            for( int i = minSize; --i >= 0; ) // Xor part in common.
             {
-                myArray[i] = leftArray[i] ^ rightArray[i];
+                myArray[ i ] = leftArray[ i ] ^ rightArray[ i ];
             }
         }
-    
-        public void Difference( BitVector left  ,
+
+        public void Difference( BitVector left,
                                 BitVector right )
         {
-            BumpVersion();
+            BumpVersion( );
 
             uint[] leftArray  = left .m_bitArray;
             uint[] rightArray = right.m_bitArray;
@@ -837,29 +835,29 @@ namespace TrueTalk.Common
 
             //--//
 
-            for(int i = mySize; --i >= maxSize; ) // Clear excess part.
+            for( int i = mySize; --i >= maxSize; ) // Clear excess part.
             {
-                myArray[i] = 0;
+                myArray[ i ] = 0;
             }
 
-            if(leftSize < maxSize)
+            if( leftSize < maxSize )
             {
-                for(int i = maxSize; --i >= minSize; ) // Clear non-overlapping part (left is smaller, so it's always zero).
+                for( int i = maxSize; --i >= minSize; ) // Clear non-overlapping part (left is smaller, so it's always zero).
                 {
-                    myArray[i] = 0;
+                    myArray[ i ] = 0;
                 }
             }
             else
             {
-                for(int i = maxSize; --i >= minSize; ) // Copy non-overlapping part (right is smaller, so it's always zero).
+                for( int i = maxSize; --i >= minSize; ) // Copy non-overlapping part (right is smaller, so it's always zero).
                 {
-                    myArray[i] = leftArray[i];
+                    myArray[ i ] = leftArray[ i ];
                 }
             }
 
-            for(int i = minSize; --i >= 0; ) // Diff common part.
+            for( int i = minSize; --i >= 0; ) // Diff common part.
             {
-                myArray[i] = leftArray[i] & ~rightArray[i];
+                myArray[ i ] = leftArray[ i ] & ~rightArray[ i ];
             }
         }
 
@@ -870,78 +868,78 @@ namespace TrueTalk.Common
         // For example, creating a BitVector with all bits set and then complementing it
         // doesn't return zero as the cardinality of the vector, as expected, but 32 - <initializeSize> % 32.
         //
-        public void Complement()
+        public void Complement( )
         {
-            BumpVersion();
+            BumpVersion( );
 
             int size = m_bitArray.Length;
 
             // complement one word at a time
-            for(int i = 0; i < size; i++)
+            for( int i = 0; i < size; i++ )
             {
-                m_bitArray[i] = ~m_bitArray[i];
+                m_bitArray[ i ] = ~m_bitArray[ i ];
             }
 
-            if(m_cardinalityCache >= 0)
+            if( m_cardinalityCache >= 0 )
             {
-                m_cardinalityCache = (size * c_BitsPerWord) - m_cardinalityCache;
+                m_cardinalityCache = ( size * c_BitsPerWord ) - m_cardinalityCache;
             }
         }
 
         //--//
 
-////    public static BitVector operator & ( BitVector left  ,
-////                                         BitVector right )
-////    {
-////        BitVector res = left.Clone();
-////
-////        res.AndInPlace( right );
-////
-////        return res;
-////    }
-////
-////    public static BitVector operator | ( BitVector left  ,
-////                                         BitVector right )
-////    {
-////        BitVector res = left.Clone();
-////
-////        res.OrInPlace( right );
-////
-////        return res;
-////    }
-////
-////    public static BitVector operator ^ ( BitVector left  ,
-////                                         BitVector right )
-////    {
-////        BitVector res = left.Clone();
-////
-////        res.XorInPlace( right );
-////
-////        return res;
-////    }
-////
-////    public static BitVector operator - ( BitVector left  ,
-////                                         BitVector right )
-////    {
-////        BitVector res = left.Clone();
-////
-////        res.DifferenceInPlace( right );
-////
-////        return res;
-////    }
-////
-////    public static BitVector operator ~ ( BitVector left )
-////    {
-////        BitVector res = left.Clone();
-////
-////        res.Complement();
-////
-////        return res;
-////    }
+        ////    public static BitVector operator & ( BitVector left  ,
+        ////                                         BitVector right )
+        ////    {
+        ////        BitVector res = left.Clone();
+        ////
+        ////        res.AndInPlace( right );
+        ////
+        ////        return res;
+        ////    }
+        ////
+        ////    public static BitVector operator | ( BitVector left  ,
+        ////                                         BitVector right )
+        ////    {
+        ////        BitVector res = left.Clone();
+        ////
+        ////        res.OrInPlace( right );
+        ////
+        ////        return res;
+        ////    }
+        ////
+        ////    public static BitVector operator ^ ( BitVector left  ,
+        ////                                         BitVector right )
+        ////    {
+        ////        BitVector res = left.Clone();
+        ////
+        ////        res.XorInPlace( right );
+        ////
+        ////        return res;
+        ////    }
+        ////
+        ////    public static BitVector operator - ( BitVector left  ,
+        ////                                         BitVector right )
+        ////    {
+        ////        BitVector res = left.Clone();
+        ////
+        ////        res.DifferenceInPlace( right );
+        ////
+        ////        return res;
+        ////    }
+        ////
+        ////    public static BitVector operator ~ ( BitVector left )
+        ////    {
+        ////        BitVector res = left.Clone();
+        ////
+        ////        res.Complement();
+        ////
+        ////        return res;
+        ////    }
 
         //--//
 
-        public Enumerator GetEnumerator()
+        public Enumerator GetEnumerator( )
         {
             return new Enumerator( this );
         }
@@ -952,7 +950,7 @@ namespace TrueTalk.Common
         // Helper Methods
         //
 
-        protected void BumpVersion()
+        protected void BumpVersion( )
         {
 #if DEBUG
             m_version++;
@@ -970,11 +968,11 @@ namespace TrueTalk.Common
         {
             int size = m_bitArray.Length;
 
-            if(size < arraySize)
+            if( size < arraySize )
             {
                 uint[] oldArray = m_bitArray;
 
-                m_bitArray = new uint[arraySize];
+                m_bitArray = new uint[ arraySize ];
 
                 Array.Copy( oldArray, m_bitArray, size );
             }
@@ -993,11 +991,11 @@ namespace TrueTalk.Common
             //               2 8-bit adds, and
             //               1 16-bit add.
             //
-            value = ((value >>  1) & 0x55555555) + (value & 0x55555555);
-            value = ((value >>  2) & 0x33333333) + (value & 0x33333333);
-            value = ((value >>  4) & 0x0F0F0F0F) + (value & 0x0F0F0F0F);
-            value = ((value >>  8) & 0x00FF00FF) + (value & 0x00FF00FF);
-            value = ((value >> 16) & 0x0000FFFF) + (value & 0x0000FFFF);
+            value = ( ( value >>  1 ) & 0x55555555 ) + ( value & 0x55555555 );
+            value = ( ( value >>  2 ) & 0x33333333 ) + ( value & 0x33333333 );
+            value = ( ( value >>  4 ) & 0x0F0F0F0F ) + ( value & 0x0F0F0F0F );
+            value = ( ( value >>  8 ) & 0x00FF00FF ) + ( value & 0x00FF00FF );
+            value = ( ( value >> 16 ) & 0x0000FFFF ) + ( value & 0x0000FFFF );
 
             return value;
         }
@@ -1006,11 +1004,11 @@ namespace TrueTalk.Common
         {
             int bitPos = 0;
 
-            if((w & 0xFFFF) == 0) { w >>= 16; bitPos += 16; }
-            if((w & 0x00FF) == 0) { w >>=  8; bitPos +=  8; }
-            if((w & 0x000F) == 0) { w >>=  4; bitPos +=  4; }
-            if((w & 0x0003) == 0) { w >>=  2; bitPos +=  2; }
-            if((w & 0x0001) == 0) { w >>=  1; bitPos +=  1; }
+            if( ( w & 0xFFFF ) == 0 ) { w >>= 16; bitPos += 16; }
+            if( ( w & 0x00FF ) == 0 ) { w >>=  8; bitPos +=  8; }
+            if( ( w & 0x000F ) == 0 ) { w >>=  4; bitPos +=  4; }
+            if( ( w & 0x0003 ) == 0 ) { w >>=  2; bitPos +=  2; }
+            if( ( w & 0x0001 ) == 0 ) { w >>=  1; bitPos +=  1; }
 
             return bitPos;
         }
@@ -1020,7 +1018,7 @@ namespace TrueTalk.Common
             uint wHi = (uint)(w >> 32);
             uint wLo = (uint) w;
 
-            if(wLo != 0)
+            if( wLo != 0 )
             {
                 return GetPositionOfFirstBitSet( wLo );
             }
@@ -1034,11 +1032,11 @@ namespace TrueTalk.Common
         {
             int bitPos = 0;
 
-            if((w >> 16) != 0) { w >>= 16; bitPos += 16; }
-            if((w >>  8) != 0) { w >>=  8; bitPos +=  8; }
-            if((w >>  4) != 0) { w >>=  4; bitPos +=  4; }
-            if((w >>  2) != 0) { w >>=  2; bitPos +=  2; }
-            if((w >>  1) != 0) { w >>=  1; bitPos +=  1; }
+            if( ( w >> 16 ) != 0 ) { w >>= 16; bitPos += 16; }
+            if( ( w >>  8 ) != 0 ) { w >>=  8; bitPos +=  8; }
+            if( ( w >>  4 ) != 0 ) { w >>=  4; bitPos +=  4; }
+            if( ( w >>  2 ) != 0 ) { w >>=  2; bitPos +=  2; }
+            if( ( w >>  1 ) != 0 ) { w >>=  1; bitPos +=  1; }
 
             return bitPos;
         }
@@ -1048,7 +1046,7 @@ namespace TrueTalk.Common
             uint wHi = (uint)(w >> 32);
             uint wLo = (uint) w;
 
-            if(wHi != 0)
+            if( wHi != 0 )
             {
                 return GetPositionOfLastBitSet( wHi ) + 32;
             }
@@ -1080,27 +1078,27 @@ namespace TrueTalk.Common
             {
                 m_owner   = owner;
                 m_version = owner.m_version;
-                m_word    = m_owner.m_bitArray[0];
+                m_word    = m_owner.m_bitArray[ 0 ];
                 m_index   = 0;
                 m_current = -1;
             }
 
-            public void Dispose()
+            public void Dispose( )
             {
             }
 
-            public bool MoveNext()
+            public bool MoveNext( )
             {
 #if DEBUG
-                if(m_version != m_owner.m_version)
+                if( m_version != m_owner.m_version )
                 {
                     throw new InvalidOperationException( "Enumerator version check failed" );
                 }
 #endif
 
-                if(hasMoreElements())
+                if( hasMoreElements( ) )
                 {
-                    m_current = nextInt();
+                    m_current = nextInt( );
                     return true;
                 }
                 else
@@ -1114,11 +1112,11 @@ namespace TrueTalk.Common
             {
                 get
                 {
-                    if(m_current == -1)
+                    if( m_current == -1 )
                     {
                         throw new InvalidOperationException( "Enumerator not started" );
                     }
-                    else if(m_current == -2)
+                    else if( m_current == -2 )
                     {
                         throw new InvalidOperationException( "Enumerator is empty" );
                     }
@@ -1131,26 +1129,26 @@ namespace TrueTalk.Common
 
             //--//
 
-            private bool hasMoreElements()
+            private bool hasMoreElements( )
             {
                 uint[] array = m_owner.m_bitArray;
                 int    size  = array.Length;
 
-                while(m_word == 0 && ++m_index < size)
+                while( m_word == 0 && ++m_index < size )
                 {
-                    m_word = array[m_index];
+                    m_word = array[ m_index ];
                 }
 
-                return (m_word != 0);
+                return ( m_word != 0 );
             }
 
-            private int nextInt()
+            private int nextInt( )
             {
                 int bitPos = GetPositionOfFirstBitSet( m_word );
 
-                m_word = m_word & ~(1U << bitPos);
+                m_word = m_word & ~( 1U << bitPos );
 
-                return bitPos + (m_index * c_BitsPerWord);
+                return bitPos + ( m_index * c_BitsPerWord );
             }
         }
 
@@ -1158,26 +1156,26 @@ namespace TrueTalk.Common
         // Debug Methods
         //
 
-        public override String ToString()
+        public override String ToString( )
         {
             System.Text.StringBuilder result    = new System.Text.StringBuilder( "{" );
             bool                      empty     = true;
             int                       size      = m_bitArray.Length;
             int                       bitNumber = 0;
 
-            for(int arrayIndex = 0; arrayIndex < size; arrayIndex++)
+            for( int arrayIndex = 0; arrayIndex < size; arrayIndex++ )
             {
                 uint bits = m_bitArray[arrayIndex];
 
-                if(bits != 0)
+                if( bits != 0 )
                 {
                     uint mask = 1;
 
-                    while(mask != 0)
+                    while( mask != 0 )
                     {
-                        if((bits & mask) != 0)
+                        if( ( bits & mask ) != 0 )
                         {
-                            if(empty)
+                            if( empty )
                             {
                                 empty = false;
                             }
@@ -1201,7 +1199,7 @@ namespace TrueTalk.Common
 
             result = result.Append( "}" );
 
-            return result.ToString();
+            return result.ToString( );
         }
     }
 }

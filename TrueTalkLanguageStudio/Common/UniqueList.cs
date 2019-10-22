@@ -8,13 +8,13 @@ namespace TrueTalk.Common.Collections.Generic
     using System.Collections.Generic;
 
 
-    public class UniqueList<T> : List<T> where T : IEquatable< T >
+    public class UniqueList<T> : List<T> where T : IEquatable<T>
     {
         //
         // Constructor Methods
         //
 
-        public UniqueList() : base()
+        public UniqueList( ) : base( )
         {
         }
 
@@ -28,9 +28,9 @@ namespace TrueTalk.Common.Collections.Generic
 
         public void AddUnique( T item )
         {
-            for(int i = 0; i < this.Count; i++)
+            for( int i = 0; i < this.Count; i++ )
             {
-                if(this[i].Equals( item ))
+                if( this[ i ].Equals( item ) )
                 {
                     return;
                 }
@@ -41,9 +41,9 @@ namespace TrueTalk.Common.Collections.Generic
 
         public int UniqueIndexOf( T item )
         {
-            for(int i = 0; i < this.Count; i++)
+            for( int i = 0; i < this.Count; i++ )
             {
-                if(this[i].Equals( item ))
+                if( this[ i ].Equals( item ) )
                 {
                     return i;
                 }
@@ -54,9 +54,9 @@ namespace TrueTalk.Common.Collections.Generic
 
         public bool ContainsUnique( T item )
         {
-            for(int i = 0; i < this.Count; i++)
+            for( int i = 0; i < this.Count; i++ )
             {
-                if(this[i].Equals( item ))
+                if( this[ i ].Equals( item ) )
                 {
                     return true;
                 }

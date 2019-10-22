@@ -6,9 +6,8 @@ namespace TrueTalk.GraphsAlgorithms
 {
     using System;
     using TrueTalk.Common;
-    using TrueTalk.GraphsAlgorithms;
 
-    public class Dominance< N, E, FC > 
+    public class Dominance<N, E, FC>
         where N : class, ITreeNode<FC>
         where E : class, ITreeEdge<FC>
     {
@@ -29,7 +28,7 @@ namespace TrueTalk.GraphsAlgorithms
 
         public Dominance( N[ ] nodesSpanningTree, N[ ] postOrderVisit )
         {
-            if(nodesSpanningTree.Length != postOrderVisit.Length)
+            if( nodesSpanningTree.Length != postOrderVisit.Length )
             {
                 throw new ArgumentException( "Mismatch between size of SpanningTree and size of PostOrderVisit" );
             }
@@ -41,7 +40,7 @@ namespace TrueTalk.GraphsAlgorithms
 
             m_spanningTreeToPostOrder = new int[ num ];
 
-            for(int pos = 0; pos < num; pos++)
+            for( int pos = 0; pos < num; pos++ )
             {
                 N node = m_nodesPostOrder[pos];
 
@@ -53,7 +52,7 @@ namespace TrueTalk.GraphsAlgorithms
         // Helper Methods
         //
 
-        private void ComputeDominators()
+        private void ComputeDominators( )
         {
             //
             // This is an implementation of the algorithm in "A Simple, Fast Dominance Algorithm", by Keith D. Cooper, Timothy J. Harvey, and Ken Kennedy.
@@ -86,29 +85,29 @@ namespace TrueTalk.GraphsAlgorithms
 
             int num = m_nodesPostOrder.Length;
 
-            m_immediateDominancePostOrder = new N[num];
+            m_immediateDominancePostOrder = new N[ num ];
 
             N startNode = m_nodesSpanningTree[0];
 
             SetIDom( startNode, startNode );
 
-            while(true)
+            while( true )
             {
                 bool fChanged = false;
 
-                for(int pos = num - 1; --pos >= 0;)
+                for( int pos = num - 1; --pos >= 0; )
                 {
                     N nodeB = m_nodesPostOrder[pos];
 
-                    CHECKS.ASSERT( !(nodeB is IEntryTreeNode<FC>)  , "Start node should not be processed by ImmediateDominance algorithm" );
-                    CHECKS.ASSERT( nodeB.Predecessors.Length > 0, "Node 'b' should have a predecessor: {0}", nodeB                     );
+                    CHECKS.ASSERT( !( nodeB is IEntryTreeNode<FC> ), "Start node should not be processed by ImmediateDominance algorithm" );
+                    CHECKS.ASSERT( nodeB.Predecessors.Length > 0, "Node 'b' should have a predecessor: {0}", nodeB );
 
                     N first = null;
-                    foreach(ITreeEdge<FC> edge in nodeB.Predecessors)
+                    foreach( ITreeEdge<FC> edge in nodeB.Predecessors )
                     {
                         N node = (N)edge.Predecessor;
 
-                        if(GetIDom( node ) != null)
+                        if( GetIDom( node ) != null )
                         {
                             first = node;
                             break;
@@ -119,20 +118,20 @@ namespace TrueTalk.GraphsAlgorithms
 
                     N new_idom = first;
 
-                    foreach(ITreeEdge<FC> edge in nodeB.Predecessors)
+                    foreach( ITreeEdge<FC> edge in nodeB.Predecessors )
                     {
                         N nodeP = (N)edge.Predecessor;
 
-                        if(nodeP != first)
+                        if( nodeP != first )
                         {
-                            if(GetIDom( nodeP ) != null)
+                            if( GetIDom( nodeP ) != null )
                             {
                                 new_idom = Intersect( nodeP, new_idom );
                             }
                         }
                     }
 
-                    if(GetIDom( nodeB ) != new_idom)
+                    if( GetIDom( nodeB ) != new_idom )
                     {
                         SetIDom( nodeB, new_idom );
 
@@ -140,7 +139,7 @@ namespace TrueTalk.GraphsAlgorithms
                     }
                 }
 
-                if(!fChanged)
+                if( !fChanged )
                 {
                     break;
                 }
@@ -151,28 +150,28 @@ namespace TrueTalk.GraphsAlgorithms
             //
             // Finally, convert to an array in spanning-tree order.
             //
-            m_immediateDominanceSpanningTree = new N[num];
-            for(int pos = 0; pos < num; pos++)
+            m_immediateDominanceSpanningTree = new N[ num ];
+            for( int pos = 0; pos < num; pos++ )
             {
-                m_immediateDominanceSpanningTree[pos] = GetIDom( m_nodesSpanningTree[pos] );
+                m_immediateDominanceSpanningTree[ pos ] = GetIDom( m_nodesSpanningTree[ pos ] );
             }
         }
 
-        private N Intersect( N b1 ,
+        private N Intersect( N b1,
                                       N b2 )
         {
             int finger1 = GetPostOrderIndex( b1 );
             int finger2 = GetPostOrderIndex( b2 );
 
-            while(finger1 != finger2)
+            while( finger1 != finger2 )
             {
-                while(finger1 < finger2)
+                while( finger1 < finger2 )
                 {
                     b1      = m_immediateDominancePostOrder[ finger1 ];
                     finger1 = GetPostOrderIndex( b1 );
                 }
 
-                while(finger2 < finger1)
+                while( finger2 < finger1 )
                 {
                     b2      = m_immediateDominancePostOrder[ finger2 ];
                     finger2 = GetPostOrderIndex( b2 );
@@ -203,36 +202,36 @@ namespace TrueTalk.GraphsAlgorithms
         // Access Methods
         //
 
-        public N[] GetImmediateDominators()
+        public N[ ] GetImmediateDominators( )
         {
-            if(m_immediateDominanceSpanningTree == null)
+            if( m_immediateDominanceSpanningTree == null )
             {
-                ComputeDominators();
+                ComputeDominators( );
             }
 
             return m_immediateDominanceSpanningTree;
         }
 
-        public BitVector[] GetDominance()
+        public BitVector[ ] GetDominance( )
         {
             N[] idom = GetImmediateDominators();
             int num  = idom.Length;
 
             BitVector[] res = BitVector.AllocateBitVectors( num, num );
 
-            for(int pos = 0; pos < num; pos++)
+            for( int pos = 0; pos < num; pos++ )
             {
                 N   node = m_nodesSpanningTree[pos];
                 var vec  = res[pos];
 
-                while(true)
+                while( true )
                 {
                     int idx = node.SpanningTreeIndex;
 
                     vec.Set( idx );
 
                     N next = idom[idx];
-                    if(next == node)
+                    if( next == node )
                     {
                         break;
                     }
@@ -244,7 +243,7 @@ namespace TrueTalk.GraphsAlgorithms
             return res;
         }
 
-        public BitVector[] GetDominanceFrontier()
+        public BitVector[ ] GetDominanceFrontier( )
         {
             //
             // This is an implementation of the algorithm in "A Simple, Fast Dominance Algorithm", by Keith D. Cooper, Timothy J. Harvey, and Ken Kennedy.
@@ -262,24 +261,24 @@ namespace TrueTalk.GraphsAlgorithms
 
             BitVector[] res = BitVector.AllocateBitVectors( num, num );
 
-            for(int nodeBidx = 0; nodeBidx < num; nodeBidx++)
+            for( int nodeBidx = 0; nodeBidx < num; nodeBidx++ )
             {
                 N nodeB = m_nodesSpanningTree[nodeBidx];
 
-                if(nodeB.Predecessors.Length >= 2)
+                if( nodeB.Predecessors.Length >= 2 )
                 {
-                    foreach(var edge in nodeB.Predecessors)
+                    foreach( var edge in nodeB.Predecessors )
                     {
                         N nodeP = (N)edge.Predecessor;
 
                         N runner = nodeP;
-                        while(runner != idom[nodeBidx])
+                        while( runner != idom[ nodeBidx ] )
                         {
                             int idx = runner.SpanningTreeIndex;
 
-                            res[idx].Set( nodeBidx );
+                            res[ idx ].Set( nodeBidx );
 
-                            runner = idom[idx];
+                            runner = idom[ idx ];
                         }
                     }
                 }

@@ -5,8 +5,6 @@
 
 namespace TrueTalk.GraphsAlgorithms
 {
-    using System;
-
     public interface ITreeNode<FC>
     {
         int SpanningTreeIndex { get; set; }

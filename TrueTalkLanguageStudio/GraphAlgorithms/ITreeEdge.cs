@@ -5,8 +5,6 @@
 
 namespace TrueTalk.GraphsAlgorithms
 {
-    using System;
-
     public interface ITreeEdge<FC>
     {
         ITreeNode<FC> Predecessor { get; }

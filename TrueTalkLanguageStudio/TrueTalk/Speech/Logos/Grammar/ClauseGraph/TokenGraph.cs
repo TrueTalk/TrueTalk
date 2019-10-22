@@ -2,22 +2,15 @@
 
 namespace TrueTalk.Speech.Grammar
 {
-    using edu.stanford.nlp.trees;
-    using edu.stanford.nlp.parser.lexparser;
-    using Console = System.Console;
-    using edu.stanford.nlp.semgraph;
-    using System.Collections.Generic;
     using System;
-    using java.io;
-    using edu.stanford.nlp.process;
-    using edu.stanford.nlp.ling;
-
-    using VertexKey    = System.String;
-    using VertexIndex  = System.Int32;
-    using VertexValue  = System.String;
-    using VertexTag    = System.String;
-    using RelationKind = System.String;
+    using System.Collections.Generic;
     using System.Diagnostics;
+    using Console = System.Console;
+    using RelationKind = System.String;
+    using VertexIndex = System.Int32;
+    using VertexKey = System.String;
+    using VertexTag = System.String;
+    using VertexValue = System.String;
 
     public class TokenGraph
     {
@@ -191,11 +184,11 @@ namespace TrueTalk.Speech.Grammar
             Debug.Assert( Vertexes.ContainsKey( index ) == false );
 
             var v = new Vertex
-            { 
-                Key   = phraseStructure ? (tag.Contains("-") ? tag : $"{tag}-{index}") : $"{value}-{index}", 
-                Index = index, 
-                Value = value, 
-                Tag   = tag 
+            {
+                Key   = phraseStructure ? (tag.Contains("-") ? tag : $"{tag}-{index}") : $"{value}-{index}",
+                Index = index,
+                Value = value,
+                Tag   = tag
             };
 
             UpdateVertexEdges( v, incoming, outgoing );

@@ -5,8 +5,6 @@
 
 namespace TrueTalk.GraphsAlgorithms
 {
-    using System;
-
     public interface IEntryTreeNode<FC> : ITreeNode<FC>
     {
     }

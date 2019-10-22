@@ -4,22 +4,17 @@
 
 namespace TrueTalk.Common
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-
-
     public static class HashTableWithSetFactory
     {
-        public static bool Create< TKey, TValue >(     GrowOnlyHashTable< TKey, GrowOnlySet< TValue > > ht  ,
-                                                       TKey                                             key ,
-                                                   out GrowOnlySet< TValue >                            set )
+        public static bool Create<TKey, TValue>( GrowOnlyHashTable<TKey, GrowOnlySet<TValue>> ht,
+                                                       TKey key,
+                                                   out GrowOnlySet<TValue> set )
         {
-            if(ht.TryGetValue( key, out set ) == false)
+            if( ht.TryGetValue( key, out set ) == false )
             {
-                set = SetFactory.New< TValue >();
+                set = SetFactory.New<TValue>( );
 
-                ht[key] = set;
+                ht[ key ] = set;
 
                 return false;
             }
@@ -27,8 +22,8 @@ namespace TrueTalk.Common
             return true;
         }
 
-        public static GrowOnlySet< TValue > Create< TKey, TValue >( GrowOnlyHashTable< TKey, GrowOnlySet< TValue > > ht  ,
-                                                                    TKey                                             key )
+        public static GrowOnlySet<TValue> Create<TKey, TValue>( GrowOnlyHashTable<TKey, GrowOnlySet<TValue>> ht,
+                                                                    TKey key )
         {
             GrowOnlySet< TValue > set;
 
@@ -37,9 +32,9 @@ namespace TrueTalk.Common
             return set;
         }
 
-        public static GrowOnlySet< TValue > Add< TKey, TValue >( GrowOnlyHashTable< TKey, GrowOnlySet< TValue > > ht    ,
-                                                                 TKey                                             key   ,
-                                                                 TValue                                           value )
+        public static GrowOnlySet<TValue> Add<TKey, TValue>( GrowOnlyHashTable<TKey, GrowOnlySet<TValue>> ht,
+                                                                 TKey key,
+                                                                 TValue value )
         {
             GrowOnlySet< TValue > set = Create( ht, key );
 
@@ -50,15 +45,15 @@ namespace TrueTalk.Common
 
         //--//
 
-        public static bool CreateWithReferenceEquality< TKey, TValue >(     GrowOnlyHashTable< TKey, GrowOnlySet< TValue > > ht  ,
-                                                                            TKey                                             key ,
-                                                                        out GrowOnlySet< TValue >                            set ) where TValue : class
+        public static bool CreateWithReferenceEquality<TKey, TValue>( GrowOnlyHashTable<TKey, GrowOnlySet<TValue>> ht,
+                                                                            TKey key,
+                                                                        out GrowOnlySet<TValue> set ) where TValue : class
         {
-            if(ht.TryGetValue( key, out set ) == false)
+            if( ht.TryGetValue( key, out set ) == false )
             {
-                set = SetFactory.NewWithReferenceEquality< TValue >();
+                set = SetFactory.NewWithReferenceEquality<TValue>( );
 
-                ht[key] = set;
+                ht[ key ] = set;
 
                 return false;
             }
@@ -66,8 +61,8 @@ namespace TrueTalk.Common
             return true;
         }
 
-        public static GrowOnlySet< TValue > CreateWithReferenceEquality< TKey, TValue >( GrowOnlyHashTable< TKey, GrowOnlySet< TValue > > ht  ,
-                                                                                         TKey                                             key ) where TValue : class
+        public static GrowOnlySet<TValue> CreateWithReferenceEquality<TKey, TValue>( GrowOnlyHashTable<TKey, GrowOnlySet<TValue>> ht,
+                                                                                         TKey key ) where TValue : class
         {
             GrowOnlySet< TValue > set;
 
@@ -76,9 +71,9 @@ namespace TrueTalk.Common
             return set;
         }
 
-        public static GrowOnlySet< TValue > AddWithReferenceEquality< TKey, TValue >( GrowOnlyHashTable< TKey, GrowOnlySet< TValue > > ht    ,
-                                                                                      TKey                                             key   ,
-                                                                                      TValue                                           value ) where TValue : class
+        public static GrowOnlySet<TValue> AddWithReferenceEquality<TKey, TValue>( GrowOnlyHashTable<TKey, GrowOnlySet<TValue>> ht,
+                                                                                      TKey key,
+                                                                                      TValue value ) where TValue : class
         {
             GrowOnlySet< TValue > set = CreateWithReferenceEquality( ht, key );
 

@@ -4,14 +4,12 @@
 
 namespace TrueTalk.GraphsAlgorithms
 {
-    using System;
-
     public enum EdgeClass
     {
-        Unknown    ,
-        TreeEdge   ,
+        Unknown,
+        TreeEdge,
         ForwardEdge,
-        BackEdge   ,
-        CrossEdge  ,
+        BackEdge,
+        CrossEdge,
     }
 }

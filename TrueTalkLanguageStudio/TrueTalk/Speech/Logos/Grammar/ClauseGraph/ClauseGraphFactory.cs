@@ -1,21 +1,15 @@
 ﻿
 namespace TrueTalk.Speech.Grammar
 {
+    using edu.stanford.nlp.ling;
+    using edu.stanford.nlp.parser.lexparser;
+    using edu.stanford.nlp.process;
+    using edu.stanford.nlp.semgraph;
+    using edu.stanford.nlp.trees;
+    using java.io;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-
-    using edu.stanford.nlp.trees;
-    using edu.stanford.nlp.parser.lexparser;
-    using edu.stanford.nlp.semgraph;
-    using java.io;
-    using edu.stanford.nlp.process;
-    using edu.stanford.nlp.ling;
-
-    using VertexIndex = System.Int32;
-    using VertexValue      = System.String;
-    using VertexTag        = System.String;
-    using RelationKind     = System.String;
     using System.Text.RegularExpressions;
 
     public class ClauseGraphFactory
@@ -118,7 +112,7 @@ namespace TrueTalk.Speech.Grammar
 
                         phraseStructure.AddEdge(
                             src.nodeNumber( root ),
-                            src.value( ) == "" ? $"nn" : src.value(),
+                            src.value( ) == "" ? $"nn" : src.value( ),
                             src.label( ).ToString( ),
                             tgt.nodeNumber( root ),
                             tgt.value( ) == "" ? $"nn" : tgt.value( ),
@@ -147,7 +141,8 @@ namespace TrueTalk.Speech.Grammar
 
             var clause = new Clause(rawClause);
 
-            var clauseGraph = new ClauseGraph { 
+            var clauseGraph = new ClauseGraph
+            {
                 Clause = clause,
                 GrammaticalRepresentation = resGrammar,
                 PhraseRepresentation = resPhrase,

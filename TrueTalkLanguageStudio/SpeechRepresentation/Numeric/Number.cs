@@ -2,7 +2,6 @@
 
 namespace TrueTalk.SpeechRepresentation
 {
-    using jdk.@internal.org.objectweb.asm.util;
     using System;
     using TrueTalk.Common;
 
@@ -25,18 +24,18 @@ namespace TrueTalk.SpeechRepresentation
 
         protected Number( String rawValue, NumberKind kind ) : base( rawValue, TokenKind.Numeric )
         {
-            if (Number.TryParse(rawValue, out Double result, out NumberKind kind1) == false)
+            if( Number.TryParse( rawValue, out Double result, out NumberKind kind1 ) == false )
             {
-                throw new ArgumentException($"Token '{rawValue}' could not be parsed as a natural number");
+                throw new ArgumentException( $"Token '{rawValue}' could not be parsed as a natural number" );
             }
 
-            if (kind == NumberKind.Natural)
+            if( kind == NumberKind.Natural )
             {
-                CHECKS.ASSERT(kind == kind1, "Number kind does not match.");
+                CHECKS.ASSERT( kind == kind1, "Number kind does not match." );
             }
-            else if (kind == NumberKind.Integer)
+            else if( kind == NumberKind.Integer )
             {
-                CHECKS.ASSERT((kind == kind1) || (kind1 == NumberKind.Natural), "Number kind does not match.");
+                CHECKS.ASSERT( ( kind == kind1 ) || ( kind1 == NumberKind.Natural ), "Number kind does not match." );
             }
 
             Value        = result;
@@ -47,19 +46,14 @@ namespace TrueTalk.SpeechRepresentation
 
         public static bool TryParse( string rawValue, out Double result )
         {
-            if( Double.TryParse( rawValue, out result ) )
-            {
-                return true;
-            }
-
-            return false;
+            return Double.TryParse( rawValue, out result );
         }
 
         public static bool TryParse( string rawValue, out Double result, out NumberKind kind )
         {
             var res = TryParse( rawValue, out result );
 
-            kind = res ? (Math.Abs(result % 1) > 0 ? NumberKind.Real : (result > 0) ? NumberKind.Natural : NumberKind.Integer) : NumberKind.Irrational;
+            kind = res ? ( Math.Abs( result % 1 ) > 0 ? NumberKind.Real : ( result > 0 ) ? NumberKind.Natural : NumberKind.Integer ) : NumberKind.Irrational;
 
             return res;
         }

@@ -36,16 +36,16 @@ namespace TrueTalk.Common
 
         internal static int GetPrime( int min )
         {
-            if(min < 0)
+            if( min < 0 )
             {
                 throw new ArgumentException( "Wrong min value" );
             }
 
-            for(int i = 0; i < primes.Length; i++)
+            for( int i = 0; i < primes.Length; i++ )
             {
                 int prime = primes[i];
 
-                if(prime >= min) return prime;
+                if( prime >= min ) return prime;
             }
 
             //

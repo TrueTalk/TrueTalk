@@ -7,7 +7,7 @@ namespace TrueTalk.GraphsAlgorithms
     using System.Collections.Generic;
     using TrueTalk.Common;
 
-    public class SpanningTree< N, FC > : GenericDepthFirst< FC > where N : class, ITreeNode<FC>
+    public class SpanningTree<N, FC> : GenericDepthFirst<FC> where N : class, ITreeNode<FC>
     {
         //
         // State
@@ -21,7 +21,7 @@ namespace TrueTalk.GraphsAlgorithms
 
         protected SpanningTree( )
         {
-            m_nodes = new List< N >();
+            m_nodes = new List<N>( );
         }
 
         //--//
@@ -38,7 +38,7 @@ namespace TrueTalk.GraphsAlgorithms
 
             edge.EdgeClass =predecessor.SpanningTreeIndex < successor.SpanningTreeIndex
                 ? IsAncestor( predecessor, successor ) ? EdgeClass.ForwardEdge : EdgeClass.CrossEdge
-                : IsAncestor( successor, predecessor ) ? EdgeClass.BackEdge    : EdgeClass.CrossEdge;
+                : IsAncestor( successor, predecessor ) ? EdgeClass.BackEdge : EdgeClass.CrossEdge;
         }
 
         //--//
@@ -48,13 +48,13 @@ namespace TrueTalk.GraphsAlgorithms
             int bbCount   = nodes.Length;
             ITreeNode<FC>[] ancestors = new N[bbCount];
 
-            for(int i = 0; i < bbCount; i++)
+            for( int i = 0; i < bbCount; i++ )
             {
                 var bb = nodes[i];
 
-                foreach(ITreeEdge<FC> edge in bb.Predecessors)
+                foreach( ITreeEdge<FC> edge in bb.Predecessors )
                 {
-                    if(edge.EdgeClass == EdgeClass.TreeEdge)
+                    if( edge.EdgeClass == EdgeClass.TreeEdge )
                     {
                         ancestors[ i ] = edge.Predecessor;
                     }
@@ -66,23 +66,23 @@ namespace TrueTalk.GraphsAlgorithms
 
         //--//
 
-        public static bool IsAncestor( ITreeNode<FC> node  ,
+        public static bool IsAncestor( ITreeNode<FC> node,
                                        ITreeNode<FC> child )
         {
-            while(child != null)
+            while( child != null )
             {
-                if(node == child)
+                if( node == child )
                 {
                     return true;
                 }
 
                 ITreeNode<FC> nodeNext = null;
 
-                foreach(ITreeEdge<FC> edge in child.Predecessors)
+                foreach( ITreeEdge<FC> edge in child.Predecessors )
                 {
-                    if(edge.EdgeClass == EdgeClass.TreeEdge)
+                    if( edge.EdgeClass == EdgeClass.TreeEdge )
                     {
-                        nodeNext = (ITreeNode<FC>)edge.Predecessor;
+                        nodeNext = ( ITreeNode<FC> )edge.Predecessor;
                         break;
                     }
                 }

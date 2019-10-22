@@ -34,7 +34,7 @@ namespace TrueTalk.SpeechRepresentation
 
         public static PuctuationKind Parse( string rawValue )
         {
-            switch(rawValue)
+            switch( rawValue )
             {
                 case "'": return PuctuationKind.Apostrophe;
                 case ":": return PuctuationKind.Colon;
@@ -48,7 +48,7 @@ namespace TrueTalk.SpeechRepresentation
                 case "`": return PuctuationKind.Quotation;
                 case ";": return PuctuationKind.Semicolon;
                 case "/": return PuctuationKind.Slash;
-                default:  throw new ArgumentException( "Value {rawvalue} cannot be parsed as a punctuation token." );
+                default: throw new ArgumentException( "Value {rawvalue} cannot be parsed as a punctuation token." );
             }
         }
 
@@ -65,9 +65,9 @@ namespace TrueTalk.SpeechRepresentation
 
         public String Value => base.RawValue;
 
-        public override bool ApplyTransformation(IAnalysis analysis)
+        public override bool ApplyTransformation( IAnalysis analysis )
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException( );
         }
 
         public override void InnerToString( StringBuilder sb )

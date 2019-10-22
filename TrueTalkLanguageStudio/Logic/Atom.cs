@@ -1,7 +1,6 @@
 ﻿namespace TrueTalk.Logic
 {
     using TrueTalk.Speech.Grammar;
-    using TrueTalk.SpeechRepresentation;
 
     public class Atom
     {
@@ -22,7 +21,7 @@
             m_truth = truth;
         }
 
-        public bool Negate()
+        public bool Negate( )
         {
             m_negated = !m_negated;
 

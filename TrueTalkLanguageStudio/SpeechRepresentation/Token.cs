@@ -2,7 +2,6 @@
 namespace TrueTalk.SpeechRepresentation
 {
     using System;
-    using System.Text;
     using TrueTalk.Interfaces;
 
     public abstract class Token : TransformableItem
@@ -17,7 +16,7 @@ namespace TrueTalk.SpeechRepresentation
 
         //--//
 
-        protected Token(String value, TokenKind kind ) : base( )
+        protected Token( String value, TokenKind kind ) : base( )
         {
             RawValue    = value;
             KindOfToken = kind;
@@ -25,7 +24,7 @@ namespace TrueTalk.SpeechRepresentation
 
         //--//
 
-        public TokenKind KindOfToken  { get; private set; }
+        public TokenKind KindOfToken { get; private set; }
 
         public String RawValue { get; private set; }
 

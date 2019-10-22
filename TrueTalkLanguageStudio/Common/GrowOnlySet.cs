@@ -6,11 +6,10 @@
 namespace TrueTalk.Common
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
 
 
-    public class GrowOnlySet< TKey >
+    public class GrowOnlySet<TKey>
     {
         //
         // State
@@ -28,11 +27,11 @@ namespace TrueTalk.Common
         // Constructor Methods
         //
 
-        protected GrowOnlySet() : this( EqualityComparer< TKey >.Default )
+        protected GrowOnlySet( ) : this( EqualityComparer<TKey>.Default )
         {
         }
 
-        internal GrowOnlySet( IEqualityComparer< TKey > comparer )
+        internal GrowOnlySet( IEqualityComparer<TKey> comparer )
         {
             m_comparer = comparer;
         }
@@ -41,7 +40,7 @@ namespace TrueTalk.Common
         // Helper Methods
         //
 
-        public void Clear()
+        public void Clear( )
         {
             m_buckets          = null;
             m_entries_HashCode = null;
@@ -52,19 +51,19 @@ namespace TrueTalk.Common
             m_version++;
         }
 
-        public void RefreshHashCodes()
+        public void RefreshHashCodes( )
         {
-            for(int i = 0; i < Count; i++)
+            for( int i = 0; i < Count; i++ )
             {
-                m_entries_HashCode[i] = m_comparer.GetHashCode( m_entries_Key[i] ) & 0x7FFFFFFF;
+                m_entries_HashCode[ i ] = m_comparer.GetHashCode( m_entries_Key[ i ] ) & 0x7FFFFFFF;
             }
 
-            RebuildBuckets();
+            RebuildBuckets( );
         }
 
         public bool Insert( TKey key )
         {
-            if(m_buckets == null)
+            if( m_buckets == null )
             {
                 Initialize( 0 );
             }
@@ -72,28 +71,28 @@ namespace TrueTalk.Common
             int hashCode     = m_comparer.GetHashCode( key ) & 0x7FFFFFFF;
             int targetBucket = hashCode % m_buckets.Length;
 
-            for(int i = m_buckets[targetBucket]; i-- > 0; i = m_entries_Next[i])
+            for( int i = m_buckets[ targetBucket ]; i-- > 0; i = m_entries_Next[ i ] )
             {
-                if(m_entries_HashCode[i] == hashCode && m_comparer.Equals( m_entries_Key[i], key ))
+                if( m_entries_HashCode[ i ] == hashCode && m_comparer.Equals( m_entries_Key[ i ], key ) )
                 {
                     return true;
                 }
             }
 
-            if(Count == m_entries_HashCode.Length)
+            if( Count == m_entries_HashCode.Length )
             {
-                Resize();
+                Resize( );
 
                 targetBucket = hashCode % m_buckets.Length;
             }
 
             int index = Count++;
 
-            m_entries_HashCode[index] = hashCode;
-            m_entries_Next    [index] = m_buckets[targetBucket];
-            m_entries_Key     [index] = key;
+            m_entries_HashCode[ index ] = hashCode;
+            m_entries_Next[ index ] = m_buckets[ targetBucket ];
+            m_entries_Key[ index ] = key;
 
-            m_buckets[targetBucket] = index + 1;
+            m_buckets[ targetBucket ] = index + 1;
             m_version++;
             return false;
         }
@@ -115,13 +114,13 @@ namespace TrueTalk.Common
             return FindEntry( key ) >= 0;
         }
 
-        public bool Contains(     TKey key   ,
+        public bool Contains( TKey key,
                               out TKey value )
         {
             int i = FindEntry( key );
-            if(i >= 0)
+            if( i >= 0 )
             {
-                value = m_entries_Key[i];
+                value = m_entries_Key[ i ];
                 return true;
             }
 
@@ -129,27 +128,27 @@ namespace TrueTalk.Common
             return false;
         }
 
-        public Enumerator GetEnumerator()
+        public Enumerator GetEnumerator( )
         {
             return new Enumerator( this, m_entries_Key );
         }
 
-        public void Merge( GrowOnlySet< TKey > target )
+        public void Merge( GrowOnlySet<TKey> target )
         {
             int    num  = target.Count;
             TKey[] keys = target.m_entries_Key;
 
-            for(int i = 0; i < num; i++)
+            for( int i = 0; i < num; i++ )
             {
-                this.Insert( keys[i] );
+                this.Insert( keys[ i ] );
             }
         }
 
-        public TKey[] ToArray()
+        public TKey[ ] ToArray( )
         {
             TKey[] res = new TKey[Count];
 
-            if(Count > 0)
+            if( Count > 0 )
             {
                 Array.Copy( m_entries_Key, res, Count );
             }
@@ -157,7 +156,7 @@ namespace TrueTalk.Common
             return res;
         }
 
-        public void Load( TKey[] keys )
+        public void Load( TKey[ ] keys )
         {
             int size = keys.Length;
 
@@ -168,7 +167,7 @@ namespace TrueTalk.Common
 
             Array.Copy( keys, m_entries_Key, size );
 
-            RefreshHashCodes();
+            RefreshHashCodes( );
         }
 
         //--//
@@ -177,13 +176,13 @@ namespace TrueTalk.Common
         {
             int size = HashHelpers.GetPrime( capacity );
 
-            m_buckets          = new int [size];
-            m_entries_HashCode = new int [size];
-            m_entries_Next     = new int [size];
-            m_entries_Key      = new TKey[size];
+            m_buckets          = new int[ size ];
+            m_entries_HashCode = new int[ size ];
+            m_entries_Next     = new int[ size ];
+            m_entries_Key      = new TKey[ size ];
         }
 
-        private void Resize()
+        private void Resize( )
         {
             int    newSize             = HashHelpers.GetPrime( Count * 2 );
             int[]  newBuckets          = new int [newSize];
@@ -192,44 +191,44 @@ namespace TrueTalk.Common
             TKey[] newEntries_Key      = new TKey[newSize];
 
             Array.Copy( m_entries_HashCode, 0, newEntries_HashCode, 0, Count );
-            Array.Copy( m_entries_Key     , 0, newEntries_Key     , 0, Count );
+            Array.Copy( m_entries_Key, 0, newEntries_Key, 0, Count );
 
             m_buckets          = newBuckets;
             m_entries_HashCode = newEntries_HashCode;
             m_entries_Next     = newEntries_Next;
             m_entries_Key      = newEntries_Key;
 
-            RebuildBuckets();
+            RebuildBuckets( );
         }
 
-        private void RebuildBuckets()
+        private void RebuildBuckets( )
         {
-            if(m_buckets != null)
+            if( m_buckets != null )
             {
                 int size = m_buckets.Length;
 
                 Array.Clear( m_buckets, 0, size );
 
-                for(int i = 0; i < Count; i++)
+                for( int i = 0; i < Count; i++ )
                 {
                     int bucket = m_entries_HashCode[i] % size;
 
-                    m_entries_Next[i] = m_buckets[bucket];
+                    m_entries_Next[ i ] = m_buckets[ bucket ];
 
-                    m_buckets[bucket] = i + 1;
+                    m_buckets[ bucket ] = i + 1;
                 }
             }
         }
 
         private int FindEntry( TKey key )
         {
-            if(m_buckets != null)
+            if( m_buckets != null )
             {
                 int hashCode = m_comparer.GetHashCode( key ) & 0x7FFFFFFF;
 
-                for(int i = m_buckets[hashCode % m_buckets.Length]; i-- > 0; i = m_entries_Next[i])
+                for( int i = m_buckets[ hashCode % m_buckets.Length ]; i-- > 0; i = m_entries_Next[ i ] )
                 {
-                    if(m_entries_HashCode[i] == hashCode && m_comparer.Equals( m_entries_Key[i], key ))
+                    if( m_entries_HashCode[ i ] == hashCode && m_comparer.Equals( m_entries_Key[ i ], key ) )
                     {
                         return i;
                     }
@@ -247,22 +246,22 @@ namespace TrueTalk.Common
 
         public int Count { get; private set; }
 
-        public GrowOnlySet< TKey > CloneSettings()
+        public GrowOnlySet<TKey> CloneSettings( )
         {
-            return new GrowOnlySet< TKey >( m_comparer );
+            return new GrowOnlySet<TKey>( m_comparer );
         }
 
-        public GrowOnlySet< TKey > Clone()
+        public GrowOnlySet<TKey> Clone( )
         {
             GrowOnlySet< TKey > copy = CloneSettings();
 
-            if(Count > 0)
+            if( Count > 0 )
             {
-                copy.m_buckets          = ArrayUtility.CopyNotNullArray( m_buckets          );
+                copy.m_buckets          = ArrayUtility.CopyNotNullArray( m_buckets );
                 copy.m_entries_HashCode = ArrayUtility.CopyNotNullArray( m_entries_HashCode );
-                copy.m_entries_Next     = ArrayUtility.CopyNotNullArray( m_entries_Next     );
-                copy.m_entries_Key      = ArrayUtility.CopyNotNullArray( m_entries_Key      );
-                                    
+                copy.m_entries_Next     = ArrayUtility.CopyNotNullArray( m_entries_Next );
+                copy.m_entries_Key      = ArrayUtility.CopyNotNullArray( m_entries_Key );
+
                 copy.Count = Count;
             }
 
@@ -275,11 +274,11 @@ namespace TrueTalk.Common
         // Debug Methods
         //
 
-        public void Dump()
+        public void Dump( )
         {
-            for(int i = 0; i < Count; i++)
+            for( int i = 0; i < Count; i++ )
             {
-                Console.WriteLine( "{0} = {1}", i, m_entries_Key[i] );
+                Console.WriteLine( "{0} = {1}", i, m_entries_Key[ i ] );
             }
         }
 
@@ -300,8 +299,8 @@ namespace TrueTalk.Common
             // Constructor Methods
             //
 
-            internal Enumerator( GrowOnlySet< TKey > dictionary ,
-                                 TKey[]              values     )
+            internal Enumerator( GrowOnlySet<TKey> dictionary,
+                                 TKey[ ] values )
             {
                 m_dictionary = dictionary;
                 m_version    = dictionary.m_version;
@@ -309,18 +308,18 @@ namespace TrueTalk.Common
                 m_values     = values;
             }
 
-            public void Dispose()
+            public void Dispose( )
             {
             }
 
-            public bool MoveNext()
+            public bool MoveNext( )
             {
-                if(m_version != m_dictionary.m_version)
+                if( m_version != m_dictionary.m_version )
                 {
                     throw new Exception( "Dictionary changed" );
                 }
 
-                if(m_index < m_dictionary.Count)
+                if( m_index < m_dictionary.Count )
                 {
                     m_index++;
                     return true;
@@ -333,13 +332,13 @@ namespace TrueTalk.Common
             {
                 get
                 {
-                    return m_values[m_index-1];
+                    return m_values[ m_index-1 ];
                 }
             }
 
-            void Reset()
+            void Reset( )
             {
-                if(m_version != m_dictionary.m_version)
+                if( m_version != m_dictionary.m_version )
                 {
                     throw new Exception( "Dictionary changed" );
                 }

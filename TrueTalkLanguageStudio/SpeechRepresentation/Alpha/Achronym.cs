@@ -17,16 +17,16 @@ namespace TrueTalk.SpeechRepresentation
 
         //--//
 
-        public override bool ApplyTransformation(IAnalysis analysis)
+        public override bool ApplyTransformation( IAnalysis analysis )
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException( );
         }
 
         public override void InnerToString( StringBuilder sb )
         {
             base.InnerToString( sb );
 
-            sb.AppendFormat(@"Achronym('{0}')", this.Value );
+            sb.AppendFormat( @"Achronym('{0}')", this.Value );
         }
     }
 }

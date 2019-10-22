@@ -4,8 +4,6 @@
 
 namespace TrueTalk.Common
 {
-    using System;
-
     public static class CHECKS
     {
         public static bool ENABLED
@@ -20,12 +18,12 @@ namespace TrueTalk.Common
             }
         }
 
-        [System.Diagnostics.Conditional( "DEBUG"         )]
+        [System.Diagnostics.Conditional( "DEBUG" )]
         [System.Diagnostics.Conditional( "CHECKS_ASSERT" )]
-        public static void ASSERT( bool   res  ,
+        public static void ASSERT( bool res,
                                    string text )
         {
-            if(res == false)
+            if( res == false )
             {
                 throw AssertionViolationException.Create( text );
             }
@@ -42,52 +40,52 @@ namespace TrueTalk.Common
             }
         }
 
-        [System.Diagnostics.Conditional( "DEBUG"         )]
+        [System.Diagnostics.Conditional( "DEBUG" )]
         [System.Diagnostics.Conditional( "CHECKS_ASSERT" )]
-        public static void ASSERT( bool   res  ,
-                                   string text ,
+        public static void ASSERT( bool res,
+                                   string text,
                                    object arg1 )
         {
-            if(res == false)
+            if( res == false )
             {
                 throw AssertionViolationException.Create( text, arg1 );
             }
         }
 
-        [System.Diagnostics.Conditional( "DEBUG"         )]
+        [System.Diagnostics.Conditional( "DEBUG" )]
         [System.Diagnostics.Conditional( "CHECKS_ASSERT" )]
-        public static void ASSERT( bool   res  ,
-                                   string text ,
-                                   object arg1 ,
+        public static void ASSERT( bool res,
+                                   string text,
+                                   object arg1,
                                    object arg2 )
         {
-            if(res == false)
+            if( res == false )
             {
                 throw AssertionViolationException.Create( text, arg1, arg2 );
             }
         }
 
-        [System.Diagnostics.Conditional( "DEBUG"         )]
+        [System.Diagnostics.Conditional( "DEBUG" )]
         [System.Diagnostics.Conditional( "CHECKS_ASSERT" )]
-        public static void ASSERT( bool   res  ,
-                                   string text ,
-                                   object arg1 ,
-                                   object arg2 ,
+        public static void ASSERT( bool res,
+                                   string text,
+                                   object arg1,
+                                   object arg2,
                                    object arg3 )
         {
-            if(res == false)
+            if( res == false )
             {
                 throw AssertionViolationException.Create( text, arg1, arg2, arg3 );
             }
         }
 
-        [System.Diagnostics.Conditional( "DEBUG"         )]
+        [System.Diagnostics.Conditional( "DEBUG" )]
         [System.Diagnostics.Conditional( "CHECKS_ASSERT" )]
-        public static void ASSERT(        bool     res  ,
-                                          string   text ,
-                                   params object[] args )
+        public static void ASSERT( bool res,
+                                          string text,
+                                   params object[ ] args )
         {
-            if(res == false)
+            if( res == false )
             {
                 throw AssertionViolationException.Create( text, args );
             }

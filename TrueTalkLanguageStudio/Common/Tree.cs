@@ -4,8 +4,6 @@
 
 namespace TrueTalk.Common
 {
-    using System;
-
     public class ExpressionTree<T>
     {
         public enum EdgeKind

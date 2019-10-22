@@ -9,7 +9,7 @@ namespace TrueTalk.Common
 
     public class ReferenceEqualityComparer<T> : IEqualityComparer<T> where T : class
     {
-        public bool Equals( T x ,
+        public bool Equals( T x,
                             T y )
         {
             return Object.ReferenceEquals( x, y );
@@ -17,7 +17,7 @@ namespace TrueTalk.Common
 
         public int GetHashCode( T obj )
         {
-            return obj != null ? obj.GetHashCode() : 0;
+            return obj != null ? obj.GetHashCode( ) : 0;
         }
     }
 }

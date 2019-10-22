@@ -19,7 +19,7 @@ namespace TrueTalk.Logic
 
         public static bool Negate( ref Truth.State truth )
         {
-            if(truth != State.Unknown)
+            if( truth != State.Unknown )
             {
                 truth = truth == State.True ? State.False : State.True;
 

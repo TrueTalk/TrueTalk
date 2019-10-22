@@ -4,10 +4,9 @@
 
 namespace TrueTalk.GraphsAlgorithms
 {
-    using System;
     using TrueTalk.Common;
 
-    public abstract class GenericDepthFirst< FC >
+    public abstract class GenericDepthFirst<FC>
     {
         //
         // State
@@ -19,9 +18,9 @@ namespace TrueTalk.GraphsAlgorithms
         // Constructor Methods
         //
 
-        protected GenericDepthFirst()
+        protected GenericDepthFirst( )
         {
-            m_visited = SetFactory.NewWithReferenceEquality< ITreeNode<FC>>();
+            m_visited = SetFactory.NewWithReferenceEquality<ITreeNode<FC>>( );
         }
 
         protected void Visit( ITreeNode<FC> node )
@@ -30,9 +29,9 @@ namespace TrueTalk.GraphsAlgorithms
 
             m_visited.Insert( node );
 
-            for(int pass = 0; pass < 2; pass++)
+            for( int pass = 0; pass < 2; pass++ )
             {
-                foreach(ITreeEdge<FC> edge in node.Successors)
+                foreach( ITreeEdge<FC> edge in node.Successors )
                 {
                     var bbSucc = edge.Successor;
 
@@ -42,13 +41,13 @@ namespace TrueTalk.GraphsAlgorithms
                     // Dead branches are almost always exception-throwing branches,
                     // following them after the other branches ensures that they don't show up in TreeEdges.
                     //
-                    if(pass == 0 == (bbSucc.FlowControl is IDeadBranch))
+                    if( pass == 0 == ( bbSucc.FlowControl is IDeadBranch ) )
                     {
                         continue;
                     }
 
 
-                    if(m_visited.Contains( bbSucc ) == false)
+                    if( m_visited.Contains( bbSucc ) == false )
                     {
                         ProcessEdgeBefore( edge );
 

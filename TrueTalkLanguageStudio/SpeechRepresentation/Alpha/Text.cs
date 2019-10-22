@@ -2,8 +2,6 @@
 namespace TrueTalk.SpeechRepresentation
 {
     using System;
-    using System.Text;
-    using TrueTalk.Interfaces;
 
     public abstract class Text : Token
     {

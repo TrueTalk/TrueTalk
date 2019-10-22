@@ -5,15 +5,9 @@ namespace TrueTalk.IrViewer
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Data;
-    using System.Drawing;
-    using System.Text;
     using System.Windows.Forms;
-    using System.IO;
-    using System.Diagnostics;
-    using static TrueTalk.Speech.Grammar.TokenGraph;
-    using TrueTalk.SpeechRepresentation;
     using TrueTalk.Speech.Grammar;
+    using static TrueTalk.Speech.Grammar.TokenGraph;
 
     //--//
 
@@ -29,9 +23,9 @@ namespace TrueTalk.IrViewer
         // Constructor Methods
         //
 
-        public MainForm()
+        public MainForm( )
         {
-            InitializeComponent();
+            InitializeComponent( );
         }
 
         private void MainForm_Load( object sender, EventArgs e )
@@ -105,7 +99,7 @@ namespace TrueTalk.IrViewer
                 {
                     //if( string.IsNullOrEmpty( filter ) || id.ToLower( ).Contains( filter ) )
                     //{
-                        lst.Add( clauseGraph.Clause.RawString );
+                    lst.Add( clauseGraph.Clause.RawString );
                     //}
                 }
 
@@ -144,7 +138,7 @@ namespace TrueTalk.IrViewer
 
             g.GraphAttr.NodeAttr.Padding = 3;
 
-            foreach (var e in graph.Edges)
+            foreach( var e in graph.Edges )
             {
                 Microsoft.Glee.Drawing.Edge edgeG = g.AddEdge(e.Source.Key, e.Target.Key) as Microsoft.Glee.Drawing.Edge;
                 Microsoft.Glee.Drawing.EdgeAttr attr = edgeG.Attr;
@@ -153,7 +147,7 @@ namespace TrueTalk.IrViewer
                 attr.Fontsize -= 4;
             }
 
-            foreach (Vertex v in graph.Vertexes.Values )
+            foreach( Vertex v in graph.Vertexes.Values )
             {
                 Microsoft.Glee.Drawing.Node node = CreateNode( g, v );
             }
