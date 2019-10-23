@@ -4,7 +4,7 @@
 
     public class LogicFormula
     {
-        private ExpressionTree<Atom> m_exprTree;
+        private readonly ExpressionTree<Atom> m_exprTree;
 
         LogicFormula( ExpressionTree<Atom> exprTree )
         {

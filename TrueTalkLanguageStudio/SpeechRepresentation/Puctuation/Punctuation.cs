@@ -13,7 +13,6 @@ namespace TrueTalk.SpeechRepresentation
             Colon,
             Comma,
             Dash,
-            Ellipsis,
             Exclamation,
             Hyphen,
             Period,
@@ -40,7 +39,6 @@ namespace TrueTalk.SpeechRepresentation
                 case ":": return PuctuationKind.Colon;
                 case ",": return PuctuationKind.Comma;
                 case "_": return PuctuationKind.Dash;
-                case "...": return PuctuationKind.Ellipsis;
                 case "!": return PuctuationKind.Exclamation;
                 case "-": return PuctuationKind.Hyphen;
                 case ".": return PuctuationKind.Period;

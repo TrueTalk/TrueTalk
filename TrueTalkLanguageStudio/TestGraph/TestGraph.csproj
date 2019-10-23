@@ -39,6 +39,10 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Analysys\Analysys.csproj">
+      <Project>{52034ef5-d186-4897-b01d-1327c8730ddb}</Project>
+      <Name>Analysys</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{96a035df-8ddc-4b92-b050-9229e2d45172}</Project>
       <Name>Common</Name>

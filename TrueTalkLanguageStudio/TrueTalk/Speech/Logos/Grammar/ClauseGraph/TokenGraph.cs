@@ -5,21 +5,25 @@ namespace TrueTalk.Speech.Grammar
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using Console = System.Console;
-    using RelationKind = System.String;
-    using VertexIndex = System.Int32;
-    using VertexKey = System.String;
-    using VertexTag = System.String;
-    using VertexValue = System.String;
+    using TrueTalk.Interfaces;
+    using TrueTalk.SpeechRepresentation;
 
-    public class TokenGraph
+    using Console      = System.Console;
+    using RelationKind = System.String;
+    using VertexIndex  = System.Int32;
+    using VertexKey    = System.String;
+    using VertexTag    = System.String;
+    using VertexValue  = System.String;
+
+    public class TokenGraph : TransformableItem
     {
         public class Vertex
         {
-            public VertexIndex  Index;
             public VertexKey    Key;
+            public VertexIndex  Index;
             public VertexValue  Value;
             public VertexTag    Tag;
+            public Token        Token         = default;
             public List<Edge>   IncomingEdges = new List<Edge>();
             public List<Edge>   OutgoingEdges = new List<Edge>();
 
@@ -175,6 +179,13 @@ namespace TrueTalk.Speech.Grammar
             //Console.WriteLine( e.ToString( ) );
             //Console.WriteLine( "==> " + src.ToString( ) );
             //Console.WriteLine( "==> " + tgt.ToString( ) );
+        }
+
+        //--//
+
+        public override bool ApplyTransformation( IAnalysis analysis )
+        {
+            return analysis.Apply( this );
         }
 
         //--//

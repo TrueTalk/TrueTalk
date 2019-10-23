@@ -3,9 +3,11 @@
 namespace TrueTalk.SpeechRepresentation
 {
     using System;
+    using System.Text;
     using TrueTalk.Common;
+    using TrueTalk.Interfaces;
 
-    public abstract class Number : Token
+    public sealed class Number : Token
     {
         public enum NumberKind
         {
@@ -22,7 +24,7 @@ namespace TrueTalk.SpeechRepresentation
 
         //--//
 
-        protected Number( String rawValue, NumberKind kind ) : base( rawValue, TokenKind.Numeric )
+        private Number( String rawValue, NumberKind kind ) : base( rawValue, TokenKind.Numeric )
         {
             if( Number.TryParse( rawValue, out Double result, out NumberKind kind1 ) == false )
             {
@@ -40,6 +42,28 @@ namespace TrueTalk.SpeechRepresentation
 
             Value        = result;
             KindOfNumber = kind;
+        }
+
+        //--//
+        public static Number New( string rawValue )
+        {
+            if( Number.TryParse( rawValue, out double result, out Number.NumberKind kind ) == false )
+            {
+                throw new ArgumentException( $"Token '{rawValue}' could not be parsed as any kind of number." );
+            }
+
+            Number n = default;
+
+            switch( kind )
+            {
+                case Number.NumberKind.Natural:
+                case Number.NumberKind.Integer:
+                case Number.NumberKind.Real   :
+                    return new Number( rawValue, kind );
+
+                default:
+                    throw new ArgumentException( $"Number {result} of kind '{kind}' is not supported." );
+            }
         }
 
         //--//
@@ -64,5 +88,26 @@ namespace TrueTalk.SpeechRepresentation
 
         public Double Value { get; private set; }
 
+        //--//
+
+        public override bool ApplyTransformation( IAnalysis analysis ) => throw new NotImplementedException( );
+
+        //--//
+
+        public override void InnerToString( StringBuilder sb )
+        {
+            base.InnerToString( sb );
+
+            sb.AppendFormat( $"Number({this.KindOfNumber}:'{this.Value}')" );
+        }
+
+        public override string ToString( )
+        {
+            StringBuilder sb = new StringBuilder();
+
+            InnerToString( sb );
+
+            return sb.ToString( );
+        }
     }
 }

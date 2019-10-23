@@ -151,24 +151,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include=".editorconfig" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alpha\Text.cs" />
     <Compile Include="Alpha\Achronym.cs" />
-    <Compile Include="Numeric\IntegerNumber.cs" />
-    <Compile Include="Numeric\NaturalNumber.cs" />
-    <Compile Include="Numeric\NumberFactory.cs" />
     <Compile Include="Numeric\Number.cs" />
     <Compile Include="Puctuation\Punctuation.cs" />
-    <Compile Include="Numeric\RealNumber.cs" />
-    <Compile Include="Symbol\Mathematical\Bracket.cs" />
-    <Compile Include="Symbol\Mathematical\MathematicalSymbolFactory.cs" />
     <Compile Include="Symbol\Mathematical\MathematicalSymbol.cs" />
-    <Compile Include="Symbol\Mathematical\Minus.cs" />
-    <Compile Include="Symbol\Mathematical\MultipliedBy.cs" />
-    <Compile Include="Symbol\Mathematical\DividedBy.cs" />
-    <Compile Include="Symbol\Mathematical\Plus.cs" />
     <Compile Include="Symbol\Symbol.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="Alpha\Word.cs" />

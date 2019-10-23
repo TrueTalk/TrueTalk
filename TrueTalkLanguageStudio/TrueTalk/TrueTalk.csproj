@@ -49,10 +49,6 @@
     <Compile Include="Speech\Pathos\Pathos.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Analysys\Analysys.csproj">
-      <Project>{52034ef5-d186-4897-b01d-1327c8730ddb}</Project>
-      <Name>Analysys</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{bbdcc7c1-56cb-40a2-b7af-03c0a0cbaad0}</Project>
       <Name>Interfaces</Name>
