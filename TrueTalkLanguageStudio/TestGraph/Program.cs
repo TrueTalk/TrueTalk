@@ -14,14 +14,14 @@ namespace TrueTalk.TestGraph
 
             var factory = new ClauseGraphFactory( modelPath );
 
-            var clause = factory.FromString( "The big brown dog jumped over the lazy fox." );
+            var clause = factory.FromString( "If temperature is higher than 57 and 7 + 2 = 9, then open the windows." );
 
             clause.Graph.GrammaticalStructure.Display( );
             clause.Graph.PhrasalStructure    .Display( );
 
             var speechAnalysis = new SpeechAnalysis( );
 
-            clause.Graph.GrammaticalStructure.ApplyTransformation( speechAnalysis );
+            //clause.Graph.GrammaticalStructure.ApplyTransformation( speechAnalysis );
             clause.Graph.PhrasalStructure    .ApplyTransformation( speechAnalysis );
 
             //--//

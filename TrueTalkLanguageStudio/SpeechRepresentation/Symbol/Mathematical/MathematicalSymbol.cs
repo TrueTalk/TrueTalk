@@ -14,6 +14,7 @@ namespace TrueTalk.SpeechRepresentation
         public static readonly string DividedByRepresentation = "/";
         public static readonly string OpenParenthesisRepresentation  = "(";
         public static readonly string CloseParenthesisRepresentation = ")";
+        public static readonly string EqualRepresentation = "=";
 
         //--//
 
@@ -25,6 +26,7 @@ namespace TrueTalk.SpeechRepresentation
             MultipliedBy,
             Parenthesis_Open,
             Parenthesis_Close,
+            Equal,
         }
 
         //--//
@@ -64,6 +66,10 @@ namespace TrueTalk.SpeechRepresentation
 
                 case ")":
                     ms = new MathematicalSymbol( value, MathematicalSymbolKind.Parenthesis_Close );
+                    break;
+
+                case "=":
+                    ms = new MathematicalSymbol( value, MathematicalSymbolKind.Equal );
                     break;
 
                 default:

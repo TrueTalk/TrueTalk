@@ -16,6 +16,11 @@ namespace TrueTalk.Analysis
 
             foreach( TokenGraph.Vertex v in tokenGraph.Vertexes.Values )
             {
+                if( ( Token.IsPunctuation( v.Value ) == false ) && tokenGraph.IsTag( v ) )
+                {
+                    continue;
+                }
+
                 if( v.Token == null )
                 {
                     fChanged = true;

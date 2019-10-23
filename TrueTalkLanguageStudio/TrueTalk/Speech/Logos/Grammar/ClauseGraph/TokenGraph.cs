@@ -181,6 +181,14 @@ namespace TrueTalk.Speech.Grammar
             //Console.WriteLine( "==> " + tgt.ToString( ) );
         }
 
+        public bool IsTag( Vertex v ) 
+        {
+            //
+            // All tags in a phrasal structure graph have the same value has the value entry.
+            // 
+            return this.phraseStructure &&  v.Value.Equals( v.Tag ) ;
+        }
+
         //--//
 
         public override bool ApplyTransformation( IAnalysis analysis )

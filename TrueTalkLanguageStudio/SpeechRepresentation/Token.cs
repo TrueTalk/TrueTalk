@@ -16,6 +16,11 @@ namespace TrueTalk.SpeechRepresentation
 
         //--//
 
+        public static readonly char[] MathematicalSymbols = { '+', '-', '*', '/', '(', ')', '=' };
+        public static readonly char[] PuctuationSymbols   = { '\'', ':', ',', '_', '!', '-', '.', '?', '`', ';', '/' };
+
+        //--//
+
         protected Token( String value, TokenKind kind ) : base( )
         {
             RawValue    = value;
@@ -73,9 +78,7 @@ namespace TrueTalk.SpeechRepresentation
             //
             // Is it a punctuation mark?
             //
-            char[] puctuationSymbols = { '\'', ':', ',', '_', '!', '-', '.', '?', '`', ';', '/' };
-
-            if( value.IndexOfAny( puctuationSymbols ) != -1 )
+            if( value.IndexOfAny( PuctuationSymbols ) != -1 )
             {
                 return true;
             }
@@ -98,9 +101,7 @@ namespace TrueTalk.SpeechRepresentation
             //
             // Is it a mathematical symbol?
             //
-            char[] mathematicalSymbols = { '+', '-', '*', '/', '(', ')' };
-
-            if( value.IndexOfAny( mathematicalSymbols ) != -1 )
+            if( value.IndexOfAny( MathematicalSymbols ) != -1 )
             {
                 return true;
             }
