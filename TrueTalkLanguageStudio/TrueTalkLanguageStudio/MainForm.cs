@@ -77,8 +77,8 @@ namespace TrueTalk.IrViewer
 
                 m_clauseGraph = graph;
 
-                var grammaticalStructureGraph = CreateGraph( m_clauseGraph.GrammaticalStructure, m_clauseGraph.Clause.RawString );
-                var phraseStructureGraph      = CreateGraph( m_clauseGraph.PhrasalStructure    , m_clauseGraph.Clause.RawString );
+                var grammaticalStructureGraph = CreateGraph( m_clauseGraph.GrammaticalStructure, m_clauseGraph.Owner.Text );
+                var phraseStructureGraph      = CreateGraph( m_clauseGraph.PhrasalStructure    , m_clauseGraph.Owner.Text );
 
                 this.gViewer1.Graph = grammaticalStructureGraph;
                 this.textBoxGrammaticalStructureGraphPennString.Text = m_clauseGraph.GrammaticalRepresentation;
@@ -99,7 +99,7 @@ namespace TrueTalk.IrViewer
                 {
                     //if( string.IsNullOrEmpty( filter ) || id.ToLower( ).Contains( filter ) )
                     //{
-                    lst.Add( clauseGraph.Clause.RawString );
+                    lst.Add( clauseGraph.Owner.Text );
                     //}
                 }
 

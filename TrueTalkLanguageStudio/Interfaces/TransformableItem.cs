@@ -11,6 +11,11 @@ namespace TrueTalk.Interfaces
         {
         }
 
+        protected TransformableItem( int version )
+        {
+            this.Version = version;
+        }
+
         //--//
 
         public int Version { get; private set; }

@@ -85,6 +85,8 @@ namespace TrueTalk.Speech.Grammar
 
         //--//
 
+        private TokenGraph( ) { }
+
         public TokenGraph( bool phraseStructure )
         {
             this.phraseStructure = phraseStructure;

@@ -21,6 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archive", "Archive", "{AE19
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test Set", "Test Set", "{D9215DB5-EFBF-4900-ACFA-B11AE59EF82D}"
 	ProjectSection(SolutionItems) = preProject
+		Resources\Test Set\CompilerTest__ClauseEquivalence_1.tts = Resources\Test Set\CompilerTest__ClauseEquivalence_1.tts
 		Resources\Test Set\Expression evaluation.txt = Resources\Test Set\Expression evaluation.txt
 		Resources\Test Set\IrViewerTestFile.xml = Resources\Test Set\IrViewerTestFile.xml
 	EndProjectSection
@@ -68,6 +69,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueTalk", "TrueTalk\TrueTalk.csproj", "{98D3F166-78B6-4437-90DE-CC00AFD4FD5E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeechRepresentation", "SpeechRepresentation\SpeechRepresentation.csproj", "{52B22CE1-9598-4BAD-92A9-FC16302F5A43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueTalkCompiler", "TrueTalkCompiler\TrueTalkCompiler.csproj", "{7C67AACC-E9A3-4D0D-89D2-06B1408FC55C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompilerDiagnostics", "CompilerDiagnostics\CompilerDiagnostics.csproj", "{3FC23360-4A44-47A6-B016-25A632ABFA59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -130,6 +135,18 @@ Global
 		{52B22CE1-9598-4BAD-92A9-FC16302F5A43}.Instrumentation|Any CPU.Build.0 = Release|Any CPU
 		{52B22CE1-9598-4BAD-92A9-FC16302F5A43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52B22CE1-9598-4BAD-92A9-FC16302F5A43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C67AACC-E9A3-4D0D-89D2-06B1408FC55C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C67AACC-E9A3-4D0D-89D2-06B1408FC55C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C67AACC-E9A3-4D0D-89D2-06B1408FC55C}.Instrumentation|Any CPU.ActiveCfg = Release|Any CPU
+		{7C67AACC-E9A3-4D0D-89D2-06B1408FC55C}.Instrumentation|Any CPU.Build.0 = Release|Any CPU
+		{7C67AACC-E9A3-4D0D-89D2-06B1408FC55C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C67AACC-E9A3-4D0D-89D2-06B1408FC55C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FC23360-4A44-47A6-B016-25A632ABFA59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FC23360-4A44-47A6-B016-25A632ABFA59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FC23360-4A44-47A6-B016-25A632ABFA59}.Instrumentation|Any CPU.ActiveCfg = Release|Any CPU
+		{3FC23360-4A44-47A6-B016-25A632ABFA59}.Instrumentation|Any CPU.Build.0 = Release|Any CPU
+		{3FC23360-4A44-47A6-B016-25A632ABFA59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FC23360-4A44-47A6-B016-25A632ABFA59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -145,6 +162,8 @@ Global
 		{48301D45-BCBA-498A-B50E-6079E45BF3CA} = {B922C56F-59E2-400E-99F6-EBFCDBF95284}
 		{186F31A3-EF89-4A25-B2D5-20060721AA01} = {F84DD0EA-5DF3-493A-8EF4-32472F6E9F75}
 		{46200C16-5607-454F-9739-91A16D56CAC8} = {F84DD0EA-5DF3-493A-8EF4-32472F6E9F75}
+		{7C67AACC-E9A3-4D0D-89D2-06B1408FC55C} = {F84DD0EA-5DF3-493A-8EF4-32472F6E9F75}
+		{3FC23360-4A44-47A6-B016-25A632ABFA59} = {F84DD0EA-5DF3-493A-8EF4-32472F6E9F75}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B34DE40C-9011-435E-BB98-CB3F4635A3EB}

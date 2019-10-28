@@ -45,14 +45,13 @@ namespace TrueTalk.SpeechRepresentation
         }
 
         //--//
+
         public static Number New( string rawValue )
         {
             if( Number.TryParse( rawValue, out double result, out Number.NumberKind kind ) == false )
             {
                 throw new ArgumentException( $"Token '{rawValue}' could not be parsed as any kind of number." );
             }
-
-            Number n = default;
 
             switch( kind )
             {

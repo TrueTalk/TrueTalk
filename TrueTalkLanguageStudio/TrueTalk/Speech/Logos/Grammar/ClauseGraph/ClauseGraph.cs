@@ -4,10 +4,15 @@
 namespace TrueTalk.Speech.Grammar
 {
     using System;
+    using System.IO;
 
     public class ClauseGraph
     {
-        public Clause Clause { get; internal set; } = null;
+        public ClauseGraph( )
+        {
+        }
+
+        public Clause Owner { get; internal set; } = null;
 
         public String GrammaticalRepresentation { get; internal set; }
 

@@ -6,13 +6,23 @@ namespace TrueTalk.Speech.Grammar
 
     public class Clause : TransformableItem
     {
-        public readonly string RawString;
+        public readonly string Text;
 
         //--//
 
-        public Clause( string rawString )
+        private Clause( )
         {
-            RawString = rawString;
+            Text = String.Empty;
+        }
+
+        public Clause( string rawText )
+        {
+            Text = rawText;
+        }
+
+        public Clause( string rawText, int version ) : base( version )
+        {
+            Text = rawText;
         }
 
         public ClauseGraph Graph { get; internal set; } = null;

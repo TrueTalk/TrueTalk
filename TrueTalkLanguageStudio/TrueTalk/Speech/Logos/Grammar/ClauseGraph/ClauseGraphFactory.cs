@@ -16,7 +16,10 @@ namespace TrueTalk.Speech.Grammar
     {
         private readonly String modelPath;
 
-        public ClauseGraphFactory( String modelPath ) { this.modelPath = modelPath; }
+        public ClauseGraphFactory( String modelPath )
+        {
+            this.modelPath = modelPath;
+        }
 
         public Clause FromString( String rawClause )
         {
@@ -128,10 +131,10 @@ namespace TrueTalk.Speech.Grammar
             //
             // Verify consistency of lookup for locating items across both graphs
             //
-            foreach( var key in grammaticalStructure.VertexesLookup.Keys )
-            {
-                Debug.Assert( phraseStructure.VertexesLookup.ContainsKey( key ) );
-            }
+            //////foreach( var key in grammaticalStructure.VertexesLookup.Keys )
+            //////{
+            //////    Debug.Assert( phraseStructure.VertexesLookup.ContainsKey( key ) );
+            //////}
 
             String grammar = sg.toFormattedString();
             string resGrammar = Regex.Replace(grammar, @"\n", "\r\n");
@@ -143,11 +146,11 @@ namespace TrueTalk.Speech.Grammar
 
             var clauseGraph = new ClauseGraph
             {
-                Clause = clause,
+                Owner                    = clause,
                 GrammaticalRepresentation = resGrammar,
-                PhraseRepresentation = resPhrase,
-                GrammaticalStructure = grammaticalStructure,
-                PhrasalStructure = phraseStructure,
+                PhraseRepresentation      = resPhrase,
+                GrammaticalStructure      = grammaticalStructure,
+                PhrasalStructure          = phraseStructure,
             };
 
             clause.Graph = clauseGraph;
