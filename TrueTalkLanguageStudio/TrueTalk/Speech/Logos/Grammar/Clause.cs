@@ -6,10 +6,6 @@ namespace TrueTalk.Speech.Grammar
 
     public class Clause : TransformableItem
     {
-        public readonly string Text;
-
-        //--//
-
         private Clause( )
         {
             Text = String.Empty;
@@ -25,7 +21,10 @@ namespace TrueTalk.Speech.Grammar
             Text = rawText;
         }
 
-        public ClauseGraph Graph { get; internal set; } = null;
+        public string Text { get; }
+
+
+        public ClauseGraph Graph { get; internal set; } = new ClauseGraph( );
 
         public override bool ApplyTransformation( IAnalysis analysis )
         {

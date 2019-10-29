@@ -1,16 +1,15 @@
 ﻿
 namespace TrueTalk.Speech.Grammar
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text.RegularExpressions;
     using edu.stanford.nlp.ling;
     using edu.stanford.nlp.parser.lexparser;
     using edu.stanford.nlp.process;
     using edu.stanford.nlp.semgraph;
     using edu.stanford.nlp.trees;
     using java.io;
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Text.RegularExpressions;
 
     public class ClauseGraphFactory
     {
@@ -115,10 +114,10 @@ namespace TrueTalk.Speech.Grammar
 
                         phraseStructure.AddEdge(
                             src.nodeNumber( root ),
-                            src.value( ) == "" ? $"nn" : src.value( ),
+                            String.IsNullOrEmpty( src.value( ) ) ? $"nn" : src.value( ),
                             src.label( ).ToString( ),
                             tgt.nodeNumber( root ),
-                            tgt.value( ) == "" ? $"nn" : tgt.value( ),
+                            String.IsNullOrEmpty( tgt.value( ) ) ? $"nn" : tgt.value( ),
                             tgt.label( ).ToString( ),
                             "dep"
                         );
@@ -146,7 +145,7 @@ namespace TrueTalk.Speech.Grammar
 
             var clauseGraph = new ClauseGraph
             {
-                Owner                    = clause,
+                Owner                     = clause,
                 GrammaticalRepresentation = resGrammar,
                 PhraseRepresentation      = resPhrase,
                 GrammaticalStructure      = grammaticalStructure,

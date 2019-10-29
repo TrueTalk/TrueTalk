@@ -17,6 +17,66 @@ namespace TrueTalk.CompilerDiagnostics
 
     public class ClausePersistence
     {
+        [Serializable]
+        public class Entry
+        {
+            [XmlElement("Key")]
+            public object Key;
+
+            [XmlElement("Value")]
+            public object Value;
+
+            public Entry( )
+            {
+            }
+
+            public Entry( object key, object value )
+            {
+                Key   = key;
+                Value = value;
+            }
+        }
+
+        [Serializable]
+        [XmlInclude( typeof( TokenGraph.Vertex ) )]
+        [XmlInclude( typeof( TokenGraph.Edge ) )]
+        public class PersistedClause
+        {
+            private PersistedClause( ) { }
+
+            public PersistedClause( Clause clause )
+            {
+                var persistedGrammarGraph = new List<Entry>( );
+
+                foreach(var entry in clause.Graph.GrammaticalStructure.Vertexes)
+                {
+                    persistedGrammarGraph.Add( new Entry( entry.Key, entry.Value ) ); 
+                }
+                
+                var persistedPhraseGraph = new List<Entry>( );
+
+                foreach( var entry in clause.Graph.PhrasalStructure.Vertexes )
+                {
+                    persistedGrammarGraph.Add( new Entry( entry.Key, entry.Value ) );
+                }
+
+                this.Text                  = clause.Text;
+                this.PersistedGrammarGraph = persistedGrammarGraph;
+                this.PersistedPhraseGraph  = persistedPhraseGraph;
+            }
+
+            [XmlElement("Text")]
+            public string Text;
+
+            [XmlElement( "PersistedPhraseGraph" )]
+            public List<Entry> PersistedPhraseGraph;
+
+            [XmlElement( "PersistedGrammarGraph" )]
+            public List<Entry> PersistedGrammarGraph;
+        }
+
+        //--//
+
         private readonly string workspaceDirectory;
 
         //--//
@@ -38,19 +98,47 @@ namespace TrueTalk.CompilerDiagnostics
 
             var fileName = this.workspaceDirectory + clause.Text + "__" + clause.Version.ToString( ) + ".ttd";
 
-            XmlSerializer mySerializer = new XmlSerializer(typeof(Clause));
+            var record = new PersistedClause( clause );
 
-            // To write to a file, create a StreamWriter object.  
-            StreamWriter myWriter = new StreamWriter( fileName );
-            mySerializer.Serialize( myWriter, clause );
-            myWriter.Close( );
+            XmlSerializer serializer = new XmlSerializer(typeof(PersistedClause));
+
+            StreamWriter writer = new StreamWriter( fileName );
+
+            serializer.Serialize( writer, record );
+
+            writer.Close( );
 
             return fileName;
         }
 
         public Clause LoadClause( string fileName )
         {
-            return new Clause( "blah" );
+            XmlSerializer serializer = new XmlSerializer(typeof(PersistedClause));
+
+            StreamReader reader = new StreamReader( fileName );
+
+            var record = (PersistedClause)serializer.Deserialize( reader );
+
+            var phrasalStructure = new TokenGraph( phraseStructure: true );
+
+            foreach( Entry entry in record.PersistedPhraseGraph )
+            {
+                phrasalStructure.AddOrUpdateVertex( (int)entry.Key, ((TokenGraph.Vertex)entry.Value).Value, ( (TokenGraph.Vertex)entry.Value ).Tag );
+            }
+
+            var grammarStructure = new TokenGraph( phraseStructure: false );
+
+            foreach( Entry entry in record.PersistedGrammarGraph )
+            {
+                grammarStructure.AddOrUpdateVertex( (int)entry.Key, ( (TokenGraph.Vertex)entry.Value ).Value, ( (TokenGraph.Vertex)entry.Value ).Tag );
+            }
+
+            var clause = new Clause( record.Text );
+
+            clause.Graph.PhrasalStructure     = phrasalStructure;
+            clause.Graph.GrammaticalStructure = grammarStructure;
+
+            return clause;
         }
 
         //////public string PersistClause( Clause clause, string compilerVersion, string workingDirectory )

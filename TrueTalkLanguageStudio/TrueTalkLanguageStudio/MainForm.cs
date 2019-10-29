@@ -140,7 +140,7 @@ namespace TrueTalk.IrViewer
 
             foreach( var e in graph.Edges )
             {
-                Microsoft.Glee.Drawing.Edge edgeG = g.AddEdge(e.Source.Key, e.Target.Key) as Microsoft.Glee.Drawing.Edge;
+                Microsoft.Glee.Drawing.Edge edgeG = g.AddEdge( graph.Vertexes[ e.Source ].Key, graph.Vertexes[ e.Target ].Key) as Microsoft.Glee.Drawing.Edge;
                 Microsoft.Glee.Drawing.EdgeAttr attr = edgeG.Attr;
 
                 attr.Label = e.Relation;

@@ -8,15 +8,16 @@ namespace TrueTalk.Speech.Grammar
     using TrueTalk.Interfaces;
     using TrueTalk.SpeechRepresentation;
 
-    using Console      = System.Console;
+    using Console = System.Console;
     using RelationKind = System.String;
-    using VertexIndex  = System.Int32;
-    using VertexKey    = System.String;
-    using VertexTag    = System.String;
-    using VertexValue  = System.String;
+    using VertexIndex = System.Int32;
+    using VertexKey = System.String;
+    using VertexTag = System.String;
+    using VertexValue = System.String;
 
     public class TokenGraph : TransformableItem
     {
+        [Serializable]
         public class Vertex
         {
             public VertexKey    Key;
@@ -65,15 +66,16 @@ namespace TrueTalk.Speech.Grammar
             }
         }
 
+        [Serializable]
         public class Edge
         {
-            public Vertex       Source;
-            public Vertex       Target;
+            public int          Source;
+            public int          Target;
             public RelationKind Relation;
 
             public String ShortLabel => $"{Relation}";
 
-            public String LongLabel => $"[{Source.LongLabel}] -> {Relation} -> [{Target.LongLabel}]";
+            public String LongLabel => $"[{Source}] -> {Relation} -> [{Target}]";
 
             public override string ToString( )
             {
@@ -118,7 +120,7 @@ namespace TrueTalk.Speech.Grammar
             Console.WriteLine( "Edges:" );
             foreach( var e in Edges )
             {
-                Console.WriteLine( $"Edge {e.Source.Index}->{e.Target.Index}: {e.ShortLabel}" );
+                Console.WriteLine( $"Edge {e.ShortLabel}->{e}: Relation{e.Relation}" );
             }
         }
 
@@ -168,7 +170,7 @@ namespace TrueTalk.Speech.Grammar
                 ReconcileLookup( tgt );
             }
 
-            var e = new Edge { Source = src, Target = tgt, Relation = r };
+            var e = new Edge { Source = src.Index, Target = tgt.Index, Relation = r };
 
             src.OutgoingEdges.Add( e );
             tgt.IncomingEdges.Add( e );
@@ -183,12 +185,12 @@ namespace TrueTalk.Speech.Grammar
             //Console.WriteLine( "==> " + tgt.ToString( ) );
         }
 
-        public bool IsTag( Vertex v ) 
+        public bool IsTag( Vertex v )
         {
             //
             // All tags in a phrasal structure graph have the same value has the value entry.
             // 
-            return this.phraseStructure &&  v.Value.Equals( v.Tag ) ;
+            return this.phraseStructure &&  v.Value.Equals( v.Tag );
         }
 
         //--//
