@@ -30,7 +30,7 @@ namespace TrueTalk.IrViewer
 
         public Parser( XmlNode node )
         {
-            foreach( XmlNode subnode in node.SelectNodes( "clause" ) )
+            foreach( XmlNode subnode in node.SelectNodes( "Text" ) )
             {
                 Clause clause = ParseClause( subnode );
 

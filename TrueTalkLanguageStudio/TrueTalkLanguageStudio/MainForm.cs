@@ -5,7 +5,9 @@ namespace TrueTalk.IrViewer
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.IO;
     using System.Windows.Forms;
+    using TrueTalk.CompilerDiagnostics;
     using TrueTalk.Speech.Grammar;
     using static TrueTalk.Speech.Grammar.TokenGraph;
 
@@ -35,23 +37,56 @@ namespace TrueTalk.IrViewer
             {
                 try
                 {
-                    System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
-
-                    doc.Load( openFileDialog1.FileName );
-
-                    foreach( System.Xml.XmlNode clauses in doc.SelectNodes( "clauses" ) )
+                    //
+                    // Load clauses from an XML doc. e.g.:
+                    //
+                    // <?xml version="1.0" encoding="utf-8"?>
+                    // <clauses>
+                    //   <clause id="1">
+                    //     <content>The big brown dog jumped over the lazy fox.</content>
+                    //   </clause>
+                    //   <clause id="2">
+                    //     <content>Work hard and hope for the best.</content>
+                    //   </clause>
+                    // </clauses>
+                    // 
+                    if( Path.GetExtension( openFileDialog1.FileName ) == ".txt" )
                     {
-                        Parser parser = new Parser( clauses );
+                        System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
+
+                        doc.Load( openFileDialog1.FileName );
+
+                        foreach( System.Xml.XmlNode clauses in doc.SelectNodes( "clauses" ) )
+                        {
+                            Parser parser = new Parser( clauses );
+
+                            SelectClause( null );
+
+                            UpdateListBox( );
+
+                            //textBoxFilter.Select( );
+
+                            loadSucceeded = true;
+
+                            break;
+                        }
+                    }
+                    //
+                    // Load clauses from a persisted graph
+                    // 
+                    else if( Path.GetExtension( openFileDialog1.FileName ) == ".ttd" )
+                    {
+                        var loader = new ClausePersistence( @"C:\src\TrueTalk\Temp", "1.0.0.0" );
+
+                        var clause = loader.LoadClause( openFileDialog1.FileName );
+
+                        Clause.ClauseGraphs[ clause.Text ] = clause.Graph;
 
                         SelectClause( null );
 
                         UpdateListBox( );
 
-                        //textBoxFilter.Select( );
-
                         loadSucceeded = true;
-
-                        break;
                     }
                 }
                 catch

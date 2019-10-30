@@ -104,6 +104,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CompilerDiagnostics\CompilerDiagnostics.csproj">
+      <Project>{3fc23360-4a44-47a6-b016-25a632abfa59}</Project>
+      <Name>CompilerDiagnostics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{bbdcc7c1-56cb-40a2-b7af-03c0a0cbaad0}</Project>
       <Name>Interfaces</Name>
