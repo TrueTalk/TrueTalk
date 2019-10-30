@@ -137,9 +137,9 @@ namespace TrueTalk.CompilerDiagnostics
 
         //--//
 
-        public ClausePersistence( string workspaceDirectory )
+        public ClausePersistence( string workspaceDirectory, string compilerVersion )
         {
-            var compilerDiagnosticsPath = Path.Combine( workspaceDirectory + @"Compiler\Trasformations\" );
+            var compilerDiagnosticsPath = Path.Combine( workspaceDirectory + $"\\Compiler\\v{compilerVersion}\\Transformations\\" );
 
             Directory.CreateDirectory( compilerDiagnosticsPath );
 
@@ -148,11 +148,9 @@ namespace TrueTalk.CompilerDiagnostics
 
         //--//
 
-        public string PersistClause( Clause clause, string compilerVersion, string workingDirectory )
+        public string PersistClause( Clause clause )
         {
-            //https://stackoverflow.com/questions/3671259/how-to-xml-serialize-a-dictionary
-
-            var fileName = this.workspaceDirectory + clause.Text + "__" + clause.Version.ToString( ) + ".ttd";
+            var fileName = Path.Combine( this.workspaceDirectory, clause.Text + "__v" + clause.Version.ToString( ) + ".ttd" );
 
             var record = new PersistedClause( clause );
 

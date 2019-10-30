@@ -41,7 +41,7 @@ namespace TrueTalk.IrViewer
 
                     foreach( System.Xml.XmlNode clauses in doc.SelectNodes( "clauses" ) )
                     {
-                        Parser parser = new Parser(clauses);
+                        Parser parser = new Parser( clauses );
 
                         SelectClause( null );
 

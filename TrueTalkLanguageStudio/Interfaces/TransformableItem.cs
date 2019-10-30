@@ -1,10 +1,12 @@
 ﻿
 namespace TrueTalk.Interfaces
 {
+    using System;
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
 
+    [Serializable]
     public abstract class TransformableItem
     {
         //--//
@@ -21,7 +23,7 @@ namespace TrueTalk.Interfaces
         //--//
 
         [XmlElement( "Version" )]
-        public int Version { get; private set; }
+        public int Version { get; set; }
 
         public abstract bool ApplyTransformation( IAnalysis analysis );
 

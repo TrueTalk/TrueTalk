@@ -38,9 +38,6 @@ namespace TrueTalk.IrViewer
 
                 Clause.ClauseGraphs[ clause.Text ] = clauseGraph.Graph;
             }
-
-            //////clauseGraph.GrammaticalStructure.Display( );
-            //////clauseGraph.PhrasalStructure.Display( );
         }
 
         //--//
@@ -63,25 +60,6 @@ namespace TrueTalk.IrViewer
         {
             res.Text = node.InnerText;
         }
-
-        //////private void ParseToken( XmlNode node, Clause method, Token tk, Dictionary< string, Token > lookupBasicBlock )
-        //////{
-        //////    foreach(XmlNode subnode in node.SelectNodes( "Edge" ))
-        //////    {
-        //////        method.TokenEdges.Add( ParseBasicBlockEdge( subnode, lookupBasicBlock ) );
-        //////    }
-        //////}
-
-        //////private TokenEdge ParseBasicBlockEdge( XmlNode node, Dictionary< string, Token > lookupToken )
-        //////{
-        //////    TokenEdge res = new TokenEdge();
-
-        //////    res.From = lookupToken[ GetAttribute( node, "From" ) ];
-        //////    res.To   = lookupToken[ GetAttribute( node, "To"   ) ];
-        //////    res.Kind = GetAttribute( node, "Kind" )  ;
-
-        //////    return res;
-        //////}
 
         //--//
 

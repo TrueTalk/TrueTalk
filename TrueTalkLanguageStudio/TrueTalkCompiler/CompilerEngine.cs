@@ -23,9 +23,9 @@ namespace TrueTalk.Compiler
 
         public void Compile( )
         {
-            var diag = new ClausePersistence( this.userConfig.WorkspaceDirectory );
+            var diag = new ClausePersistence( this.userConfig.WorkspaceDirectory, this.Version.ToString( ) );
 
-            var allLines = ParseClauses( this.userConfig.SourceFile) ;
+            var allLines = ParseClauses( this.userConfig.SourceFile ) ;
 
             var factory = new ClauseGraphFactory( this.userConfig.LanguageModel );
 
@@ -33,7 +33,7 @@ namespace TrueTalk.Compiler
             {
                 var clause = factory.FromString( clauseText );
 
-                var fileName = diag.PersistClause( clause, this.Version.ToString( ), this.userConfig.WorkspaceDirectory );
+                var fileName = diag.PersistClause( clause );
 
                 var clause1 = diag.LoadClause( fileName );
 
