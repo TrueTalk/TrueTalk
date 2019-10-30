@@ -40,5 +40,9 @@
     <Compile Include="IAnalysis.cs" />
     <Compile Include="TransformableItem.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Serialization" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -36,8 +36,8 @@ namespace TrueTalk.Compiler
 
                 var clause1 = diag.LoadClause( fileName );
 
-                clause.Graph.GrammaticalStructure.Display( );
-                clause.Graph.PhrasalStructure.Display( );
+                clause1.Graph.GrammaticalStructure.Display( );
+                clause1.Graph.PhrasalStructure.Display( );
 
                 var speechAnalysis = new SpeechAnalysis();
 

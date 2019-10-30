@@ -120,7 +120,7 @@ namespace TrueTalk.Speech.Grammar
             Console.WriteLine( "Edges:" );
             foreach( var e in Edges )
             {
-                Console.WriteLine( $"Edge {e.ShortLabel}->{e}: Relation{e.Relation}" );
+                Console.WriteLine( $"Edge {e.ShortLabel}->{e}: {e.Relation}" );
             }
         }
 

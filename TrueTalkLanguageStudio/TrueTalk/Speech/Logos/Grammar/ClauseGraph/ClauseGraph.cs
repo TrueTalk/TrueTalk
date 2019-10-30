@@ -11,9 +11,9 @@ namespace TrueTalk.Speech.Grammar
         {
         }
 
-        // TODO make properties invisble but to XmlSerialization
+        // TODO make property setters invisble but to XmlSerialization
 
-        public Clause Owner { get; internal set; } = null;
+        public Clause Owner { get; set; } = null;
 
         public String GrammaticalRepresentation { get; set; }
 
