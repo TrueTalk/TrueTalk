@@ -32,6 +32,55 @@ namespace TrueTalk.Speech.Grammar
 
             public String LongLabel => $"{Value}/{Tag}/{Index}";
 
+            //--//
+
+            public override bool Equals( object obj )
+            {
+                return this.Equals( obj as TokenGraph );
+            }
+
+            public bool Equals( Vertex v )
+            {
+                if( v is null )
+                {
+                    return false;
+                }
+
+                if( Object.ReferenceEquals( this, v ) )
+                {
+                    return true;
+                }
+
+                if( this.GetType( ) != v.GetType( ) )
+                {
+                    return false;
+                }
+
+                return VertexesAreEquivalent( this, v );
+            }
+
+            public static bool operator ==( Vertex left, Vertex right )
+            {
+                if( left is null )
+                {
+                    if( right is null )
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+
+                return left.Equals( right );
+            }
+
+            public static bool operator !=( Vertex right, Vertex left )
+            {
+                return false == ( right == left );
+            }
+
+            //--//
+
             public override string ToString( )
             {
                 return LongLabel;
@@ -64,6 +113,71 @@ namespace TrueTalk.Speech.Grammar
 
                 //////return $"[{incomingRep}] -> ({LongLabel}) -> [{outgoingRep}]";
             }
+
+            //--//
+
+            private bool VertexesAreEquivalent( Vertex left, Vertex right )
+            {
+                if( left.IncomingEdges.Count != right.IncomingEdges.Count )
+                {
+                    return false;
+                }
+
+                if( left.OutgoingEdges.Count != right.OutgoingEdges.Count )
+                {
+                    return false;
+                }
+
+                foreach( var e1 in left.IncomingEdges )
+                {
+                    bool same = false;
+
+                    // TODO TODO TODO: make this more efficient.
+                    foreach( var e2 in right.IncomingEdges )
+                    {
+                        if( e1.Source == e2.Source && 
+                            e1.Target == e2.Target && 
+                            e1.Relation == e2.Relation )
+                        {
+                            same = true; break;
+                        }
+                    }
+
+                    if( same == false )
+                    {
+                        return false;
+                    }
+                }
+
+                foreach( var e1 in left.OutgoingEdges )
+                {
+                    bool same = false;
+
+                    // TODO TODO TODO: make this more efficient.
+                    foreach( var e2 in right.OutgoingEdges )
+                    {
+                        if( e1.Source == e2.Source &&
+                            e1.Target == e2.Target &&
+                            e1.Relation == e2.Relation )
+                        {
+                            same = true; break;
+                        }
+                    }
+
+                    if( same == false )
+                    {
+                        return false;
+                    }
+                }
+
+                return (
+                    left.Key   == right.Key   &&
+                    left.Index == right.Index &&
+                    left.Value == right.Value &&
+                    left.Tag   == right.Tag   &&
+                    left.Token == right.Token 
+                    );
+            }
         }
 
         [Serializable]
@@ -89,9 +203,57 @@ namespace TrueTalk.Speech.Grammar
 
         private TokenGraph( ) { }
 
+
         public TokenGraph( bool phraseStructure )
         {
             this.phraseStructure = phraseStructure;
+        }
+
+        //--//
+
+        public override bool Equals( object obj )
+        {
+            return this.Equals( obj as TokenGraph );
+        }
+
+        public bool Equals( TokenGraph graph )
+        {
+            if( graph is null )
+            {
+                return false;
+            }
+
+            if( Object.ReferenceEquals( this, graph ) )
+            {
+                return true;
+            }
+
+            if( this.GetType( ) != graph.GetType( ) )
+            {
+                return false;
+            }
+
+            return GraphsAreEquivalent( this, graph );
+        }
+
+        public static bool operator ==( TokenGraph left, TokenGraph right )
+        {
+            if( left is null )
+            {
+                if( right is null )
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            return left.Equals( right );
+        }
+
+        public static bool operator !=( TokenGraph right, TokenGraph left )
+        {
+            return false == ( right == left );
         }
 
         //--//
@@ -253,6 +415,34 @@ namespace TrueTalk.Speech.Grammar
             {
                 VertexesLookup.Add( v.Key, v );
             }
+        }
+
+        private static bool GraphsAreEquivalent( TokenGraph left, TokenGraph right )
+        {
+            if( left.phraseStructure != right.phraseStructure )
+            {
+                return false;
+            }
+
+            if( left.Edges.Count != right.Edges.Count )
+            {
+                return false;
+            }
+
+            if( left.Vertexes.Count != right.Vertexes.Count )
+            {
+                return false;
+            }
+
+            foreach( var v in left.Vertexes.Values )
+            {
+                if( v.Equals( right.Vertexes[ v.Index ] ) == false )
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

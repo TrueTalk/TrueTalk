@@ -6,6 +6,7 @@ namespace TrueTalk.Compiler
     using System.Collections.Generic;
     using System.IO;
     using TrueTalk.Analysis;
+    using TrueTalk.Common;
     using TrueTalk.CompilerDiagnostics;
     using TrueTalk.Speech.Grammar;
 
@@ -36,8 +37,10 @@ namespace TrueTalk.Compiler
 
                 var clause1 = diag.LoadClause( fileName );
 
+                CHECKS.ASSERT( clause == clause1, "Persisted graph is not equivalent to orignal graph." );
+
                 clause1.Graph.GrammaticalStructure.Display( );
-                clause1.Graph.PhrasalStructure.Display( );
+                clause1.Graph.PhrasalStructure    .Display( );
 
                 var speechAnalysis = new SpeechAnalysis();
 
