@@ -93,14 +93,14 @@ namespace TrueTalk.IrViewer
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             this.openFileDialog1.Filter = "ttd files (*.ttd)|*.ttd|All files (*.*)|*.*";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // listBoxClauses
             // 
             this.listBoxClauses.FormattingEnabled = true;
             this.listBoxClauses.ItemHeight = 20;
-            this.listBoxClauses.Location = new System.Drawing.Point(12, 45);
+            this.listBoxClauses.Location = new System.Drawing.Point(12, 12);
             this.listBoxClauses.Name = "listBoxClauses";
             this.listBoxClauses.Size = new System.Drawing.Size(1300, 84);
             this.listBoxClauses.TabIndex = 0;
@@ -148,7 +148,7 @@ namespace TrueTalk.IrViewer
             // 
             // textBoxPhraseStructureGraphPennString
             // 
-            this.textBoxPhraseStructureGraphPennString.Location = new System.Drawing.Point(3, 0);
+            this.textBoxPhraseStructureGraphPennString.Location = new System.Drawing.Point(2, 0);
             this.textBoxPhraseStructureGraphPennString.Multiline = true;
             this.textBoxPhraseStructureGraphPennString.Name = "textBoxPhraseStructureGraphPennString";
             this.textBoxPhraseStructureGraphPennString.Size = new System.Drawing.Size(543, 650);
@@ -167,7 +167,7 @@ namespace TrueTalk.IrViewer
             this.Name = "MainForm";
             this.Text = "IR Viewer";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.Resize += new System.EventHandler( this.MainForm_Resize );
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();

@@ -137,9 +137,9 @@ namespace TrueTalk.CompilerDiagnostics
 
         //--//
 
-        public ClausePersistence( string workspaceDirectory, string compilerVersion )
+        public ClausePersistence( string workspaceDirectory )
         {
-            var compilerDiagnosticsPath = Path.Combine( workspaceDirectory + $"\\Compiler\\v{compilerVersion}\\Transformations\\" );
+            var compilerDiagnosticsPath = Path.Combine( workspaceDirectory + $"\\Compiler\\Transformations\\" );
 
             Directory.CreateDirectory( compilerDiagnosticsPath );
 

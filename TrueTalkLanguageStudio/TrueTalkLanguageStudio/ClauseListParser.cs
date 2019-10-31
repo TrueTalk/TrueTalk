@@ -20,7 +20,7 @@ namespace TrueTalk.IrViewer
         public static Dictionary<string, ClauseGraph> ClauseGraphs = new Dictionary<string, ClauseGraph>();
     }
 
-    public class Parser
+    public class ClauseListParser
     {
         private readonly ClauseGraphFactory Factory = new ClauseGraphFactory( @"C:\src\TrueTalk\TrueTalkLanguageStudio\Resources\Models\englishPCFG.ser.gz" );
 
@@ -28,7 +28,7 @@ namespace TrueTalk.IrViewer
         // Constructor Methods
         //
 
-        public Parser( XmlNode node )
+        public ClauseListParser( XmlNode node )
         {
             foreach( XmlNode subnode in node.SelectNodes( "Text" ) )
             {

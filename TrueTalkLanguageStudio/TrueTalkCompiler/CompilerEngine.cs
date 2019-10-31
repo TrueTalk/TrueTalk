@@ -23,7 +23,7 @@ namespace TrueTalk.Compiler
 
         public void Compile( )
         {
-            var diag = new ClausePersistence( this.userConfig.WorkspaceDirectory, this.Version.ToString( ) );
+            var diag = new ClausePersistence( this.userConfig.WorkspaceDirectory );
 
             var allLines = ParseClauses( this.userConfig.SourceFile ) ;
 
@@ -37,7 +37,7 @@ namespace TrueTalk.Compiler
 
                 var clause1 = diag.LoadClause( fileName );
 
-                CHECKS.ASSERT( clause == clause1, "Persisted graph is not equivalent to orignal graph." );
+                CHECKS.ASSERT( clause == clause1, "Persisted graph is not equivalent to original graph." );
 
                 clause1.Graph.GrammaticalStructure.Display( );
                 clause1.Graph.PhrasalStructure    .Display( );

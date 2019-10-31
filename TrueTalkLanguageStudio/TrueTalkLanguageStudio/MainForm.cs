@@ -58,7 +58,7 @@ namespace TrueTalk.IrViewer
 
                         foreach( System.Xml.XmlNode clauses in doc.SelectNodes( "clauses" ) )
                         {
-                            Parser parser = new Parser( clauses );
+                            ClauseListParser parser = new ClauseListParser( clauses );
 
                             SelectClause( null );
 
@@ -76,7 +76,7 @@ namespace TrueTalk.IrViewer
                     // 
                     else if( Path.GetExtension( openFileDialog1.FileName ) == ".ttd" )
                     {
-                        var loader = new ClausePersistence( @"C:\src\TrueTalk\Temp", "1.0.0.0" );
+                        var loader = new ClausePersistence( Environment.GetEnvironmentVariable( "TEMP" ) );
 
                         var clause = loader.LoadClause( openFileDialog1.FileName );
 
@@ -115,10 +115,12 @@ namespace TrueTalk.IrViewer
                 var grammaticalStructureGraph = CreateGraph( m_clauseGraph.GrammaticalStructure, m_clauseGraph.Owner.Text );
                 var phraseStructureGraph      = CreateGraph( m_clauseGraph.PhrasalStructure    , m_clauseGraph.Owner.Text );
 
-                this.gViewer1.Graph = grammaticalStructureGraph;
+                this.gViewer1.Graph                                  = grammaticalStructureGraph;
                 this.textBoxGrammaticalStructureGraphPennString.Text = m_clauseGraph.GrammaticalRepresentation;
-                this.gViewer2.Graph = phraseStructureGraph;
-                this.textBoxPhraseStructureGraphPennString.Text = m_clauseGraph.PhraseRepresentation;
+                this.gViewer2.Graph                                  = phraseStructureGraph;
+                this.textBoxPhraseStructureGraphPennString.Text      = m_clauseGraph.PhraseRepresentation;
+
+                this.Text = $"IR Viewer - {graph.Owner.Text}";
             }
         }
 
@@ -150,7 +152,14 @@ namespace TrueTalk.IrViewer
 
                 listBoxClauses.ResumeLayout( );
 
-                listBoxClauses.Visible = listBoxClauses.Items.Count > 0;
+                if( listBoxClauses.Items.Count == 1 )
+                {
+                    SelectClause( Clause.ClauseGraphs[ ( string )listBoxClauses.Items[ 0 ] ] );
+                }
+                else if( listBoxClauses.Items.Count > 1 )
+                {
+                    listBoxClauses.Visible = true;
+                }
             }
         }
 
