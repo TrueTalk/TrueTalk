@@ -16,6 +16,10 @@ namespace TrueTalk.SpeechRepresentation
 
         //--//
 
+        protected Symbol( ) : base( )
+        {
+        }
+
         protected Symbol( String rawValue, SymbolKind kind ) : base( rawValue, TokenKind.Symbol )
         {
             KindOfSymbol = kind;
@@ -23,7 +27,7 @@ namespace TrueTalk.SpeechRepresentation
 
         //--//
 
-        public SymbolKind KindOfSymbol { get; private set; }
+        public SymbolKind KindOfSymbol { get; set; }
 
         public String Value => RawValue;
     }

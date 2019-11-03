@@ -24,6 +24,10 @@ namespace TrueTalk.SpeechRepresentation
 
         //--//
 
+        private Number( ) : base( )
+        {
+        }
+
         private Number( String rawValue, NumberKind kind ) : base( rawValue, TokenKind.Numeric )
         {
             if( Number.TryParse( rawValue, out Double result, out NumberKind kind1 ) == false )
@@ -83,9 +87,9 @@ namespace TrueTalk.SpeechRepresentation
 
         //--//
 
-        public NumberKind KindOfNumber { get; private set; }
+        public NumberKind KindOfNumber { get; set; }
 
-        public Double Value { get; private set; }
+        public Double Value { get; set; }
 
         //--//
 

@@ -19,16 +19,16 @@
         /// <summary>
         /// Extracting meaning from a sentence or a collection of sentences.
         /// </summary>
-        public Understanding Understanding { get; private set; }
+        public Understanding Understanding { get; set; }
 
         /// <summary>
         /// Assigning relationships between different parts speech in a phrase or clause.
         /// </summary>
-        public Judging Judiging { get; private set; }
+        public Judging Judiging { get; set; }
 
         /// <summary>
         /// Generating logically sound representations from a clause or a set of clauses.
         /// </summary>
-        public Reasoning Reasoning { get; private set; }
+        public Reasoning Reasoning { get; set; }
     }
 }

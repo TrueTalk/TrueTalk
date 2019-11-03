@@ -75,11 +75,18 @@ namespace TrueTalk.Speech.Grammar
 
         public string Text { get; }
         
-        public ClauseGraph Graph { get; internal set; } = new ClauseGraph( );
+        public ClauseGraph Graph { get; set; } = new ClauseGraph( );
 
         public override bool ApplyTransformation( IAnalysis analysis )
         {
-            throw new NotImplementedException( );
+            bool fChanged = this.Graph.ApplyTransformation( analysis );
+
+            if(fChanged)
+            {
+                this.BumpVersion( );
+            }
+
+            return fChanged;
         }
     }
 }

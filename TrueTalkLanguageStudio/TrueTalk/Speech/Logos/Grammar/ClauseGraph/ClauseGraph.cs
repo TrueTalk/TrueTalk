@@ -4,8 +4,9 @@
 namespace TrueTalk.Speech.Grammar
 {
     using System;
+    using TrueTalk.Interfaces;
 
-    public class ClauseGraph
+    public class ClauseGraph : TransformableItem
     {
         public ClauseGraph( )
         {
@@ -22,5 +23,15 @@ namespace TrueTalk.Speech.Grammar
         public TokenGraph PhrasalStructure { get; set; }
 
         public TokenGraph GrammaticalStructure { get; set; }
+
+        public override bool ApplyTransformation( IAnalysis analysis )
+        {
+            bool fChanged = false;
+
+            fChanged |= this.GrammaticalStructure.ApplyTransformation( analysis );
+            fChanged |= this.PhrasalStructure    .ApplyTransformation( analysis );
+
+            return fChanged;
+        }
     }
 }

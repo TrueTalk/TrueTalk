@@ -9,6 +9,7 @@ namespace TrueTalk.IrViewer
     using System.Windows.Forms;
     using TrueTalk.CompilerDiagnostics;
     using TrueTalk.Speech.Grammar;
+    using TrueTalk.SpeechRepresentation;
     using static TrueTalk.Speech.Grammar.TokenGraph;
 
     //--//
@@ -19,7 +20,8 @@ namespace TrueTalk.IrViewer
         // State
         //
 
-        ClauseGraph m_clauseGraph;
+        private ClauseGraph clauseGraph;
+        private string      currentFile;
 
         //
         // Constructor Methods
@@ -76,17 +78,7 @@ namespace TrueTalk.IrViewer
                     // 
                     else if( Path.GetExtension( openFileDialog1.FileName ) == ".ttd" )
                     {
-                        var loader = new ClausePersistence( Environment.GetEnvironmentVariable( "TEMP" ) );
-
-                        var clause = loader.LoadClause( openFileDialog1.FileName );
-
-                        Clause.ClauseGraphs[ clause.Text ] = clause.Graph;
-
-                        SelectClause( null );
-
-                        UpdateListBox( );
-
-                        loadSucceeded = true;
+                        loadSucceeded = LoadPersistedClause( openFileDialog1.FileName );
                     }
                 }
                 catch
@@ -98,27 +90,46 @@ namespace TrueTalk.IrViewer
             {
                 Close( );
             }
+            else
+            {
+                this.currentFile = openFileDialog1.FileName;
+            }
+        }
+
+        private bool LoadPersistedClause( string fileName )
+        {
+            var loader = new ClausePersistence( Environment.GetEnvironmentVariable( "TEMP" ) );
+
+            var clause = loader.LoadClause( fileName );
+
+            Clause.ClauseGraphs[ clause.Text ] = clause.Graph;
+
+            SelectClause( null );
+
+            UpdateListBox( );
+
+            return true;
         }
 
         private void SelectClause( ClauseGraph graph )
         {
             if( graph == null )
             {
-                m_clauseGraph = graph;
+                clauseGraph = graph;
             }
             else
             {
                 listBoxClauses.Visible = false;
 
-                m_clauseGraph = graph;
+                clauseGraph = graph;
 
-                var grammaticalStructureGraph = CreateGraph( m_clauseGraph.GrammaticalStructure, m_clauseGraph.Owner.Text );
-                var phraseStructureGraph      = CreateGraph( m_clauseGraph.PhrasalStructure    , m_clauseGraph.Owner.Text );
+                var grammaticalStructureGraph = CreateGraph( clauseGraph.GrammaticalStructure, clauseGraph.Owner.Text );
+                var phraseStructureGraph      = CreateGraph( clauseGraph.PhrasalStructure    , clauseGraph.Owner.Text );
 
                 this.gViewer1.Graph                                  = grammaticalStructureGraph;
-                this.textBoxGrammaticalStructureGraphPennString.Text = m_clauseGraph.GrammaticalRepresentation;
+                this.textBoxGrammaticalStructureGraphPennString.Text = clauseGraph.GrammaticalRepresentation;
                 this.gViewer2.Graph                                  = phraseStructureGraph;
-                this.textBoxPhraseStructureGraphPennString.Text      = m_clauseGraph.PhraseRepresentation;
+                this.textBoxPhraseStructureGraphPennString.Text      = clauseGraph.PhraseRepresentation;
 
                 this.Text = $"IR Viewer - {graph.Owner.Text}";
             }
@@ -209,14 +220,29 @@ namespace TrueTalk.IrViewer
                 attr.Shape = Microsoft.Glee.Drawing.Shape.Box;
                 attr.Fillcolor = Microsoft.Glee.Drawing.Color.Green;
             }
-            else if( v.Value == "Leaf" )
+            else if( v.Token != null && v.Token.GetType( ) == typeof( Achronym ) )
             {
                 attr.Shape = Microsoft.Glee.Drawing.Shape.Box;
-                attr.Fillcolor = Microsoft.Glee.Drawing.Color.Red;
+                attr.Fillcolor = Microsoft.Glee.Drawing.Color.Tan;
             }
-            else if( v.Value == "Blah" )
+            else if( v.Token != null && v.Token.GetType( ) == typeof( Word ) )
             {
                 attr.Shape = Microsoft.Glee.Drawing.Shape.Box;
+                attr.Fillcolor = Microsoft.Glee.Drawing.Color.LightGray;
+            }
+            else if( v.Token != null && v.Token.GetType( ) == typeof( MathematicalSymbol ) )
+            {
+                attr.Shape = Microsoft.Glee.Drawing.Shape.DoubleCircle;
+                attr.Fillcolor = Microsoft.Glee.Drawing.Color.Cyan;
+            }
+            else if( v.Token != null && v.Token.GetType( ) == typeof( Number ) )
+            {
+                attr.Shape = Microsoft.Glee.Drawing.Shape.Circle;
+                attr.Fillcolor = Microsoft.Glee.Drawing.Color.LightCyan;
+            }
+            else if( v.Token != null && v.Token.GetType( ) == typeof( Punctuation ) )
+            {
+                attr.Shape = Microsoft.Glee.Drawing.Shape.Diamond;
                 attr.Fillcolor = Microsoft.Glee.Drawing.Color.Purple;
             }
             else
@@ -227,99 +253,7 @@ namespace TrueTalk.IrViewer
             return node;
         }
 
-        private void openFileDialog1_FileOk( object sender, CancelEventArgs e )
-        {
-
-        }
-
         //--//
-
-        //private void gViewer1_SelectionChanged(object sender,
-        //                                        EventArgs e)
-        //{
-        //    if (m_highlightedObject != null)
-        //    {
-        //        if (m_highlightedObject is Microsoft.Glee.Drawing.Edge)
-        //        {
-        //            Microsoft.Glee.Drawing.Edge edge = (Microsoft.Glee.Drawing.Edge)m_highlightedObject;
-
-        //            edge.Attr = m_highlightedObjectAttr as Microsoft.Glee.Drawing.EdgeAttr;
-        //        }
-        //        else if (m_highlightedObject is Microsoft.Glee.Drawing.Node)
-        //        {
-        //            Microsoft.Glee.Drawing.Node node = (Microsoft.Glee.Drawing.Node)m_highlightedObject;
-
-        //            node.Attr = m_highlightedObjectAttr as Microsoft.Glee.Drawing.NodeAttr;
-        //        }
-
-        //        m_highlightedObject = null;
-        //        m_highlightedObjectAttr = null;
-        //    }
-
-        //    if (gViewer1.SelectedObject != null)
-        //    {
-        //        m_highlightedObject = gViewer1.SelectedObject;
-
-        //        if (m_highlightedObject is Microsoft.Glee.Drawing.Edge)
-        //        {
-        //            Microsoft.Glee.Drawing.Edge edge = (Microsoft.Glee.Drawing.Edge)m_highlightedObject;
-
-        //            m_highlightedObjectAttr = edge.Attr.Clone();
-
-        //            edge.Attr.Color = Microsoft.Glee.Drawing.Color.Magenta;
-        //            edge.Attr.Fontcolor = Microsoft.Glee.Drawing.Color.Magenta;
-        //        }
-        //        else if (m_highlightedObject is Microsoft.Glee.Drawing.Node)
-        //        {
-        //            Microsoft.Glee.Drawing.Node node = (Microsoft.Glee.Drawing.Node)m_highlightedObject;
-
-        //            m_highlightedObjectAttr = node.Attr.Clone();
-
-        //            node.Attr.Color = Microsoft.Glee.Drawing.Color.Magenta;
-        //            node.Attr.Fontcolor = Microsoft.Glee.Drawing.Color.Magenta;
-        //        }
-        //    }
-
-        //    gViewer1.Invalidate();
-        //}
-
-        //private void gViewer1_MouseClick(object sender,
-        //                                  MouseEventArgs e)
-        //{
-        //    // Do nothing if we didn't click on a node or click on the same node 
-        //    if (m_highlightedObject is Microsoft.Glee.Drawing.Node && m_highlightedObject != m_selectedNode)
-        //    {
-        //        if (m_selectedNode != null)
-        //        {
-        //            m_selectedNode.Attr = m_selectedNodeAttr;
-        //            m_selectedNode = null;
-        //            m_selectedNodeAttr = null;
-        //        }
-
-        //        Microsoft.Glee.Drawing.Node node = (Microsoft.Glee.Drawing.Node)m_highlightedObject;
-
-        //        foreach (BasicBlock bb in m_method.BasicBlocks)
-        //        {
-        //            if (bb.Id == node.Id)
-        //            {
-        //                SelectBasicBlock(bb);
-        //                m_selectedNode = node;
-
-        //                // Save the original / untempered style so when we can go back to it when the node is unselected
-        //                m_selectedNodeAttr = ((Microsoft.Glee.Drawing.NodeAttr)m_highlightedObjectAttr).Clone();
-
-        //                // Apply the selected style to both the node and the saved styled from highlight so when
-        //                // mouse moves away, the node remain selected
-        //                ((Microsoft.Glee.Drawing.NodeAttr)m_highlightedObjectAttr).Fillcolor = Microsoft.Glee.Drawing.Color.Goldenrod;
-        //                node.Attr.Fillcolor = Microsoft.Glee.Drawing.Color.Goldenrod;
-
-        //                break;
-        //            }
-        //        }
-
-        //        gViewer1.Invalidate();
-        //    }
-        //}
 
         private void MainForm_Resize( object sender, EventArgs e )
         {
@@ -330,5 +264,125 @@ namespace TrueTalk.IrViewer
             //listBoxClauses.Width = textBoxFilter.Width;
         }
 
+        private void forward_Click( object sender, EventArgs e )
+        {
+            var nextFile = GetNextFile( this.currentFile );
+
+            if( File.Exists( nextFile ) == false )
+            {
+                return;
+            }
+
+            LoadPersistedClause( nextFile );
+        }
+
+        private string GetNextFile( string currentFile )
+        {
+            var fileNameWithoutExtension = Path.GetFileNameWithoutExtension( currentFile );
+            var directory = Path.GetDirectoryName( currentFile );
+
+            int nextVersion = 1 + ((int)fileNameWithoutExtension[ fileNameWithoutExtension.Length - 1 ] - (int)'0');
+
+            var nextFile = Path.Combine( directory, fileNameWithoutExtension.Substring( 0, fileNameWithoutExtension.Length - 1 ) + nextVersion + ".ttd" );
+            
+            return nextFile;
+        }
+
+        private void backward_Click( object sender, EventArgs e )
+        {
+
+        }
     }
 }
+
+
+
+
+
+
+//private void gViewer1_SelectionChanged(object sender,
+//                                        EventArgs e)
+//{
+//    if (m_highlightedObject != null)
+//    {
+//        if (m_highlightedObject is Microsoft.Glee.Drawing.Edge)
+//        {
+//            Microsoft.Glee.Drawing.Edge edge = (Microsoft.Glee.Drawing.Edge)m_highlightedObject;
+
+//            edge.Attr = m_highlightedObjectAttr as Microsoft.Glee.Drawing.EdgeAttr;
+//        }
+//        else if (m_highlightedObject is Microsoft.Glee.Drawing.Node)
+//        {
+//            Microsoft.Glee.Drawing.Node node = (Microsoft.Glee.Drawing.Node)m_highlightedObject;
+
+//            node.Attr = m_highlightedObjectAttr as Microsoft.Glee.Drawing.NodeAttr;
+//        }
+
+//        m_highlightedObject = null;
+//        m_highlightedObjectAttr = null;
+//    }
+
+//    if (gViewer1.SelectedObject != null)
+//    {
+//        m_highlightedObject = gViewer1.SelectedObject;
+
+//        if (m_highlightedObject is Microsoft.Glee.Drawing.Edge)
+//        {
+//            Microsoft.Glee.Drawing.Edge edge = (Microsoft.Glee.Drawing.Edge)m_highlightedObject;
+
+//            m_highlightedObjectAttr = edge.Attr.Clone();
+
+//            edge.Attr.Color = Microsoft.Glee.Drawing.Color.Magenta;
+//            edge.Attr.Fontcolor = Microsoft.Glee.Drawing.Color.Magenta;
+//        }
+//        else if (m_highlightedObject is Microsoft.Glee.Drawing.Node)
+//        {
+//            Microsoft.Glee.Drawing.Node node = (Microsoft.Glee.Drawing.Node)m_highlightedObject;
+
+//            m_highlightedObjectAttr = node.Attr.Clone();
+
+//            node.Attr.Color = Microsoft.Glee.Drawing.Color.Magenta;
+//            node.Attr.Fontcolor = Microsoft.Glee.Drawing.Color.Magenta;
+//        }
+//    }
+
+//    gViewer1.Invalidate();
+//}
+
+//private void gViewer1_MouseClick(object sender,
+//                                  MouseEventArgs e)
+//{
+//    // Do nothing if we didn't click on a node or click on the same node 
+//    if (m_highlightedObject is Microsoft.Glee.Drawing.Node && m_highlightedObject != m_selectedNode)
+//    {
+//        if (m_selectedNode != null)
+//        {
+//            m_selectedNode.Attr = m_selectedNodeAttr;
+//            m_selectedNode = null;
+//            m_selectedNodeAttr = null;
+//        }
+
+//        Microsoft.Glee.Drawing.Node node = (Microsoft.Glee.Drawing.Node)m_highlightedObject;
+
+//        foreach (BasicBlock bb in m_method.BasicBlocks)
+//        {
+//            if (bb.Id == node.Id)
+//            {
+//                SelectBasicBlock(bb);
+//                m_selectedNode = node;
+
+//                // Save the original / untempered style so when we can go back to it when the node is unselected
+//                m_selectedNodeAttr = ((Microsoft.Glee.Drawing.NodeAttr)m_highlightedObjectAttr).Clone();
+
+//                // Apply the selected style to both the node and the saved styled from highlight so when
+//                // mouse moves away, the node remain selected
+//                ((Microsoft.Glee.Drawing.NodeAttr)m_highlightedObjectAttr).Fillcolor = Microsoft.Glee.Drawing.Color.Goldenrod;
+//                node.Attr.Fillcolor = Microsoft.Glee.Drawing.Color.Goldenrod;
+
+//                break;
+//            }
+//        }
+
+//        gViewer1.Invalidate();
+//    }
+//}

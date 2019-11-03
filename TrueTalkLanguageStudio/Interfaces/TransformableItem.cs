@@ -33,9 +33,14 @@ namespace TrueTalk.Interfaces
         {
             TransformableItem cpy = (TransformableItem)this.MemberwiseClone();
 
-            cpy.Version += 1;
+            cpy.BumpVersion( );
 
             return cpy;
+        }
+
+        public virtual void BumpVersion( )
+        {
+            this.Version += 1;
         }
 
         public virtual void InnerToString( StringBuilder sb )

@@ -5,8 +5,11 @@ namespace TrueTalk.SpeechRepresentation
     using System.Text;
     using TrueTalk.Interfaces;
 
-    public class Word : Text
+    public sealed class Word : Text
     {
+        private Word( ) : base( )
+        { }
+
         protected Word( String value ) : base( value )
         { }
 

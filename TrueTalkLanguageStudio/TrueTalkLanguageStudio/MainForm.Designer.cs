@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 
 namespace TrueTalk.IrViewer
 {
@@ -38,6 +39,10 @@ namespace TrueTalk.IrViewer
             this.textBoxGrammaticalStructureGraphPennString = new System.Windows.Forms.TextBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.textBoxPhraseStructureGraphPennString = new System.Windows.Forms.TextBox();
+            this.forward = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.backward = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -58,12 +63,13 @@ namespace TrueTalk.IrViewer
             this.gViewer1.ForwardEnabled = false;
             this.gViewer1.Graph = null;
             this.gViewer1.Location = new System.Drawing.Point(0, 0);
+            this.gViewer1.Margin = new System.Windows.Forms.Padding(4);
             this.gViewer1.MouseHitDistance = 0.05D;
             this.gViewer1.Name = "gViewer1";
             this.gViewer1.NavigationVisible = true;
             this.gViewer1.PanButtonPressed = false;
             this.gViewer1.SaveButtonVisible = true;
-            this.gViewer1.Size = new System.Drawing.Size(750, 650);
+            this.gViewer1.Size = new System.Drawing.Size(999, 812);
             this.gViewer1.TabIndex = 0;
             this.gViewer1.ZoomF = 1D;
             this.gViewer1.ZoomFraction = 0.5D;
@@ -79,12 +85,13 @@ namespace TrueTalk.IrViewer
             this.gViewer2.ForwardEnabled = false;
             this.gViewer2.Graph = null;
             this.gViewer2.Location = new System.Drawing.Point(0, 0);
+            this.gViewer2.Margin = new System.Windows.Forms.Padding(4);
             this.gViewer2.MouseHitDistance = 0.05D;
             this.gViewer2.Name = "gViewer2";
             this.gViewer2.NavigationVisible = true;
             this.gViewer2.PanButtonPressed = false;
             this.gViewer2.SaveButtonVisible = true;
-            this.gViewer2.Size = new System.Drawing.Size(750, 650);
+            this.gViewer2.Size = new System.Drawing.Size(999, 812);
             this.gViewer2.TabIndex = 0;
             this.gViewer2.ZoomF = 1D;
             this.gViewer2.ZoomFraction = 0.5D;
@@ -99,16 +106,18 @@ namespace TrueTalk.IrViewer
             // listBoxClauses
             // 
             this.listBoxClauses.FormattingEnabled = true;
-            this.listBoxClauses.ItemHeight = 20;
-            this.listBoxClauses.Location = new System.Drawing.Point(12, 12);
+            this.listBoxClauses.ItemHeight = 25;
+            this.listBoxClauses.Location = new System.Drawing.Point(16, 15);
+            this.listBoxClauses.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxClauses.Name = "listBoxClauses";
-            this.listBoxClauses.Size = new System.Drawing.Size(1300, 84);
+            this.listBoxClauses.Size = new System.Drawing.Size(1732, 104);
             this.listBoxClauses.TabIndex = 0;
             this.listBoxClauses.Click += new System.EventHandler(this.listBoxClauses_Click);
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Location = new System.Drawing.Point(12, 191);
+            this.splitContainer1.Location = new System.Drawing.Point(16, 239);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -118,21 +127,24 @@ namespace TrueTalk.IrViewer
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.textBoxGrammaticalStructureGraphPennString);
-            this.splitContainer1.Size = new System.Drawing.Size(1300, 650);
-            this.splitContainer1.SplitterDistance = 750;
+            this.splitContainer1.Size = new System.Drawing.Size(1733, 812);
+            this.splitContainer1.SplitterDistance = 999;
+            this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 1;
             // 
             // textBoxGrammaticalStructureGraphPennString
             // 
-            this.textBoxGrammaticalStructureGraphPennString.Location = new System.Drawing.Point(3, 0);
+            this.textBoxGrammaticalStructureGraphPennString.Location = new System.Drawing.Point(4, 0);
+            this.textBoxGrammaticalStructureGraphPennString.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxGrammaticalStructureGraphPennString.Multiline = true;
             this.textBoxGrammaticalStructureGraphPennString.Name = "textBoxGrammaticalStructureGraphPennString";
-            this.textBoxGrammaticalStructureGraphPennString.Size = new System.Drawing.Size(543, 650);
+            this.textBoxGrammaticalStructureGraphPennString.Size = new System.Drawing.Size(723, 812);
             this.textBoxGrammaticalStructureGraphPennString.TabIndex = 0;
             // 
             // splitContainer2
             // 
-            this.splitContainer2.Location = new System.Drawing.Point(12, 950);
+            this.splitContainer2.Location = new System.Drawing.Point(16, 1188);
+            this.splitContainer2.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
@@ -142,28 +154,72 @@ namespace TrueTalk.IrViewer
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.textBoxPhraseStructureGraphPennString);
-            this.splitContainer2.Size = new System.Drawing.Size(1300, 650);
-            this.splitContainer2.SplitterDistance = 750;
+            this.splitContainer2.Size = new System.Drawing.Size(1733, 812);
+            this.splitContainer2.SplitterDistance = 999;
+            this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 1;
             // 
             // textBoxPhraseStructureGraphPennString
             // 
-            this.textBoxPhraseStructureGraphPennString.Location = new System.Drawing.Point(2, 0);
+            this.textBoxPhraseStructureGraphPennString.Location = new System.Drawing.Point(3, 0);
+            this.textBoxPhraseStructureGraphPennString.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxPhraseStructureGraphPennString.Multiline = true;
             this.textBoxPhraseStructureGraphPennString.Name = "textBoxPhraseStructureGraphPennString";
-            this.textBoxPhraseStructureGraphPennString.Size = new System.Drawing.Size(543, 650);
+            this.textBoxPhraseStructureGraphPennString.Size = new System.Drawing.Size(723, 812);
             this.textBoxPhraseStructureGraphPennString.TabIndex = 0;
+            // 
+            // forward
+            // 
+            this.forward.Location = new System.Drawing.Point(319, 137);
+            this.forward.Name = "forward";
+            this.forward.Size = new System.Drawing.Size(129, 60);
+            this.forward.TabIndex = 2;
+            this.forward.Text = ">";
+            this.forward.UseVisualStyleBackColor = true;
+            this.forward.Click += new System.EventHandler(this.forward_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(854, 1029);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(129, 60);
+            this.button1.TabIndex = 3;
+            this.button1.Text = ">";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(862, 1037);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(129, 60);
+            this.button2.TabIndex = 4;
+            this.button2.Text = ">";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // backward
+            // 
+            this.backward.Location = new System.Drawing.Point(184, 137);
+            this.backward.Name = "backward";
+            this.backward.Size = new System.Drawing.Size(129, 60);
+            this.backward.TabIndex = 2;
+            this.backward.Text = "<";
+            this.backward.UseVisualStyleBackColor = true;
+            this.backward.Click += new System.EventHandler(this.backward_Click);
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1378, 1694);
+            this.ClientSize = new System.Drawing.Size(1837, 2118);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.backward);
+            this.Controls.Add(this.forward);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.splitContainer2);
             this.Controls.Add(this.listBoxClauses);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.MinimumSize = new System.Drawing.Size(1350, 1000);
+            this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.MinimumSize = new System.Drawing.Size(1791, 1232);
             this.Name = "MainForm";
             this.Text = "IR Viewer";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -182,6 +238,9 @@ namespace TrueTalk.IrViewer
 
         }
 
+        private void openFileDialog1_FileOk( object sender, CancelEventArgs e )
+        { }
+
         #endregion
         private Microsoft.Glee.GraphViewerGdi.GViewer gViewer1;
         private Microsoft.Glee.GraphViewerGdi.GViewer gViewer2;
@@ -191,6 +250,10 @@ namespace TrueTalk.IrViewer
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.TextBox textBoxGrammaticalStructureGraphPennString;
         private System.Windows.Forms.TextBox textBoxPhraseStructureGraphPennString;
+        private System.Windows.Forms.Button forward;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button backward;
     }
 }
 

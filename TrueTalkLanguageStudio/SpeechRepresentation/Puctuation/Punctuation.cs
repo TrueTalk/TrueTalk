@@ -24,6 +24,10 @@ namespace TrueTalk.SpeechRepresentation
 
         //--//
 
+        private Punctuation( ) : base( )
+        {
+        }
+
         protected Punctuation( String value, PuctuationKind kind, TokenKind type ) : base( value, type )
         {
             KindOfPunctuation = kind;
@@ -59,7 +63,7 @@ namespace TrueTalk.SpeechRepresentation
 
         //--//
 
-        public PuctuationKind KindOfPunctuation { get; private set; }
+        public PuctuationKind KindOfPunctuation { get; set; }
 
         public String Value => base.RawValue;
 

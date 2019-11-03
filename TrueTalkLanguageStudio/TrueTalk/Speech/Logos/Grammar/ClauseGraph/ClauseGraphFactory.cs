@@ -50,7 +50,7 @@ namespace TrueTalk.Speech.Grammar
 
                     visited.Add( current );
 
-                    grammaticalStructure.AddOrUpdateVertex( current.index( ), current.value( ), current.tag( ) );
+                    grammaticalStructure.AddOrUpdateVertex( current.index( ), current.value( ), current.tag( ), null );
 
                     foreach( SemanticGraphEdge edge in sg.getOutEdgesSorted( current ).toArray( ) )
                     {
@@ -70,9 +70,11 @@ namespace TrueTalk.Speech.Grammar
                             src.index( ),
                             src.value( ),
                             src.tag( ),
+                            null,
                             tgt.index( ),
                             tgt.value( ),
                             tgt.tag( ),
+                            null,
                             edge.getRelation( ).getShortName( )
                             );
                     }
@@ -96,7 +98,7 @@ namespace TrueTalk.Speech.Grammar
 
                     visited.Add( current );
 
-                    phraseStructure.AddOrUpdateVertex( current.nodeNumber( current ), current.label( ).ToString( ), current.value( ) );
+                    phraseStructure.AddOrUpdateVertex( current.nodeNumber( current ), current.label( ).ToString( ), current.value( ), null );
 
                     foreach( Tree child in current.children( ) )
                     {
@@ -116,9 +118,11 @@ namespace TrueTalk.Speech.Grammar
                             src.nodeNumber( root ),
                             String.IsNullOrEmpty( src.value( ) ) ? $"nn" : src.value( ),
                             src.label( ).ToString( ),
+                            null,
                             tgt.nodeNumber( root ),
                             String.IsNullOrEmpty( tgt.value( ) ) ? $"nn" : tgt.value( ),
                             tgt.label( ).ToString( ),
+                            null,
                             "dep"
                         );
                     }

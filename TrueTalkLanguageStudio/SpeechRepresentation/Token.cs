@@ -21,6 +21,10 @@ namespace TrueTalk.SpeechRepresentation
 
         //--//
 
+        protected Token( ) : base( )
+        {
+        }
+
         protected Token( String value, TokenKind kind ) : base( )
         {
             RawValue    = value;
@@ -29,9 +33,9 @@ namespace TrueTalk.SpeechRepresentation
 
         //--//
 
-        public TokenKind KindOfToken { get; private set; }
+        public TokenKind KindOfToken { get; set; }
 
-        public String RawValue { get; private set; }
+        public String RawValue { get; set; }
 
         public static bool IsAlpha( string value )
         {

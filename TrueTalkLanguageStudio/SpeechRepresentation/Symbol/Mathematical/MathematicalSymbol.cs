@@ -31,6 +31,10 @@ namespace TrueTalk.SpeechRepresentation
 
         //--//
 
+        private MathematicalSymbol( ) : base( )
+        {
+        }
+
         private MathematicalSymbol( String value, MathematicalSymbolKind kind ) : base( value, SymbolKind.Mathematical )
         {
             KindOfMathematicalSymbol = kind;
@@ -79,7 +83,7 @@ namespace TrueTalk.SpeechRepresentation
             return ms;
         }
 
-        public MathematicalSymbolKind KindOfMathematicalSymbol { get; internal set; }
+        public MathematicalSymbolKind KindOfMathematicalSymbol { get; set; }
 
         //--//
 

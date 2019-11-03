@@ -147,6 +147,10 @@ namespace TrueTalk.Speech.Grammar
                     {
                         return false;
                     }
+                    else
+                    {
+                        break;
+                    }
                 }
 
                 foreach( var e1 in left.OutgoingEdges )
@@ -168,14 +172,17 @@ namespace TrueTalk.Speech.Grammar
                     {
                         return false;
                     }
+                    else
+                    {
+                        break;
+                    }
                 }
 
                 return (
                     left.Key   == right.Key   &&
                     left.Index == right.Index &&
                     left.Value == right.Value &&
-                    left.Tag   == right.Tag   &&
-                    left.Token == right.Token 
+                    left.Tag   == right.Tag   
                     );
             }
         }
@@ -286,7 +293,7 @@ namespace TrueTalk.Speech.Grammar
             }
         }
 
-        public void AddOrUpdateVertex( VertexIndex id, VertexValue value, VertexTag tag, Edge[ ] incoming, Edge[ ] outgoing )
+        public void AddOrUpdateVertex( VertexIndex id, VertexValue value, VertexTag tag, Token token, Edge[ ] incoming, Edge[ ] outgoing )
         {
             Vertex v = null;
 
@@ -296,16 +303,16 @@ namespace TrueTalk.Speech.Grammar
             }
             else
             {
-                AddVertex( id, value, tag, incoming, outgoing );
+                AddVertex( id, value, tag, token, incoming, outgoing );
             }
         }
 
-        public void AddOrUpdateVertex( VertexIndex id, VertexValue value, VertexTag tag )
+        public void AddOrUpdateVertex( VertexIndex id, VertexValue value, VertexTag tag, Token token )
         {
-            AddOrUpdateVertex( id, value, tag, EmptyEdgeSet, EmptyEdgeSet );
+            AddOrUpdateVertex( id, value, tag, token, EmptyEdgeSet, EmptyEdgeSet );
         }
 
-        public void AddEdge( VertexIndex srcId, VertexValue srcValue, VertexTag srcTag, VertexIndex tgtId, VertexValue tgtValue, VertexTag tgtTag, RelationKind r )
+        public void AddEdge( VertexIndex srcId, VertexValue srcValue, VertexTag srcTag, Token srcToken, VertexIndex tgtId, VertexValue tgtValue, VertexTag tgtTag, Token tgtToken, RelationKind r )
         {
             Vertex src = null;
             Vertex tgt = null;
@@ -316,7 +323,7 @@ namespace TrueTalk.Speech.Grammar
             }
             else
             {
-                src = AddVertex( srcId, srcValue, srcTag );
+                src = AddVertex( srcId, srcValue, srcTag, srcToken );
 
                 ReconcileLookup( src );
             }
@@ -327,7 +334,7 @@ namespace TrueTalk.Speech.Grammar
             }
             else
             {
-                tgt = AddVertex( tgtId, tgtValue, tgtTag );
+                tgt = AddVertex( tgtId, tgtValue, tgtTag, tgtToken );
 
                 ReconcileLookup( tgt );
             }
@@ -364,7 +371,7 @@ namespace TrueTalk.Speech.Grammar
 
         //--//
 
-        private Vertex AddVertex( VertexIndex index, VertexValue value, VertexTag tag, Edge[ ] incoming, Edge[ ] outgoing )
+        private Vertex AddVertex( VertexIndex index, VertexValue value, VertexTag tag, Token token, Edge[ ] incoming, Edge[ ] outgoing )
         {
             Debug.Assert( Vertexes.ContainsKey( index ) == false );
 
@@ -373,7 +380,8 @@ namespace TrueTalk.Speech.Grammar
                 Key   = phraseStructure ? (tag.Contains("-") ? tag : $"{tag}-{index}") : $"{value}-{index}",
                 Index = index,
                 Value = value,
-                Tag   = tag
+                Tag   = tag,
+                Token = token
             };
 
             UpdateVertexEdges( v, incoming, outgoing );
@@ -385,11 +393,11 @@ namespace TrueTalk.Speech.Grammar
             return v;
         }
 
-        private Vertex AddVertex( VertexIndex id, VertexValue value, VertexTag tag )
+        private Vertex AddVertex( VertexIndex id, VertexValue value, VertexTag tag, Token token )
         {
             Debug.Assert( Vertexes.ContainsKey( id ) == false );
 
-            return AddVertex( id, value, tag, EmptyEdgeSet, EmptyEdgeSet );
+            return AddVertex( id, value, tag, token, EmptyEdgeSet, EmptyEdgeSet );
         }
 
         private void UpdateVertexEdges( Vertex v, Edge[ ] incoming, Edge[ ] outgoing )

@@ -5,8 +5,11 @@ namespace TrueTalk.SpeechRepresentation
     using System.Text;
     using TrueTalk.Interfaces;
 
-    public class Achronym : Text
+    public sealed class Achronym : Text
     {
+        private Achronym( ) : base( )
+        { }
+
         protected Achronym( String value ) : base( value )
         { }
 

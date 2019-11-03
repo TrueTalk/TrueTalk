@@ -44,8 +44,13 @@ namespace TrueTalk.Compiler
 
                 var speechAnalysis = new SpeechAnalysis();
 
-                clause.Graph.GrammaticalStructure.ApplyTransformation( speechAnalysis );
-                clause.Graph.PhrasalStructure.ApplyTransformation( speechAnalysis );
+                clause.ApplyTransformation( speechAnalysis );
+
+                fileName = diag.PersistClause( clause );
+
+                clause1 = diag.LoadClause( fileName );
+
+                CHECKS.ASSERT( clause == clause1, "Persisted graph is not equivalent to original graph." );
             }
         }
 
