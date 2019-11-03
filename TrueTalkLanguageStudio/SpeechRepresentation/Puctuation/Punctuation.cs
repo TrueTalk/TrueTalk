@@ -5,7 +5,8 @@ namespace TrueTalk.SpeechRepresentation
     using System.Text;
     using TrueTalk.Interfaces;
 
-    public class Punctuation : Token
+    [Serializable]
+    public sealed class Punctuation : Token
     {
         public enum PuctuationKind
         {
@@ -28,7 +29,7 @@ namespace TrueTalk.SpeechRepresentation
         {
         }
 
-        protected Punctuation( String value, PuctuationKind kind, TokenKind type ) : base( value, type )
+        private Punctuation( String value, PuctuationKind kind, TokenKind type ) : base( value, type )
         {
             KindOfPunctuation = kind;
         }

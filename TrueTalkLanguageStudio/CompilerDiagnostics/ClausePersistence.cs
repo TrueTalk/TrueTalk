@@ -68,8 +68,8 @@ namespace TrueTalk.CompilerDiagnostics
         //[XmlInclude( typeof( Clause ) )]
         //[XmlInclude( typeof( ClauseGraph ) )]
         //[XmlInclude( typeof( TokenGraph ) )]
-        [XmlInclude( typeof( TokenGraph.Vertex ) )]
-        [XmlInclude( typeof( TokenGraph.Edge ) )]
+        [XmlInclude( typeof( Vertex ) )]
+        [XmlInclude( typeof( Edge ) )]
         [XmlInclude( typeof( TransformableItem ) )]
         [XmlInclude( typeof( Token ) )]
         [XmlInclude( typeof( Text ) )]
@@ -190,7 +190,7 @@ namespace TrueTalk.CompilerDiagnostics
 
             foreach( VertexEntry entry in record.PersistedPhraseGraphVertexes )
             {
-                phrasalStructure.AddOrUpdateVertex( (int)entry.Key, ( (TokenGraph.Vertex)entry.Value ).Value, ( (TokenGraph.Vertex)entry.Value ).Tag, ( (TokenGraph.Vertex)entry.Value ).Token );
+                phrasalStructure.AddOrUpdateVertex( (int)entry.Key, ( (Vertex)entry.Value ).Value, ( (Vertex)entry.Value ).Tag, ( (Vertex)entry.Value ).Token );
             }
             foreach( EdgeEntry entry in record.PersistedPhraseGraphEdges )
             {
@@ -215,7 +215,7 @@ namespace TrueTalk.CompilerDiagnostics
 
             foreach( VertexEntry entry in record.PersistedGrammarGraphVertexes )
             {
-                grammarStructure.AddOrUpdateVertex( (int)entry.Key, ( (TokenGraph.Vertex)entry.Value ).Value, ( (TokenGraph.Vertex)entry.Value ).Tag, ( (TokenGraph.Vertex)entry.Value ).Token );
+                grammarStructure.AddOrUpdateVertex( (int)entry.Key, ( (Vertex)entry.Value ).Value, ( (Vertex)entry.Value ).Tag, ( (Vertex)entry.Value ).Token );
             }
             foreach( EdgeEntry entry in record.PersistedGrammarGraphEdges )
             {

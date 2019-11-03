@@ -71,6 +71,11 @@ namespace TrueTalk.Speech.Grammar
             return false == ( right == left );
         }
 
+        public override int GetHashCode( )
+        {
+            return this.Version.GetHashCode( ) ^ this.Text.GetHashCode( ) ^ this.Graph.GetHashCode( );
+        }
+
         //--//
 
         public string Text { get; }

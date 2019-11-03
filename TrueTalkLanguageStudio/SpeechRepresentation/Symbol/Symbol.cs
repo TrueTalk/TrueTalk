@@ -4,6 +4,7 @@ namespace TrueTalk.SpeechRepresentation
 {
     using System;
 
+    [Serializable]
     public abstract class Symbol : Token
     {
         //

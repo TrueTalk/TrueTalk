@@ -7,6 +7,7 @@ namespace TrueTalk.SpeechRepresentation
     using TrueTalk.Common;
     using TrueTalk.Interfaces;
 
+    [Serializable]
     public sealed class Number : Token
     {
         public enum NumberKind

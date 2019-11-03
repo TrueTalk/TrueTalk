@@ -6,6 +6,7 @@ namespace TrueTalk.SpeechRepresentation
     using System.Text;
     using TrueTalk.Interfaces;
 
+    [Serializable]
     public sealed class MathematicalSymbol : Symbol
     {
         public static readonly string PlusRepresentation = "+";

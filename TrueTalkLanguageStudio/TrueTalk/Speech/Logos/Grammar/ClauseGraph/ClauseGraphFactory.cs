@@ -26,9 +26,16 @@ namespace TrueTalk.Speech.Grammar
             var lp = LexicalizedParser.loadModel(modelPath);
 
             var tokenizerFactory = PTBTokenizer.factory(new CoreLabelTokenFactory(), "");
-            var reader = new StringReader(rawClause);
-            var rawWords = tokenizerFactory.getTokenizer(reader).tokenize();
-            reader.close( );
+
+            java.util.List rawWords = null;
+
+            using( var reader = new StringReader( rawClause ) )
+            {
+                rawWords = tokenizerFactory.getTokenizer(reader).tokenize();
+
+                reader.close( );
+            }
+
             var tree = lp.apply(rawWords);
 
             // Extract dependencies from lexical tree

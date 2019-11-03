@@ -3,6 +3,7 @@ namespace TrueTalk.SpeechRepresentation
 {
     using System;
 
+    [Serializable]
     public abstract class Text : Token
     {
         protected Text( ) : base( )

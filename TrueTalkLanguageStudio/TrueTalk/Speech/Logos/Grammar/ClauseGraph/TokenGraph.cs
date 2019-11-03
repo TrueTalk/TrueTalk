@@ -15,199 +15,207 @@ namespace TrueTalk.Speech.Grammar
     using VertexTag = System.String;
     using VertexValue = System.String;
 
-    public class TokenGraph : TransformableItem
+    [Serializable]
+    public class Vertex
     {
-        [Serializable]
-        public class Vertex
+        public VertexKey    Key;
+        public VertexIndex  Index;
+        public VertexValue  Value;
+        public VertexTag    Tag;
+        public Token        Token         = default;
+        public List<Edge>   IncomingEdges = new List<Edge>();
+        public List<Edge>   OutgoingEdges = new List<Edge>();
+
+        public String ShortLabel => $"{Value}";
+
+        public String LongLabel => $"{Value}/{Tag}/{Index}";
+
+        //--//
+
+        public override bool Equals( object obj )
         {
-            public VertexKey    Key;
-            public VertexIndex  Index;
-            public VertexValue  Value;
-            public VertexTag    Tag;
-            public Token        Token         = default;
-            public List<Edge>   IncomingEdges = new List<Edge>();
-            public List<Edge>   OutgoingEdges = new List<Edge>();
+            return this.Equals( obj as TokenGraph );
+        }
 
-            public String ShortLabel => $"{Value}";
-
-            public String LongLabel => $"{Value}/{Tag}/{Index}";
-
-            //--//
-
-            public override bool Equals( object obj )
+        public bool Equals( Vertex v )
+        {
+            if( v is null )
             {
-                return this.Equals( obj as TokenGraph );
+                return false;
             }
 
-            public bool Equals( Vertex v )
+            if( Object.ReferenceEquals( this, v ) )
             {
-                if( v is null )
-                {
-                    return false;
-                }
+                return true;
+            }
 
-                if( Object.ReferenceEquals( this, v ) )
+            if( this.GetType( ) != v.GetType( ) )
+            {
+                return false;
+            }
+
+            return VertexesAreEquivalent( this, v );
+        }
+
+        public static bool operator ==( Vertex left, Vertex right )
+        {
+            if( left is null )
+            {
+                if( right is null )
                 {
                     return true;
                 }
 
-                if( this.GetType( ) != v.GetType( ) )
-                {
-                    return false;
-                }
-
-                return VertexesAreEquivalent( this, v );
+                return false;
             }
 
-            public static bool operator ==( Vertex left, Vertex right )
-            {
-                if( left is null )
-                {
-                    if( right is null )
-                    {
-                        return true;
-                    }
-
-                    return false;
-                }
-
-                return left.Equals( right );
-            }
-
-            public static bool operator !=( Vertex right, Vertex left )
-            {
-                return false == ( right == left );
-            }
-
-            //--//
-
-            public override string ToString( )
-            {
-                return LongLabel;
-
-                //////String incomingRep = "";
-                //////int incoming = IncomingEdges.Count;
-
-                //////String outgoingRep = "";
-                //////int outgoing = OutgoingEdges.Count;
-
-                //////for( int i = 0; i < incoming; ++i )
-                //////{
-                //////    incomingRep += IncomingEdges[ i ];
-
-                //////    if( i < incoming - 1 )
-                //////    {
-                //////        incomingRep += ",";
-                //////    }
-                //////}
-
-                //////for( int i = 0; i < outgoing; ++i )
-                //////{
-                //////    outgoingRep += OutgoingEdges[ i ];
-
-                //////    if( i < outgoing - 1 )
-                //////    {
-                //////        outgoingRep += ",";
-                //////    }
-                //////}
-
-                //////return $"[{incomingRep}] -> ({LongLabel}) -> [{outgoingRep}]";
-            }
-
-            //--//
-
-            private bool VertexesAreEquivalent( Vertex left, Vertex right )
-            {
-                if( left.IncomingEdges.Count != right.IncomingEdges.Count )
-                {
-                    return false;
-                }
-
-                if( left.OutgoingEdges.Count != right.OutgoingEdges.Count )
-                {
-                    return false;
-                }
-
-                foreach( var e1 in left.IncomingEdges )
-                {
-                    bool same = false;
-
-                    // TODO TODO TODO: make this more efficient.
-                    foreach( var e2 in right.IncomingEdges )
-                    {
-                        if( e1.Source == e2.Source && 
-                            e1.Target == e2.Target && 
-                            e1.Relation == e2.Relation )
-                        {
-                            same = true; break;
-                        }
-                    }
-
-                    if( same == false )
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-
-                foreach( var e1 in left.OutgoingEdges )
-                {
-                    bool same = false;
-
-                    // TODO TODO TODO: make this more efficient.
-                    foreach( var e2 in right.OutgoingEdges )
-                    {
-                        if( e1.Source == e2.Source &&
-                            e1.Target == e2.Target &&
-                            e1.Relation == e2.Relation )
-                        {
-                            same = true; break;
-                        }
-                    }
-
-                    if( same == false )
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-
-                return (
-                    left.Key   == right.Key   &&
-                    left.Index == right.Index &&
-                    left.Value == right.Value &&
-                    left.Tag   == right.Tag   
-                    );
-            }
+            return left.Equals( right );
         }
 
-        [Serializable]
-        public class Edge
+        public static bool operator !=( Vertex right, Vertex left )
         {
-            public int          Source;
-            public int          Target;
-            public RelationKind Relation;
+            return false == ( right == left );
+        }
 
-            public String ShortLabel => $"{Relation}";
-
-            public String LongLabel => $"[{Source}] -> {Relation} -> [{Target}]";
-
-            public override string ToString( )
-            {
-                return LongLabel;
-            }
-
-            //--//
+        public override int GetHashCode( )
+        {
+            return
+                this.Key.GetHashCode( )     ^
+                this.Index.GetHashCode( )   ^
+                this.Value.GetHashCode( )   ^
+                this.Tag.GetHashCode( )     ^
+                this.Token.GetHashCode( );
         }
 
         //--//
 
+        public override string ToString( )
+        {
+            return LongLabel;
+
+            //////String incomingRep = "";
+            //////int incoming = IncomingEdges.Count;
+
+            //////String outgoingRep = "";
+            //////int outgoing = OutgoingEdges.Count;
+
+            //////for( int i = 0; i < incoming; ++i )
+            //////{
+            //////    incomingRep += IncomingEdges[ i ];
+
+            //////    if( i < incoming - 1 )
+            //////    {
+            //////        incomingRep += ",";
+            //////    }
+            //////}
+
+            //////for( int i = 0; i < outgoing; ++i )
+            //////{
+            //////    outgoingRep += OutgoingEdges[ i ];
+
+            //////    if( i < outgoing - 1 )
+            //////    {
+            //////        outgoingRep += ",";
+            //////    }
+            //////}
+
+            //////return $"[{incomingRep}] -> ({LongLabel}) -> [{outgoingRep}]";
+        }
+
+        //--//
+
+        private static bool VertexesAreEquivalent( Vertex left, Vertex right )
+        {
+            if( left.IncomingEdges.Count != right.IncomingEdges.Count )
+            {
+                return false;
+            }
+
+            if( left.OutgoingEdges.Count != right.OutgoingEdges.Count )
+            {
+                return false;
+            }
+
+            foreach( var e1 in left.IncomingEdges )
+            {
+                bool same = false;
+
+                // TODO TODO TODO: make this more efficient.
+                foreach( var e2 in right.IncomingEdges )
+                {
+                    if( e1.Source == e2.Source &&
+                        e1.Target == e2.Target &&
+                        e1.Relation == e2.Relation )
+                    {
+                        same = true; break;
+                    }
+                }
+
+                if( same == false )
+                {
+                    return false;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            foreach( var e1 in left.OutgoingEdges )
+            {
+                bool same = false;
+
+                // TODO TODO TODO: make this more efficient.
+                foreach( var e2 in right.OutgoingEdges )
+                {
+                    if( e1.Source == e2.Source &&
+                        e1.Target == e2.Target &&
+                        e1.Relation == e2.Relation )
+                    {
+                        same = true; break;
+                    }
+                }
+
+                if( same == false )
+                {
+                    return false;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return (
+                left.Key   == right.Key   &&
+                left.Index == right.Index &&
+                left.Value == right.Value &&
+                left.Tag   == right.Tag
+                );
+        }
+    }
+
+    [Serializable]
+    public class Edge
+    {
+        public int          Source;
+        public int          Target;
+        public RelationKind Relation;
+
+        public String ShortLabel => $"{Relation}";
+
+        public String LongLabel => $"[{Source}] -> {Relation} -> [{Target}]";
+
+        public override string ToString( )
+        {
+            return LongLabel;
+        }
+
+        //--//
+    }
+
+    public class TokenGraph : TransformableItem
+    {
         private TokenGraph( ) { }
 
 
@@ -263,6 +271,15 @@ namespace TrueTalk.Speech.Grammar
             return false == ( right == left );
         }
 
+        public override int GetHashCode( )
+        {
+            return
+                this.Version.GetHashCode( )         ^
+                this.phraseStructure.GetHashCode( ) ^
+                this.Vertexes.GetHashCode( )        ^
+                this.Edges.GetHashCode( );
+        }
+
         //--//
 
         private readonly bool phraseStructure;
@@ -275,7 +292,7 @@ namespace TrueTalk.Speech.Grammar
 
         //--//
 
-        private readonly Edge[] EmptyEdgeSet = new Edge[0] { };
+        private readonly Edge[] EmptyEdgeSet = Array.Empty<Edge>( );
 
         //--//
 
