@@ -1,5 +1,5 @@
 ﻿//
-// Copyright (c) Microsoft Corporation.    All rights reserved.
+// Copyright (c) TrueTalk LLC.    All rights reserved.
 //
 
 namespace TrueTalk.Common.Collections.Generic
@@ -7,6 +7,7 @@ namespace TrueTalk.Common.Collections.Generic
     using System;
     using System.Collections.Generic;
 
+    //--//
 
     public class UniqueList<T> : List<T> where T : IEquatable<T>
     {

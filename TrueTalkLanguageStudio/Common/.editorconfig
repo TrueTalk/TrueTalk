@@ -2,3 +2,15 @@
 
 # IDE0046: Convert to conditional expression
 dotnet_style_prefer_conditional_expression_over_return = false:error
+
+# IDE0044: Add readonly modifier
+dotnet_style_readonly_field = true:silent
+
+# IDE0018: Inline variable declaration
+csharp_style_inlined_variable_declaration = true:silent
+
+# IDE0032: Use auto property
+dotnet_style_prefer_auto_properties = true:silent
+
+# IDE0011: Add braces
+csharp_prefer_braces = true:silent

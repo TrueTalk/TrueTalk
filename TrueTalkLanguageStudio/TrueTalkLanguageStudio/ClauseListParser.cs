@@ -1,5 +1,5 @@
 //
-// Copyright (c) Microsoft Corporation.    All rights reserved.
+// Copyright (c) TrueTalk LLC.    All rights reserved.
 //
 
 namespace TrueTalk.IrViewer
@@ -8,16 +8,14 @@ namespace TrueTalk.IrViewer
     using System.Xml;
     using TrueTalk.Speech.Grammar;
 
-    public class Clause
+    //--//
+
+    public class ClauseWrapper
     {
-        //
-        // State
-        //
-
-        public string Id;
-        public string Text;
-
         public static Dictionary<string, ClauseGraph> ClauseGraphs = new Dictionary<string, ClauseGraph>();
+
+        public string Id { get; set; }
+        public string Text { get; set; }
     }
 
     public class ClauseListParser
@@ -32,19 +30,19 @@ namespace TrueTalk.IrViewer
         {
             foreach( XmlNode subnode in node.SelectNodes( "Text" ) )
             {
-                Clause clause = ParseClause( subnode );
+                ClauseWrapper clause = ParseClause( subnode );
 
                 var clauseGraph = Factory.FromString( clause.Text );
 
-                Clause.ClauseGraphs[ clause.Text ] = clauseGraph.Graph;
+                ClauseWrapper.ClauseGraphs[ clause.Text ] = clauseGraph.Graph;
             }
         }
 
         //--//
 
-        private Clause ParseClause( XmlNode node )
+        private ClauseWrapper ParseClause( XmlNode node )
         {
-            Clause res = new Clause();
+            ClauseWrapper res = new ClauseWrapper();
 
             res.Id = GetAttribute( node, "id" );
 
@@ -56,7 +54,7 @@ namespace TrueTalk.IrViewer
             return res;
         }
 
-        private void ParseClause( XmlNode node, Clause res )
+        private void ParseClause( XmlNode node, ClauseWrapper res )
         {
             res.Text = node.InnerText;
         }

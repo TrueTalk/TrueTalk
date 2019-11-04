@@ -1,13 +1,13 @@
 //
-// Copyright (c) Microsoft Corporation.    All rights reserved.
+// Copyright (c) TrueTalk LLC.    All rights reserved.
 //
-
 
 namespace TrueTalk.Common
 {
     using System;
     using System.Collections.Generic;
 
+    //--//
 
     public class GrowOnlySet<TKey>
     {

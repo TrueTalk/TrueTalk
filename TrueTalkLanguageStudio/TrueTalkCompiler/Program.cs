@@ -1,8 +1,15 @@
-﻿using System;
-using System.IO;
+﻿//
+// Copyright (c) TrueTalk LLC.    All rights reserved.
+//
+
 
 namespace TrueTalk.Compiler
 {
+    using System;
+    using System.IO;
+
+    //--//
+
     class Compiler
     {
         public static readonly string SourceFileExtension = ".tts"; // True Talk Source file

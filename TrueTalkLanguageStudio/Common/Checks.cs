@@ -1,5 +1,5 @@
 //
-// Copyright (c) Microsoft Corporation.    All rights reserved.
+// Copyright (c) TrueTalk LLC.    All rights reserved.
 //
 
 namespace TrueTalk.Common

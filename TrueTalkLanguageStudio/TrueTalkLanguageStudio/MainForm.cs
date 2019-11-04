@@ -102,7 +102,7 @@ namespace TrueTalk.IrViewer
 
             var clause = loader.LoadClause( fileName );
 
-            Clause.ClauseGraphs[ clause.Text ] = clause.Graph;
+            ClauseWrapper.ClauseGraphs[ clause.Text ] = clause.Graph;
 
             SelectClause( null );
 
@@ -132,18 +132,19 @@ namespace TrueTalk.IrViewer
                 this.textBoxPhraseStructureGraphPennString.Text      = clauseGraph.PhraseRepresentation;
 
                 this.Text = $"IR Viewer - {graph.Owner.Text}";
+                this.originalClause.Text = graph.Owner.Text;
             }
         }
 
         private void UpdateListBox( )
         {
-            if( Clause.ClauseGraphs != null )
+            if( ClauseWrapper.ClauseGraphs != null )
             {
                 //string filter = textBoxFilter.Text.ToLower();
 
                 List<string> lst = new List<string>();
 
-                foreach( var clauseGraph in Clause.ClauseGraphs.Values )
+                foreach( var clauseGraph in ClauseWrapper.ClauseGraphs.Values )
                 {
                     //if( string.IsNullOrEmpty( filter ) || id.ToLower( ).Contains( filter ) )
                     //{
@@ -165,7 +166,7 @@ namespace TrueTalk.IrViewer
 
                 if( listBoxClauses.Items.Count == 1 )
                 {
-                    SelectClause( Clause.ClauseGraphs[ ( string )listBoxClauses.Items[ 0 ] ] );
+                    SelectClause( ClauseWrapper.ClauseGraphs[ ( string )listBoxClauses.Items[ 0 ] ] );
                 }
                 else if( listBoxClauses.Items.Count > 1 )
                 {
@@ -174,13 +175,17 @@ namespace TrueTalk.IrViewer
             }
         }
 
+        private void openFileDialog1_FileOk( object sender, EventArgs e )
+        {
+        }
+        
         private void listBoxClauses_Click( object sender, EventArgs e )
         {
-            if( Clause.ClauseGraphs != null )
+            if( ClauseWrapper.ClauseGraphs != null )
             {
                 if( listBoxClauses.SelectedItem != null )
                 {
-                    SelectClause( Clause.ClauseGraphs[ ( string )listBoxClauses.SelectedItem ] );
+                    SelectClause( ClauseWrapper.ClauseGraphs[ ( string )listBoxClauses.SelectedItem ] );
                 }
             }
         }
@@ -273,7 +278,25 @@ namespace TrueTalk.IrViewer
                 return;
             }
 
-            LoadPersistedClause( nextFile );
+            if(LoadPersistedClause( nextFile ))
+            {
+                this.currentFile = nextFile;
+            }
+        }
+
+        private void backward_Click( object sender, EventArgs e )
+        {
+            var prevFile = GetPreviousFile( this.currentFile );
+
+            if( File.Exists( prevFile ) == false )
+            {
+                return;
+            }
+            
+            if( LoadPersistedClause( prevFile ) )
+            {
+                this.currentFile = prevFile;
+            }
         }
 
         private string GetNextFile( string currentFile )
@@ -281,16 +304,23 @@ namespace TrueTalk.IrViewer
             var fileNameWithoutExtension = Path.GetFileNameWithoutExtension( currentFile );
             var directory = Path.GetDirectoryName( currentFile );
 
-            int nextVersion = 1 + ((int)fileNameWithoutExtension[ fileNameWithoutExtension.Length - 1 ] - (int)'0');
+            int nextVersion = (int)((int)fileNameWithoutExtension[ fileNameWithoutExtension.Length - 1 ] - (int)'0') + 1;
 
             var nextFile = Path.Combine( directory, fileNameWithoutExtension.Substring( 0, fileNameWithoutExtension.Length - 1 ) + nextVersion + ".ttd" );
-            
+
             return nextFile;
         }
 
-        private void backward_Click( object sender, EventArgs e )
+        private string GetPreviousFile( string currentFile )
         {
+            var fileNameWithoutExtension = Path.GetFileNameWithoutExtension( currentFile );
+            var directory = Path.GetDirectoryName( currentFile );
 
+            int nextVersion = (int)((int)fileNameWithoutExtension[ fileNameWithoutExtension.Length - 1 ] - (int)'0') - 1;
+
+            var nextFile = Path.Combine( directory, fileNameWithoutExtension.Substring( 0, fileNameWithoutExtension.Length - 1 ) + nextVersion + ".ttd" );
+
+            return nextFile;
         }
     }
 }

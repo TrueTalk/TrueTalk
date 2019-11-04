@@ -1,9 +1,11 @@
 //
-// Copyright (c) Microsoft Corporation.    All rights reserved.
+// Copyright (c) TrueTalk LLC.    All rights reserved.
 //
 
 namespace TrueTalk.Common
 {
+    //--//
+
     public static class HashTableWithSetFactory
     {
         public static bool Create<TKey, TValue>( GrowOnlyHashTable<TKey, GrowOnlySet<TValue>> ht,

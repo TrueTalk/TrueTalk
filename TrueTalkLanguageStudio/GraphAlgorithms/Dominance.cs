@@ -1,11 +1,13 @@
 //
-// Copyright (c) Microsoft Corporation.    All rights reserved.
+// Copyright (c) TrueTalk LLC.    All rights reserved.
 //
 
 namespace TrueTalk.GraphsAlgorithms
 {
     using System;
     using TrueTalk.Common;
+
+    //--//
 
     public class Dominance<N, E, FC>
         where N : class, ITreeNode<FC>

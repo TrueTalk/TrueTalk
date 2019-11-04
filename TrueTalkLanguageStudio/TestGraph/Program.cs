@@ -1,10 +1,15 @@
-﻿
+﻿//
+// Copyright (c) TrueTalk LLC.    All rights reserved.
+//
+
 namespace TrueTalk.TestGraph
 {
     using TrueTalk.Analysis;
     using TrueTalk.Common;
     using TrueTalk.Speech.Grammar;
     using TrueTalk.SpeechRepresentation;
+
+    //--//
 
     class Program
     {

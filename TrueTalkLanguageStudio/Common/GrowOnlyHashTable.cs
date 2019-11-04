@@ -1,5 +1,5 @@
 //
-// Copyright (c) Microsoft Corporation.    All rights reserved.
+// Copyright (c) TrueTalk LLC.    All rights reserved.
 //
 
 //#define DETECT_HIGH_COLLISION_RATES
@@ -8,6 +8,8 @@ namespace TrueTalk.Common
 {
     using System;
     using System.Collections.Generic;
+
+    //--//
 
     public class GrowOnlyHashTable<TKey, TValue>
     {

@@ -1,4 +1,6 @@
-﻿
+﻿//
+// Copyright (c) TrueTalk LLC.    All rights reserved.
+//
 
 namespace TrueTalk.CompilerDiagnostics
 {

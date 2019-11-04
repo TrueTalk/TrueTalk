@@ -1,4 +1,6 @@
-﻿
+﻿//
+// Copyright (c) TrueTalk LLC.    All rights reserved.
+//
 
 namespace TrueTalk.Compiler
 {
@@ -9,6 +11,8 @@ namespace TrueTalk.Compiler
     using TrueTalk.Common;
     using TrueTalk.CompilerDiagnostics;
     using TrueTalk.Speech.Grammar;
+
+    //--//
 
     internal class CompilerEngine
     {

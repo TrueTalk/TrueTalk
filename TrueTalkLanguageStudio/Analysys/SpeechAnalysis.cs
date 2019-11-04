@@ -1,10 +1,15 @@
-﻿
+﻿//
+// Copyright (c) TrueTalk LLC.    All rights reserved.
+//
+
 namespace TrueTalk.Analysis
 {
     using System;
     using TrueTalk.Interfaces;
     using TrueTalk.Speech.Grammar;
     using TrueTalk.SpeechRepresentation;
+
+    //--//
 
     public class SpeechAnalysis : IAnalysis
     {

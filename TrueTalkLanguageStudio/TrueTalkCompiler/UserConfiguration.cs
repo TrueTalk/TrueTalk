@@ -1,4 +1,8 @@
-﻿namespace TrueTalk.Compiler
+﻿//
+// Copyright (c) TrueTalk LLC.    All rights reserved.
+//
+
+namespace TrueTalk.Compiler
 {
     internal class UserConfiguration
     {

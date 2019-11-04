@@ -1,8 +1,13 @@
+//
+// Copyright (c) TrueTalk LLC.    All rights reserved.
+//
 
 namespace TrueTalk.IrViewer
 {
     using System;
     using System.Windows.Forms;
+
+    //--//
 
     static class Program
     {

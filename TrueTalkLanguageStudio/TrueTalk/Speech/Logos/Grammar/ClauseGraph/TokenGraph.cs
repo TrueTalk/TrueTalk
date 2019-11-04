@@ -79,12 +79,18 @@ namespace TrueTalk.Speech.Grammar
 
         public override int GetHashCode( )
         {
-            return
+            int hashCode =
                 this.Key.GetHashCode( )     ^
                 this.Index.GetHashCode( )   ^
                 this.Value.GetHashCode( )   ^
-                this.Tag.GetHashCode( )     ^
-                this.Token.GetHashCode( );
+                this.Tag.GetHashCode( );
+
+            if( this.Token != null )
+            {
+                hashCode ^= this.Token.GetHashCode( );
+            }
+
+            return hashCode;
         }
 
         //--//
